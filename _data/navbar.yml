@@ -1,0 +1,31 @@
+- text: Home
+  sub:
+    - text: Deployment Considerations index
+      url: /deployment-considerations/index.html
+    - text: Uptane Home
+      url: /index.html
+
+- text: Contents
+  sub:
+    - text: Introduction
+      url: /deployment-considerations/introduction.html
+    - text: Preparing ECUs
+      url: /deployment-considerations/ecus.html
+    - text: Preparing servers
+      url: /deployment-considerations/repositories.html
+    - text: Key management and metadata expiration
+      url: /deployment-considerations/key_management.html
+    - text: Normal operating guidelines
+      url: /deployment-considerations/normal_operation.html
+    - text: Exceptional operations
+      url: /deployment-considerations/exceptional_operations.html
+    - text: Customizing Uptane
+      url: /deployment-considerations/customizations.html
+    - text: Other security considerations
+      url: /deployment-considerations/security_considerations.html
+    - text: ASN.1 examples for metadata syntax
+      url: /deployment-considerations/asn1_examples.html
+    - text: Reference Implementation and Demonstration Code
+      url: https://github.com/uptane/uptane
+      external: true
+

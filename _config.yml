@@ -1,0 +1,13 @@
+# You can access these variables using jekyll template language and the
+# `site` variable, e.g.: {{site.title}}
+# Look at layouts/default.html to see how they are used
+
+title: Uptane
+description:  Deployment Considerations and Best Practices
+logo_url: /deployment-considerations/assets/images/uptane-logo-white.png
+google_analytics: false
+theme: jekyll-theme-cayman
+exclude: ["LICENSE", "README.md"]
+baseurl: "/deployment-considerations"
+plugins:
+  - jekyll-mentions
