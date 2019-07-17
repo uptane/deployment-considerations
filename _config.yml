@@ -3,7 +3,7 @@
 # Look at layouts/default.html to see how they are used
 
 title: Uptane
-description:  Deployment Considerations and Best Practices
+description:  Securing Software Updates for Automobiles
 logo_url: /deployment-considerations/assets/images/uptane-logo-white.png
 google_analytics: false
 theme: jekyll-theme-cayman

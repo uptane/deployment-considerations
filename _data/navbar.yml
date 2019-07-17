@@ -1,11 +1,36 @@
 - text: Home
-  sub:
-    - text: Deployment Considerations index
-      url: /deployment-considerations/index.html
-    - text: Uptane Home
-      url: /index.html
+  url: /index.html
 
-- text: Contents
+- text: The Basics
+  sub:
+    - text: Project Overview
+      url: /overview.html
+
+    - text: Why Uptane is needed
+      url: /attacks.html
+
+    - text: Uptane Design
+      url: /design.html
+
+    - text: The Uptane Alliance
+      url: /alliance.html
+
+    - text: Timeline
+      url: /timeline.html
+
+    - text: Governance
+      url: /governance.html
+
+    - text: People
+      url: /people.html
+
+- text: Design Documents
+  sub:
+    - text: Uptane Standards
+      url: https://uptane.github.io/uptane-standard/uptane-standard.html
+      external: true
+
+- text: Deployment
   sub:
     - text: Introduction
       url: /deployment-considerations/introduction.html
@@ -29,3 +54,22 @@
       url: https://github.com/uptane/uptane
       external: true
 
+- text: Learn More
+  sub:
+    - text: Conference and Journal Publications
+      url: /publications.html
+
+    - text: Audio-Visuals
+      url: /audio.html
+    
+    - text: Adoptions
+      url: /adoptions.html
+
+    - text: Security Audits
+      url: /audits.html
+
+- text: Press
+  url: /press.html
+
+- text: Participate
+  url: /participate.html
