@@ -1,9 +1,11 @@
-# Jekyll website
+# Uptane Deployment Considerations website
 
 Uptane's project website is created with [Jekyll](https://jekyllrb.com) and extends
 the [GitHub pages slate theme](https://github.com/pages-themes/slate).
 
 The site is available [here](https://uptane.github.io/).
+
+This repository is a dedicated place for the deployment considerations text. Whatever is on master will be built automatically by github, and deployed at https://uptane.github.io/deployment-considerations.
 
 ## Maintenance and re-use
 
