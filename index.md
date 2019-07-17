@@ -1,20 +1,12 @@
 ---
 layout: default
-css_id: landing
+css_id: introduction
 ---
 
-Uptane is the first software update system designed to protect software delivered over-the-air to the computerized units of automobiles.
-The framework can thwart attacks from malicious actors who can
-compromise servers and networks at the manufacturing level.  Hence, it is designed to be resilient even to the best efforts of nation state
-attackers. Uptane is integrated into [Automotive Grade Linux](https://www.automotivelinux.org/),
-an open source system currently used by many large OEMs, and has also been adopted by a number of U.S. and international manufacturers. Within the next few years, more than one-third of new cars on U.S. roads will include Uptane.
+# Deployment Guidelines
 
-Currently considered the *de facto* secure standard for software updates on
-automobiles, in July 2018 the [IEEE/ISTO Federation](https://ieee-isto.org/) began
-formally standardizing Uptane under a non-profit consortium called the [Uptane
-Alliance](https://ieee-isto.org/member_programs/uptane-alliance/). This 
-step will encourage adoption and ensure clear guidance for future
-users. The initial version of the [Uptane Standard document](https://uptane.github.io/uptane-standard/uptane-standard.html), which presents procedures for the secure design and implementation of the framework, is now available and can be accessed free of charge. Recommended deployment strategies are also currently being prepared and will be posted on this web site upon completion. Other materials, including [technical papers](https://uptane.github.io/publications.html),
-[security audits](https://uptane.github.io/audits.html), and
-[a public reference implementation](https://github.com/uptane/uptane)
-are also freely available for all to use.
+Uptane is a standard, and does not have an official distribution or implementation. We do provide a [reference implementation in Python](https://github.com/uptane/uptane), and there are a number of open source projects such as [aktualizr](https://github.com/advancedtelematic/aktualizr), [rust-tuf](https://github.com/heartsucker/rust-tuf), [Notary](https://github.com/theupdateframework/notary), and [OTA Community Edition](https://github.com/advancedtelematic/ota-community-edition/) implementing all or part of the standard. In addition, commercial Uptane offerings are available in the marketplace from [HERE Technologies](https://www.here.com/products/automotive/ota-technology) and [Airbiquity](https://www.airbiquity.com/product-offerings/software-and-data-management).
+
+However, in any serious Uptane installation, a number of deployment decisions will need to be made, and policies and practices for software signing and key management will need to be implemented. Additionally, some OEMs may wish to develop their own Uptane implementation. Here, we provide a set of guidelines for how to set up, operate, integrate, and adapt Uptane to work in a variety of situations. We also discuss the human operations required, and describe Uptane-compatible ways to implement some specific features that OEMs have requested guidance or clarification on in the past.
+
+All of these guidelines should be viewed as complementary to the official Uptane standard: they should be taken as advice, not gospel.
