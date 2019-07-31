@@ -9,13 +9,13 @@ This page outlines recommended procedures for the one-time operations that an OE
 
 ## Secure Source of Time
 
-Uptane repositories need access to a secure source of time. If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. This section describes how a time server can be used in an Uptane implementation.
+Uptane repositories need access to a secure source of time. If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. This section describes how a Time Server can be used in an Uptane implementation.
 
 ### Time server
 
 The Time Server exists to inform vehicles about the current time in a cryptographically secure way, since many ECUs in a vehicle will not have a reliable source of time. It receives lists of tokens from vehicles, and returns back a signed sequence that includes the token and the current time.
 
-If the time server is used, it MUST conform to the following requirements:
+If the Time Server is used, it MUST conform to the following requirements:
 
 * When the Time Server receives a sequence of tokens from a vehicle, it SHALL provide one or more signed responses, containing the time along with these tokens. It MAY produce either one signed time attestation containing the current time and all tokens, or multiple time attestations each containing the current time and one or more tokens.
 
@@ -34,32 +34,32 @@ Listing the public key of the Time Server in Director targets metadata is necess
 
 #### Changes to a Primary
 
-If the time server is implemented, the primary SHALL use the following procedure to verify the time. This procedure will occur after the vehicle version manifest is sent and will fulfill the "Download and check current time" step of the Uptane Standard.
+If the Time Server is implemented, the primary SHALL use the following procedure to verify the time. This procedure will occur after the vehicle version manifest is sent and will fulfill the "Download and check current time" step of the Uptane Standard.
 
 1. Gather the tokens from each secondary ECU's version report.
-2. Send the list of tokens to the time server to fetch the current time. The time server responds as described in [Time Server](#time_server), providing a cryptographic attestation of the last known time.
-3. If the time server's response meets the criteria below, update the primary ECU's clock and retain the time server's response for distribution to secondary ECUs, otherwise discard it and proceed without an updated time.  The criteria for checking the time server's response are:
-  - The signature over the time server's response is valid.
-  - The tokens provided to the time server have been included in the response.
-  - The time in the time server's response is later than the last time verified in this manner.
+2. Send the list of tokens to the Time Server to fetch the current time. The time server responds as described in [Time Server](#time_server), providing a cryptographic attestation of the last known time.
+3. If the Time Server's response meets the criteria below, update the primary ECU's clock and retain the Time Server's response for distribution to secondary ECUs, otherwise discard it and proceed without an updated time.  The criteria for checking the Time Server's response are:
+  - The signature over the Time Server's response is valid.
+  - The tokens provided to the Time Server have been included in the response.
+  - The time in the Time Server's response is later than the last time verified in this manner.
 
 #### ECU Version Report
 
-The payload of the ECU version report should contain the latest time downloaded from the time server. In addition, the report should include a token (nonce) for the time server to sign and send back.
+The payload of the ECU version report should contain the latest time downloaded from the Time Server. In addition, the report should include a token (nonce) for the Time Server to sign and send back.
 
 #### Changes to all ECUs
 
-At build time, ECUs will be provisioned with an attestation of the current time downloaded from the time server.
+At build time, ECUs will be provisioned with an attestation of the current time downloaded from the Time Server.
 
-As the first step to verifying metadata, described as "Load and verify the current time or the most recent securely attested time" in the Standard, the ECU SHOULD load and verify the  most recent time from the time server using the following procedure:
+As the first step to verifying metadata, described as "Load and verify the current time or the most recent securely attested time" in the Standard, the ECU SHOULD load and verify the  most recent time from the Time Server using the following procedure:
 
 1. Verify that the signatures on the downloaded time are valid.
 2. Verify that the list of nonces/tokens in the downloaded time includes the token that the ECU sent in its previous version report.
 3. Verify that the time downloaded is greater than the previous time.
 
-If all three steps complete without error, the ECU SHALL overwrite its current attested time with the time it has just downloaded, and generate a new nonce/token for the next request to the time server.
+If all three steps complete without error, the ECU SHALL overwrite its current attested time with the time it has just downloaded, and generate a new nonce/token for the next request to the Time Server.
 
-If any check fails, the ECU SHALL NOT overwrite its current attested time, and SHALL jump to the last step ([Create and Send Version Report](https://uptane.github.io/uptane-standard/uptane-standard.html#create_version_report)), and report the error. The ECU MUST reuse its previous token for the next request to the time server.
+If any check fails, the ECU SHALL NOT overwrite its current attested time, and SHALL jump to the last step ([Create and Send Version Report](https://uptane.github.io/uptane-standard/uptane-standard.html#create_version_report)), and report the error. The ECU MUST reuse its previous token for the next request to the Time Server.
 
 #### Changes to checking Root metadata
 
