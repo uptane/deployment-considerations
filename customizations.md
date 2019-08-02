@@ -15,7 +15,10 @@ Examples of code include the bootloader, shared libraries, and the application, 
 
 Examples of data include setup or initialization data, such as engine parameters, application data, such as maps, and user data, such as an address book or system logs.
 
-### TODO Insert Figure 1 (custom_1_code_data_image.jpg)
+<img align="center" src="assets/images/custom_1_code_data_image.png" width="500" style="margin: 0px 20px"/>
+
+**Figure 1.** *An example of how code and / or data may constitute an image.*
+
 
 ## Delta update strategies
 
@@ -30,7 +33,7 @@ Finally, in order to install a delta image, an ECU SHOULD take one of the action
 
 ### TODO Recreate and insert Table D.2a from google doc and label it as Table 1.
 
-
+                                                                                                                                                                                                                 |
 ### Dynamic delta updates vs. precomputed delta updates
 
 There are two options when computing delta updates. Delta updates can be computed dynamically for each ECU during the installation process (dynamic delta updates), or possible delta images can be precomputed before installation begins (precomputed delta updates). The process for describing both types of updates appears below in the subsection on custom installation instructions.
