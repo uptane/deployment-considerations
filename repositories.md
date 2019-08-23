@@ -45,7 +45,7 @@ If the Time Server is implemented, the primary SHALL use the following procedure
 
 #### ECU Version Report
 
-The payload of the ECU version report should contain the latest time downloaded from the Time Server. In addition, the report should include a token (nonce) for the Time Server to sign and send back.
+The payload of the ECU version report should contain the latest time downloaded from the Time Server. In addition, the report should include a token (which MUST be used exactly once) for the Time Server to sign and send back.
 
 #### Changes to all ECUs
 
@@ -63,7 +63,7 @@ If any check fails, the ECU SHALL NOT overwrite its current attested time, and S
 
 #### Changes to checking Root metadata
 
-After updating to the most recent Root metadata file, check the Timeserver key. If the Timeserver key is listed in the Root metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value (e.g. zero, or any time that is guaranteed to not be in the future based on other evidence).  It will be updated in the next cycle.
+In order to prevent a new timeserver from accidentally causing a rollback warning, the clock must be reset when switching to a new timeserver. To do this, check the Timeserver key after updating to the most recent Root metadata file. If the Timeserver key is listed in the Root metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value (e.g. zero, or any time that is guaranteed to not be in the future based on other evidence).  It will be updated in the next cycle.
 
 
 ## What suppliers should do
