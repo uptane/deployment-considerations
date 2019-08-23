@@ -9,11 +9,11 @@ This page outlines recommended procedures for the one-time operations that an OE
 
 ## Secure Source of Time
 
-Uptane repositories need access to a secure source of time. If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. This section describes how a Time Server can be used in an Uptane implementation.
+ECUs need access to a secure source of time. If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. This section describes how a Time Server can be used in an Uptane implementation.
 
 ### Time server
 
-The Time Server exists to inform vehicles about the current time in a cryptographically secure way, since many ECUs in a vehicle will not have a reliable source of time. It receives lists of tokens from vehicles, and returns back a signed sequence that includes the token and the current time.
+The Time Server exists to inform ECUs about the current time in a cryptographically secure way, since many ECUs in a vehicle do not have a reliable source of time. The Time Server receives a list of tokens from vehicles, and returns back a list of signed records containing every token in the original list of tokens received and at least one instance of the current time.
 
 If the Time Server is used, it MUST conform to the following requirements:
 
@@ -26,7 +26,7 @@ If the Time Server is used, it MUST conform to the following requirements:
 #### Changes to the Director repository
 If a Time Server is in use, a representation of the Time Server public key is CONDITIONALLY REQUIRED in Director repository root metadata.
 
-If a Time Server is implemented AND partial-verification secondaries will be used, the following metadata is CONDITIONALLY REQUIRED in the Director repository's Targets metadata:
+If a Time Server is implemented AND partial-verification secondaries are used, the following metadata is CONDITIONALLY REQUIRED in the Director repository's Targets metadata:
 
 * A representation of the public key(s) for the Time Server, similar to the representation of public keys in Root metadata.
 
@@ -34,7 +34,7 @@ Listing the public key of the Time Server in Director targets metadata is necess
 
 #### Changes to a Primary
 
-If the Time Server is implemented, the primary SHALL use the following procedure to verify the time. This procedure will occur after the vehicle version manifest is sent and will fulfill the "Download and check current time" step of the Uptane Standard.
+If the Time Server is implemented, the primary SHALL use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the "Download and check current time" step of the Uptane Standard.
 
 1. Gather the tokens from each secondary ECU's version report.
 2. Send the list of tokens to the Time Server to fetch the current time. The time server responds as described in [Time Server](#time_server), providing a cryptographic attestation of the last known time.
@@ -54,10 +54,10 @@ At build time, ECUs will be provisioned with an attestation of the current time 
 As the first step to verifying metadata, described as "Load and verify the current time or the most recent securely attested time" in the Standard, the ECU SHOULD load and verify the  most recent time from the Time Server using the following procedure:
 
 1. Verify that the signatures on the downloaded time are valid.
-2. Verify that the list of nonces/tokens in the downloaded time includes the token that the ECU sent in its previous version report.
+2. Verify that the list of tokens in the downloaded time includes the token that the ECU sent in its previous version report.
 3. Verify that the time downloaded is greater than the previous time.
 
-If all three steps complete without error, the ECU SHALL overwrite its current attested time with the time it has just downloaded, and generate a new nonce/token for the next request to the Time Server.
+If all three steps complete without error, the ECU SHALL overwrite its current attested time with the time it has just downloaded, and generate a new token for the next request to the Time Server.
 
 If any check fails, the ECU SHALL NOT overwrite its current attested time, and SHALL jump to the last step ([Create and Send Version Report](https://uptane.github.io/uptane-standard/uptane-standard.html#create_version_report)), and report the error. The ECU MUST reuse its previous token for the next request to the Time Server.
 
