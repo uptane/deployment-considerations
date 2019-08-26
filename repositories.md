@@ -13,7 +13,7 @@ ECUs need access to a secure source of time. If an ECU does not have a secure cl
 
 ### Time server
 
-A Time Server is a server that is responsible for the distribution of a secure source of time. 
+A Time Server is a server that is responsible for the distribution of a secure source of time.
 
 The Time Server exists to inform ECUs about the current time in a cryptographically secure way, since many ECUs in a vehicle do not have a reliable source of time. The Time Server receives a list of tokens from vehicles, and returns back a list of signed records containing every token in the original list of tokens received and at least one instance of the current time.
 
@@ -67,6 +67,9 @@ If any check fails, the ECU SHALL NOT overwrite its current attested time, and S
 
 In order to prevent a new timeserver from accidentally causing a rollback warning, the clock must be reset when switching to a new timeserver. To do this, check the Timeserver key after updating to the most recent Root metadata file. If the Timeserver key is listed in the Root metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value (e.g. zero, or any time that is guaranteed to not be in the future based on other evidence).  It will be updated in the next cycle.
 
+#### Changes to Partial Verification Secondaries
+
+As partial verification secondaries only check the Targets metadata from the Director repository, the timeserver key must be checked when verifying the Targets metadata on partial verification secondaries. To do this, check the Timeserver key after verifying the most recent Targets metadata file. If the Timeserver key is listed in the Targets metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value as described in [Changes to checking Root metadata](#changes-to-checking-root-metadata).
 
 ## What suppliers should do
 
