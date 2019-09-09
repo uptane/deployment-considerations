@@ -9,7 +9,9 @@ This page outlines recommended procedures for the one-time operations that an OE
 
 ## Secure Source of Time
 
-ECUs need access to a secure source of time. If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. This section describes how a Time Server can be used in an Uptane implementation.
+Without access to a secure source of time, ECUs may be prevented from receiving the most recent updates. If the ECU's time is too high, the ECU will detect that the current valid metadata is expired and will be unable to perform an update. If the ECU's time is too low, an attacker would be able to replay old metadata to the ECU and install an old, potentially insecure, version.
+
+To prevent these issues, ECUs need access to a secure source of time. If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. This section describes how a Time Server can be used in an Uptane implementation.
 
 ### Time server
 
