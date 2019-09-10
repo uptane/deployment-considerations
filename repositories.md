@@ -55,10 +55,10 @@ The payload of the ECU version report should contain the latest time downloaded 
 
 At build time, ECUs will be provisioned with an attestation of the current time downloaded from the Time Server.
 
-As the first step to verifying metadata, described as "Load and verify the current time or the most recent securely attested time" in the Standard, the ECU SHOULD load and verify the  most recent time from the Time Server using the following procedure:
+As the first step to verifying metadata, described as ["Load and verify the current time or the most recent securely attested time"](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#partial_verification) in the Standard, the ECU SHOULD load and verify the most recent time from the Time Server using the following procedure:
 
 1. Verify that the signatures on the downloaded time are valid.
-2. Verify that the list of tokens in the downloaded time includes the token that the ECU sent in its previous version report.
+2. Verify that the list of tokens in the downloaded time includes the token that the ECU sent in its version report.
 3. Verify that the time downloaded is greater than the previous time.
 
 If all three steps complete without error, the ECU is CONDITIONALLY REQUIRED to overwrite its current attested time with the time it has just downloaded, and generate a new token for the next request to the Time Server.
