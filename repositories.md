@@ -44,7 +44,7 @@ If the Time Server is implemented, the primary is CONDITIONALLY REQUIRED to use 
 2. Send the list of tokens to the Time Server to fetch the current time. The time server responds as described in [Time Server](#time_server), providing a cryptographic attestation of the last known time.
 3. If the Time Server's response meets the criteria below, update the primary ECU's clock and retain the Time Server's response for distribution to secondary ECUs, otherwise discard it and proceed without an updated time.  The criteria for checking the Time Server's response are:
   - The signature over the Time Server's response is valid.
-  - The tokens provided to the Time Server have been included in the response.
+  - All the tokens provided to the Time Server have been included in the response.
   - The time in the Time Server's response is later than the last time verified in this manner.
 
 #### ECU Version Report
