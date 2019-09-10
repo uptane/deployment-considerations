@@ -41,7 +41,7 @@ Listing the public key of the Time Server in Director targets metadata is necess
 If the Time Server is implemented, the primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the ["Download and check current time"](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) step of the Uptane Standard.
 
 1. Gather the tokens from each secondary ECU's version report.
-2. Send the list of tokens to the Time Server to fetch the current time. The time server responds as described in [Time Server](#time_server), providing a cryptographic attestation of the last known time.
+2. Send the list of tokens to the Time Server to fetch the current time. The Time Server responds as described in [Time Server](#time_server), providing a cryptographic attestation of the last known time.
 3. If the Time Server's response meets the criteria below, update the primary ECU's clock and retain the Time Server's response for distribution to secondary ECUs, otherwise discard it and proceed without an updated time.  The criteria for checking the Time Server's response are:
   - The signature over the Time Server's response is valid.
   - All the tokens provided to the Time Server have been included in the response.
@@ -49,7 +49,7 @@ If the Time Server is implemented, the primary is CONDITIONALLY REQUIRED to use 
 
 #### ECU Version Report
 
-The payload of the ECU version report should contain the latest time downloaded from the Time Server. In addition, the report should include a token (which SHOULD be used exactly once to prevent a replay attack) for the Time Server to sign and send back.
+The payload of the ECU version report sent to the Director might contain the token sent to the Time Server. This token is in the version report sent from secondaries to the primary, and so is in the signed version of the version report. If the token is removed, the signature will not match.
 
 #### Changes to all ECUs
 
