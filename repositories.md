@@ -21,7 +21,7 @@ The Time Server exists to inform ECUs about the current time in a cryptographica
 
 If the Time Server is used, it is CONDITIONALLY REQUIRED to conform to the following requirements:
 
-* When the Time Server receives a sequence of tokens from a vehicle, it will provide one or more signed responses, containing the time along with these tokens. It MAY produce either one signed time attestation containing the current time and all tokens, or multiple time attestations each containing the current time and one or more tokens.
+* When the Time Server receives a sequence of tokens from a vehicle, it will provide one or more signed responses, containing the time along with these tokens. It MAY produce either one signed time attestation containing the current time and all tokens, or multiple time attestations each containing the current time and one or more tokens. In the second case, all tokens must be contained in one of the time attestations sent.
 
 * The Time Server will expose a public interface allowing primaries to communicate with it. This communication MAY occur over FTP, FTPS, SFTP, HTTP, HTTPS, or another transport control of the implementor's choice.
 
