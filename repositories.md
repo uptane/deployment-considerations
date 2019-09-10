@@ -15,7 +15,7 @@ To prevent these issues, ECUs need access to a secure source of time. If an ECU 
 
 ### Time server
 
-A Time Server is a server that is responsible for the distribution of a secure source of time.
+A Time Server is a server that is responsible to act as a secure source of time.
 
 The Time Server exists to inform ECUs about the current time in a cryptographically secure way, since many ECUs in a vehicle do not have a reliable source of time. The Time Server receives a list of tokens from vehicles, and returns back a list of signed records containing every token in the original list of tokens received and at least one instance of the current time.
 
