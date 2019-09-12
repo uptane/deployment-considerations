@@ -69,7 +69,7 @@ If any check fails, the ECU is CONDITIONALLY REQUIRED to NOT overwrite its curre
 
 #### Changes to checking Root metadata
 
-In order to prevent a new timeserver from accidentally causing a rollback warning, the clock will be reset when switching to a new timeserver. To do this, check the Timeserver key after updating to the most recent Root metadata file. If the Timeserver key is listed in the Root metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value (e.g. zero, or any time that is guaranteed to not be in the future based on other evidence).  It will be updated in the next cycle.
+In order to prevent a new Time Server from accidentally causing a rollback warning, the clock will be reset when switching to a new Time Server. To do this, check the Time Server key after updating to the most recent Root metadata file. If the Time Server key is listed in the Root metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value (e.g. zero, or any time that is guaranteed to not be in the future based on other evidence).  It will be updated in the next cycle.
 
 #### Changes to Partial Verification Secondaries
 
