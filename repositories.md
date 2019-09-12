@@ -34,7 +34,7 @@ If a Time Server is implemented AND partial-verification secondaries are used, t
 
 * A representation of the public key(s) for the Time Server, similar to the representation of public keys in Root metadata.
 
-Listing the public key of the Time Server in Director targets metadata is necessary to allow partial-verification secondaries to perform time server key rotation.
+Listing the public key of the Time Server in Director Targets metadata is necessary to allow partial-verification Secondaries to perform Time Server key rotation.
 
 #### Changes to a Primary
 
