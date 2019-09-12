@@ -30,7 +30,7 @@ If the Time Server is used, it is CONDITIONALLY REQUIRED to conform to the follo
 #### Changes to the Director repository
 If a Time Server is in use, a representation of the Time Server public key is CONDITIONALLY REQUIRED in Director repository root metadata.
 
-If a Time Server is implemented AND partial-verification secondaries are used, the following metadata is CONDITIONALLY REQUIRED in the Director repository's Targets metadata:
+If a Time Server is implemented AND partial verification Secondaries are used, the following metadata is CONDITIONALLY REQUIRED in the Director repository's Targets metadata:
 
 * A representation of the public key(s) for the Time Server, similar to the representation of public keys in Root metadata.
 
