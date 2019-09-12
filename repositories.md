@@ -73,7 +73,7 @@ In order to prevent a new timeserver from accidentally causing a rollback warnin
 
 #### Changes to Partial Verification Secondaries
 
-As partial verification secondaries only check the Targets metadata from the Director repository, the timeserver key will be checked when verifying the Targets metadata on partial verification secondaries. To do this, check the Timeserver key after verifying the most recent Targets metadata file. If the Timeserver key is listed in the Targets metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value as described in [Changes to checking Root metadata](#changes-to-checking-root-metadata).
+As partial verification Secondaries only check the Targets metadata from the Director repository, the Time Server key will be checked when verifying the Targets metadata on partial verification Secondaries. To do this, check the Time Server key after verifying the most recent Targets metadata file. If the Time Server key is listed in the Targets metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value as described in [Changes to checking Root metadata](#changes-to-checking-root-metadata).
 
 ## What suppliers should do
 
