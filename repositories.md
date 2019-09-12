@@ -25,7 +25,7 @@ If the Time Server is used, it is CONDITIONALLY REQUIRED to conform to the follo
 
 * The Time Server will expose a public interface allowing primaries to communicate with it. This communication MAY occur over FTP, FTPS, SFTP, HTTP, HTTPS, or another transport control of the implementor's choice.
 
-* Rotation of the The Time Server's key is performed by listing the new key in the Director's Root metadata, in the same manner as other role keys are listed, and also in the custom field of the Director Repository's Targets metadata (for partial verification secondaries).
+* Rotation of the the Time Server's key is performed by listing the new key in the Director's Root metadata, in the same manner as other role keys are listed, and also in the custom field of the Director repository's Targets metadata (for partial verification Secondaries).
 
 #### Changes to the Director repository
 If a Time Server is in use, a representation of the Time Server public key is CONDITIONALLY REQUIRED in Director repository root metadata.
