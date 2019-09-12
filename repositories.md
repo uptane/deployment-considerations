@@ -41,7 +41,7 @@ Listing the public key of the Time Server in Director Targets metadata is necess
 If the Time Server is implemented, the primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the ["Download and check current time"](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) step of the Uptane Standard.
 
 1. Gather the tokens from each secondary ECU's version report.
-2. Send the list of tokens to the Time Server to fetch the current time. The Time Server responds as described in [Time Server](#time_server), providing a cryptographic attestation of the last known time.
+2. Send the list of tokens to the Time Server to fetch the current time. The Time Server responds as described in the [Time Server section](#time-server), providing a cryptographic attestation of the last known time.
 3. If the Time Server's response meets the criteria below, update the primary ECU's clock and retain the Time Server's response for distribution to secondary ECUs, otherwise discard it and proceed without an updated time.  The criteria for checking the Time Server's response are:
   - The signature over the Time Server's response is valid.
   - All the tokens provided to the Time Server have been included in the response.
