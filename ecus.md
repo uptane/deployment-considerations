@@ -29,7 +29,7 @@ Firstly, if the ECU is a primary ECU, partial verification is not an option: it 
 
 ### Symmetric vs. asymmetric ECU keys
 
-<img align="center" src="assets/images/ECU-1_sym_asym.png" width="500" style="margin: 0px 20px"/>
+<img align="center" src="assets/images/ECU_1_sym_asym.png" width="500" style="margin: 0px 20px"/>
 
 **Figure 1.** *An arrangement that an OEM SHOULD use when using symmetric ECU keys.*
 
