@@ -25,9 +25,9 @@ delta images. A delta image update contains only the code and / or data that dif
 
 The OEM SHOULD add two types of information to the custom targets metadata used by the Director repository: (1) the algorithm used to apply a delta image, and (2) the Targets metadata about the delta image. This is done so that ECUs know how to apply and verify the delta image. The Director repository SHOULD also be modified to produce delta images, because Uptane does not require it to compute deltas by default. The Director repository can use the vehicle version manifest and dependency resolution to determine the differences between the previous and latest images. If desired, then the Director repository MAY encrypt the delta image.
 
-As these images are produced on demand by the Director repository, Primaries SHOULD download all delta and / or encrypted images only from that source. After full verification of metadata, Primaries SHOULD also check whether delta images match the Targets metadata from the Director repository, just as they check whether encrypted images match the Targets metadata from the Director repository when using non-delta images.
+As these images are produced on demand by the Director repository, Primaries SHOULD download all delta and / or encrypted images only from that source. After full verification of metadata, Primaries SHOULD also check whether delta images match the Targets metadata from the Director repository in the same manner in which they check such metadata from the Director repository when using non-delta images.
 
-Finally, in order to install a delta image, an ECU SHOULD take one of the actions described in Table 1, depending on whether or not the delta image has been encrypted, and if the ECU has additional storage. Note that the OEM MAY use stream ciphers in order to enable on-the-fly decryption by ECUs that have no additional storage space. In this case, the ECU would decrypt the delta image as it is downloaded, then follow the remainder of the steps in the third box below.
+Finally, in order to install a delta image, an ECU SHOULD take one of the actions described in Table 1, depending on whether or not the delta image has been encrypted, and if the ECU has additional storage. Note that the OEM MAY use stream ciphers in order to enable on-the-fly decryption on ECUs that do not have additional storage. In this case, the ECU would decrypt the delta image as it is downloaded, then follow the remainder of the steps in the third box below.
 
 ### TODO Write rationale for the SHOULDs throughout the section above.
 
@@ -37,8 +37,6 @@ Finally, in order to install a delta image, an ECU SHOULD take one of the action
 
 There are two options when computing delta updates. Delta updates can be computed dynamically for each ECU during the installation process (dynamic delta updates), or possible delta images can be precomputed before installation begins (precomputed delta updates). The process for describing both types of updates appears below in the subsection on [custom installation instructions](#custom-installation-instructions-for-ecus).
 
-### TODO Insert link to the subsection Custom installation instructions below in the last sentence above.
-
 Dynamic delta updates reduce the amount of data sent in each update, while allowing for fine grained control of what version is placed on each ECU.  By using the custom field of the Targets metadata, the Director can be configured to specify a particular version of software for every ECU. Dynamic delta updates allow the Director to do file granular resource tracking, which can save bandwidth by only transmitting the delta of the image.
 
 To send dynamic delta updates, the Director would compute the delta as described
@@ -46,7 +44,7 @@ earlier in this section. The computed images would be made available to the Prim
 
 One drawback of dynamic delta updates is that if many ECUs are updating from the same version, computing the delta of each would result in duplicate computation that could be time consuming or use up a lot of memory. A possible solution to this is to use precomputed delta updates.
 
-To send precomputed delta updates the Director precomputes various probable diffs and makes these available as images. The Director then specifies which precomputed delta image to send to each ECU by using the custom field of Targets metadata, as described below. Precomputing the delta images has the added advantage of allowing these images to be stored on the Image repository, which offers additional security against a Director compromise.
+To send precomputed delta updates the Director precomputes various probable diffs and makes these available as images. The Director then specifies which precomputed delta image to send to each ECU using the custom field of Targets metadata, as described below. Precomputing the delta images has the added advantage of allowing these images to be stored on the Image repository, which offers additional security against a Director compromise.
 
 ## Uptane in conjunction with other protocols
 
@@ -61,7 +59,7 @@ metadata, images, and other messages to Primaries.
 
 Implementers MAY use [Unified Diagnostic Services](https://en.wikipedia.org/wiki/Unified_Diagnostic_Services) (UDS) to transport Uptane metadata, images, and other messages between Primaries and Secondaries.
 
-Any system being used to transport images to ECUs needs to modified only to also allow transport of Uptane metadata and other messages. Note that Uptane does not require authentication of network traffic between the Director and Image repositories and Primaries, or between Primaries and Secondaries.
+Any system being used to transport images to ECUs needs to modified only to permit transport of Uptane metadata and other messages. Note that Uptane does not require authentication of network traffic between the Director and Image repositories and Primaries, or between Primaries and Secondaries.
 
 However, in order for an implementation to be Uptane-compliant, no ECU can cause another ECU to install an image without performing either full or partial verification of metadata. This is done in order to prevent attackers from being able to bypass Uptane, and thus execute arbitrary software attacks. Thus, in an Uptane-compliant implementation, an ECU performs either full or partial verification of metadata and images before installing any image, regardless of how the metadata and images were transmitted to the ECU.
 
@@ -117,13 +115,13 @@ In the second option, the third party MAY choose to override the root of trust f
 
 Currently, implementation instructions are written with the implicit assumptions that: (1) ECUs are able to parse the string filenames of metadata and images, and that (2) ECUs may have filesystems to read and write these files. However, not all ECUs, especially partial verification Secondaries, may fit these assumptions. There are two important observations.
 
-First, filenames need not be strings. Even if there is no explicit notion of “files” on an ECU, it is important for distinct pieces of metadata and images to have distinct names. This is needed for Primaries to perform full verification on behalf of Secondaries, which entails comparing the metadata for different images for different Secondaries. Either strings or numbers may be used to refer to distinct metadata and images, as long as different “files” have different “file” names or numbers. The Image and Director repositories can continue to use file systems, and may also use either strings or numbers to represent “file” names.
+First, filenames need not be strings. Even if there is no explicit notion of "files" on an ECU, it is important for distinct pieces of metadata and images to have distinct names. This is needed for Primaries to perform full verification on behalf of Secondaries, which entails comparing the metadata for different images for different Secondaries. Either strings or numbers may be used to refer to distinct metadata and images, as long as different “files” have different "file" names or numbers. The Image and Director repositories can continue to use file systems, and may also use either strings or numbers to represent "file" names.
 
-Second, ECUs need not have a filesystem in order to use Uptane. It is only important that ECUs are able to recognize distinct metadata and images, using either strings or numbers as “file” names or numbers, and that they allocate different parts of storage to different “files.”
+Second, ECUs need not have a filesystem in order to use Uptane. It is only important that ECUs are able to recognize distinct metadata and images, using either strings or numbers as "file" names or numbers, and that they allocate different parts of storage to different "files."
 
 ## Custom installation instructions for ECUs
 
-Most inputs to ECUs are delivered as signed Targets files and are stored on the Image directory. These signed Targets files are then sent to the ECU by the Director. However, there may be some cases where the inputs required for a particular customization cannot be configured to follow this standard signing process. Variations in input may be due to not knowing the input in advance, or a need to customize instructions for each vehicle. Examples of such inputs could be a command line option that turns on a feature in certain ECUs, a configuration sent by a Director repository to an ECU, or a Director doing a dynamic customization for an ECU. We can collectively call all these non-standard inputs “dynamic directions.” Uptane allows ECUs to access dynamic directions in two different ways, each having particular advantages for different use cases.
+Most inputs to ECUs are delivered as signed Targets files and are stored on the Image directory. These signed Targets files are then sent to the ECU by the Director. However, there may be some cases where the inputs required for a particular customization cannot be configured to follow this standard signing process. Variations in input may be due to not knowing the input in advance, or a need to customize instructions for each vehicle. Examples of such inputs could be a command line option that turns on a feature in certain ECUs, a configuration sent by a Director repository to an ECU, or a Director doing a dynamic customization for an ECU. We can collectively call all these non-standard inputs "dynamic directions." Uptane allows ECUs to access dynamic directions in two different ways, each having particular advantages for different use cases.
 
 ### Accessing dynamic directions through signed images from the Director repository
 
