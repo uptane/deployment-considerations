@@ -35,7 +35,7 @@ Finally, in order to install a delta image, an ECU SHOULD take one of the action
                                                                                                                              
 ### Dynamic delta updates vs. precomputed delta updates
 
-There are two options when computing delta updates. Delta updates can be computed dynamically for each ECU during the installation process (dynamic delta updates), or possible delta images can be precomputed before installation begins (precomputed delta updates). The process for describing both types of updates appears below in the subsection on Custom installation instructions.
+There are two options when computing delta updates. Delta updates can be computed dynamically for each ECU during the installation process (dynamic delta updates), or possible delta images can be precomputed before installation begins (precomputed delta updates). The process for describing both types of updates appears below in the subsection on [custom installation instructions](#custom-installation-instructions-for-ecus).
 
 ### TODO Insert link to the subsection Custom installation instructions below in the last sentence above.
 
