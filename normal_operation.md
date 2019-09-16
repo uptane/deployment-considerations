@@ -8,7 +8,7 @@ In this section, we discuss how to perform regular maintenance operations. Since
 
 ## What can an Uptane-compliant system look like?
 
-### TODO There is no discernible text describing such a system in the original document. New text needs to be drafted for this section
+### TODO There is no discernible text describing such a system in the original document. New text needs to be drafted for this section or should this be a graphic?
 
 ## Updating metadata and images
 
@@ -16,29 +16,25 @@ An OEM SHOULD perform the following steps whenever a new update is delivered. Fi
 
 ### Receiving updates from tier-1 suppliers
 
-#### TODO link a reference to the Security page in the last sentence of the third paragraph to the first subsection on that page.
+In order to prevent updates from being tampered with by man-in-the-middle attackers, images SHOULD be delivered from the tier-1 supplier to the OEM in a manner that provides an extremely high degree of confidence in the timeliness and authenticity of the files provided. This may entail any manner of technical, physical, and/or personnel controls.
 
-In order to prevent updates from being tampered with by man-in-the-middle attackers, images SHOULD be delivered from the tier-1 supplier to the OEM in a manner that provides an extremely high degree of confidence in the timeliness and authenticity of the files provided. This may entail any manner of technical, physical, and / or personnel controls.
+An OEM and its suppliers MAY use any transport mechanism in order to deliver these files. For example, an OEM MAY maintain a private web portal where metadata and/or images from suppliers can be uploaded. This private server MAY be managed by either the OEM or the tier-1 supplier, and SHOULD require authentication, so that only certain users are allowed to read and/or write certain files. Alternatively, the OEM and its suppliers MAY use email or courier mail.
 
-An OEM and its suppliers MAY use any transport mechanism in order to deliver these files. For example, an OEM MAY maintain a private web portal where metadata and / or images from suppliers can be uploaded. This private server MAY be managed by either the OEM or the tier-1 supplier, and SHOULD require authentication, so that only certain users are allowed to read and / or write certain files. Alternatively, the OEM and its suppliers MAY use email, or courier mail.
+If the supplier signs its own images, then it delivers all of its metadata, including delegations, and associated images. Otherwise, if the OEM signs images on behalf of the supplier, then the supplier needs to update ONLY images, and the OEM is responsible for producing signed metadata. Regardless of which party produces signed metadata, the release counters associated with images SHOULD be incremented, so that attackers who compromise the Director repository are not able to rollback to obsolete images (see the opening section of the [Security page](https://github.com/uptane/deployment-considerations/blob/master/security_considerations.md) for more on this attack.)
 
-If the supplier signs its own images, then it delivers all of its metadata, including delegations, and associated images. Otherwise, if the OEM signs images on behalf of the supplier, then the supplier needs to update ONLY images, and the OEM is responsible for producing signed metadata. Regardless of whether it is the OEM or suppliers that produce signed metadata, the release counters associated with images SHOULD be incremented, so that attackers who compromise the director repository are not able to rollback to obsolete images (see the opening section of the Security page for more on this attack.)
+Regardless of the transport mechanism used to deliver images, the OEM needs to somehow ensure that the images received are authentic, and have not been altered. The OEM SHOULD verify these images using some out-of-band mechanism, so that the authenticity and integrity of these images can be double-checked. For example, to obtain a higher degree of assurance, and for additional validation, the OEM MAY also require the supplier's update team to send a PGP/GPG signed email to the OEM's security team listing the cryptographic hashes of the new files.
 
-Regardless of the transport mechanism used to deliver images, the most important thing is for the OEM to somehow ensure that the images are authentic, and have not been altered. The OEM SHOULD verify these images using some out-of-band mechanism, so that the authenticity and integrity of these images can be double-checked. For example, to obtain a higher degree of assurance, and for additional validation, the OEM MAY also require the supplier's update team to send a PGP / GPG signed email to the OEM's security team listing the cryptographic hashes of the new files.
-
-Alternatively, the OEM MAY require that updates be transmitted via DVD delivered by bonded and insured couriers. To validate the provided files, the OEM and a known contact at the supplier MAY have a video call where the cryptographic hashes of the metadata and / or images are provided by the supplier, and confirmed by the OEM.
+Alternatively, the OEM MAY require that updates be transmitted via DVD delivered by bonded and insured couriers. To validate the provided files, the OEM and a known contact at the supplier MAY have a video call where the cryptographic hashes of the metadata and/or images are provided by the supplier, and confirmed by the OEM.
 
 An OEM SHOULD perform this verification even if a trusted transport mechanism is used to ensure whether the transport mechanism has been compromised. If the suppliers have signed metadata, then the OEM SHOULD verify metadata and images by checking version numbers, expiration timestamps, delegations, signatures, and hashes, so that it can be sure that the metadata matches the images.
 
 ### Testing metadata and images
 
-#### TODO Add link from last sentence of third paragraph to symmetric vs. asymmetric ECU section on the ECU page
+After the OEM has somehow verified the authenticity and integrity of new metadata and images received from the tier-1 supplier, the OEM SHOULD test both before releasing them to ensure that the images work as intended on end-user vehicles. To do so, It SHOULD use the following steps.
 
-After a tier-1 supplier has delivered new images to the OEM, and the OEM has somehow verified the authenticity and integrity of these images, the OEM SHOULD test new metadata and images before releasing them, in order to ensure that the images work as intended on end user vehicles. To do so, It SHOULD use the following steps.
+First, the OEM SHOULD add these metadata and images to the Image repository. It SHOULD also add information about these images to the inventory database, including any dependencies and conflicts between images for different ECUs. Both of these steps are done to make the new metadata and images available to vehicles.
 
-First, the OEM SHOULD add these metadata and images to the Image repository. It SHOULD also add information about these images to the inventory database, including any dependencies and conflicts between images for different ECUs. Both of these steps are done, to  make  the new metadata and images available to vehicles.
-
-Optionally, if images are encrypted on demand per ECU, then the OEM SHOULD ensure that the Director repository somehow has access to the original, unencrypted images, so that automated processes running the Director repository are able to encrypt them in the first place. It does not matter how the original, unencrypted images are stored on the Director repository. For example, they MAY be stored unencrypted, or they MAY be encrypted using a master key that is known by the automated processes. See the "Preparing an ECU for Uptane" page for more details.
+Optionally, if images are encrypted on demand per ECU, then the OEM SHOULD ensure that the Director repository somehow has access to the original, unencrypted images, so that automated processes running the Director repository are able to encrypt them in the first place. It does not matter how the original, unencrypted images are stored on the Director repository. For example, they MAY be stored unencrypted, or they MAY be encrypted using a master key that is known by the automated processes. See the ["Preparing an ECU for Uptane"](https://github.com/uptane/deployment-considerations/blob/master/ecus.md) page on this website for more details.
 
 Second, the OEM SHOULD test the updated metadata and images on reserved vehicles, before releasing them to all vehicles in circulation, so that it can verify whether these images work as intended. To do so, it MAY instruct the Director repository to first install the updated images on these reserved vehicles.
 
@@ -50,14 +46,12 @@ Finally, the OEM SHOULD update the inventory database, so that the Director repo
 
 ### TODO There is no text describing this testing in the original document. New text needs to be drafted for this section
 
-## Backup and garbage collection for the image repository
+## Backup and garbage collection for the Image repository
 
-#### TODO Add link from last sentence in this section to the Delta update strategies subsection of the Customizations section.
+The OEM SHOULD regularly perform backup and garbage collection of the metadata and images on the Image repository. This is done to ensure the OEM is able to safely recover from a repository compromise, and that the repository continues to have sufficient storage space. To do so, an OEM MAY use either the following steps, or its own corporate backup and garbage collection policy.
 
-The OEM SHOULD regularly perform backup and garbage collection of the metadata and images on the Image repository. This is done to ensure the OEM is able to safely recover from a repository compromise, and that the repository has enough storage space. To do so, an OEM MAY use either the following steps, or its own corporate backup and garbage collection policy.
+First, an automated process SHOULD store every file on the Image repository, as well as its cryptographic hash on a separate, offline system. A copy of the inventory database from the Director repository SHOULD also be stored on this offline system. This allows administrators to detect and recover from a repository compromise. 
 
-First, an automated process SHOULD store every file on the image repository, as well as its cryptographic hash on a separate, offline system. This automated process SHOULD also store a copy of the inventory database from the Director repository on this offline system. This allows administrators to detect and recover from a repository compromise.
-
-Second, the automated process SHOULD remove expired metadata from the image repository to reclaim storage space. If the OEM is interested in supporting delta updates for vehicles that have not been updated for a long time, then the automated process SHOULD NOT remove images associated with expired metadata, because these images MAY be needed in order to compute delta images (see Delta Update Strategies on the Customizing Uptane page).
+Second, the automated process SHOULD remove expired metadata from the image repository to reclaim storage space. If the OEM is interested in supporting delta updates for vehicles that have not been updated for a long time, then the automated process SHOULD NOT remove images associated with expired metadata, because these images MAY be needed in order to compute delta images. (See [Delta Update Strategies](https://github.com/uptane/deployment-considerations/blob/master/customizations.md#delta-update-strategies) on the Customizing Uptane page).
 
 ### TODO Write rationale for the SHOULDs in the section above.
