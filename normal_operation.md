@@ -6,10 +6,6 @@ css_id: normal_operation
 # Normal operating procedures
 In this section, we discuss how to perform regular maintenance operations. Since these operations are performed on a regular basis, it is important to ensure they be performed in a systematic manner so that software updates are delivered securely to ECUs.
 
-## What can an Uptane-compliant system look like?
-
-### TODO There is no discernible text describing such a system in the original document. New text needs to be drafted for this section or should this be a graphic?
-
 ## Updating metadata and images
 
 An OEM SHOULD perform the following steps whenever a new update is delivered. First, the OEM verifies the authenticity and integrity of new images delivered by its suppliers. Second, the OEM tests whether the images work as intended, before releasing them to end-user vehicles.
@@ -41,10 +37,6 @@ Second, the OEM SHOULD test the updated metadata and images on reserved vehicles
 Finally, the OEM SHOULD update the inventory database, so that the Director repository is able to instruct appropriate ECUs on all affected vehicles on how to install these updated images.
 
 ### TODO Write rationale for the SHOULDs in the section above.
-
-## Acceptance testing
-
-### TODO There is no text describing this testing in the original document. New text needs to be drafted for this section
 
 ## Backup and garbage collection for the Image repository
 
