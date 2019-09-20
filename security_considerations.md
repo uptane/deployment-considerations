@@ -10,7 +10,7 @@ if an OEM or supplier deems it necessary. In this section, we discuss several of
 
 ## Restricting image installation with custom hardware IDs
 
-Before an ECU installs a new image, it SHOULD always check the hardware type of the image. This can prevent attackers from causing an ECU to install random images not intended for it. Furthermore, to prevent attackers who compromise the Director repository from causing unintended images to be installed on any ECU, an OEM and/or its suppliers SHOULD include certain information about images in the Targets metadata.
+Before an ECU installs a new image, it SHOULD always check the hardware type of the image. This can prevent attackers from causing an ECU to install arbitrary images not intended for it. Furthermore, to prevent attackers who compromise the Director repository from causing unintended images to be installed on any ECU, an OEM and/or its suppliers SHOULD include certain information about images in the Targets metadata.
 
 Consider the following example, where attackers have compromised the Director repository. If certain mitigating steps have been taken, such as using release counters, they can not rollback software updates. Furthermore, without an additional key compromise, attackers cannot cause arbitrary software attacks on Primaries and full verification Secondaries. However, attackers can cause the ECUs of one hardware type to install images intended for another hardware type. To use an analogy, this is similar to causing [Linkedsys](https://www.linksys.com/us/) routers to install images intended for [NetGear](https://www.netgear.com/) routers.
 
