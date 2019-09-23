@@ -84,7 +84,7 @@ In order to analyze this problem, let us recap what new information should be do
 
 1. The Primary writes and sends the latest vehicle version manifest to the Director repository.
 2. If a Time Server is used, all Secondaries write and send fresh tokens to the Primary. 
-3. All ECUs download, verify, and write the latest downloaded time from the Time Server, or whatever device is used to provide the current accurate time.
+3. All ECUs download, verify, and write the latest downloaded time from the Time Server, or whatever source is used to provide the current accurate time.
 4. All ECUs download, verify, and write metadata from the Director and/or Image repositories.
 5. At some point, ECUs download, verify, and write images.
 6. At some point, ECUs install new images. Then, they sign, and write the latest ECU version manifests.
