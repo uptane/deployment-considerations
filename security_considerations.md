@@ -16,7 +16,7 @@ Consider the following example, where attackers have compromised the Director re
 
 Simply having ECU identifiers (e.g., serial numbers) specified in the Targets metadata signed by the Director repository do not solve this problem, because: (1) they are used by the Director repository only to instruct which ECU should install which image, and (2) they are not specified in the Targets metadata signed on the Image repository, because it is impractical to list all ECU identifiers that pertain to an image.
 
-In order to avoid this problem, the Targets metadata about unencrypted images on the Image repository SHOULD always include the TargetsModule.Custom.hardwareIdentifier attribute. A hardware identifier allows an OEM and/or its suppliers to succinctly capture an entire class of ECUs without listing each of their ECU identifiers. Note that the OEM and/or its suppliers SHALL ensure that hardware identifiers are unique across different hardware types of ECUs, so that attackers who compromise the Director repository cannot cause ECUs of one type to install images intended for another type.
+In order to avoid this problem, the custom Targets metadata about unencrypted images on the Image repository SHOULD always include hardware identifiers. A hardware identifier allows an OEM and/or its suppliers to succinctly capture an entire class of ECUs without listing each of their ECU identifiers. Note that the OEM and/or its suppliers SHALL ensure that hardware identifiers are unique across different hardware types of ECUs, so that attackers who compromise the Director repository cannot cause ECUs of one type to install images intended for another type.
 
 ## Preventing rollback attacks in case of Director compromise
 
