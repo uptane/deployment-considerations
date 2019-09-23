@@ -19,7 +19,7 @@ By default, Uptane does not allow updates to be rolled back and enforces this ac
 
 There are at least two ways to allow rollbacks, each with different advantages and disadvantages.
 
-In the first option, an OEM MAY choose to never increment the release counters of images (see Figure 2). Uptane will accept any new image associated with a release counter, as long as it is equal to the release counter of the previous image in the previous Targets metadata file. If release counters are never incremented, then all images would have the same release counters. In this situation, an ECU would accept the installation of any compatible image referred in the new Targets metadata. (See the [Security pages](https://github.com/uptane/deployment-considerations/blob/master/security_considerations.md) on this website).
+In the first option, an OEM MAY choose to never increment the release counters of images (see Figure 2). Uptane will accept any new image associated with a release counter, as long as it is equal to the release counter of the previous image in the previous Targets metadata file. If release counters are never incremented, then all images would have the same release counters. In this situation, an ECU would accept the installation of any compatible image referred in the new Targets metadata. (See the [security considerations](https://github.com/uptane/deployment-considerations/blob/master/security_considerations.md) document.)
 
 <img align="center" src="assets/images/except_2_diffimage_samecounter.png" width="500" style="margin: 0px 20px"/>
 
