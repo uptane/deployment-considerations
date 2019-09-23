@@ -38,12 +38,22 @@ Insert link to subsection on the Security page dealing with rollback attacks.
 
 ## Adding, removing, or replacing ECUs
 
-Sometimes, it may be necessary for a dealership or mechanic to add, update, or remove ECUs on a vehicle. This may be done in order to support custom configurations of vehicles.
-In order to support this use case, one way is for a dealership or mechanic to use an out-of-band communications channel (e.g., perhaps a private, authenticated web site) to communicate with an OEM about the hardware updates to the vehicle. The dealership or mechanic would then identify the vehicle using its identifier (e.g., VIN), and tell the OEM about the ECUs added to or removed from the vehicle.
+Sometimes, it may be necessary for a dealership or mechanic to replace a particular ECU in a vehicle, or even add or remove one. This will mean that the vehicle version manifest will change--even if the replacement ECU is an identical model, it will have a different ECU key. The Director may detect this as a security attack; an ECU suddenly using a new signing key could be indicative of a compromised ECU.
 
-Note also that Uptane does not prescribe a protocol for primaries to discover whether ECUs have been added to, updated on, or removed from a vehicle. This is because it is an orthogonal problem to software update security. The advantage of this approach is that an OEM is free to solve this problem using existing solutions that it may already have in place.
+We recommend dealing with this use case by establishing an out-of-band process that allows authorized mechanics to report a change to the OEM so that the change in ECU configuration is recorded in the inventory database. Exactly what that process looks like will depend on the size of the automaker and the relative frequency of ECU replacements.
 
-The OEM should then decide how to respond to the new information. The OEM can verify the new information by requiring the vehicle to produce a new vehicle version manifest that corresponds to the new hardware. If this is a rare enough use case, then human intervention MAY always be required in order to update the hardware on a vehicle.
+* A small luxury automaker might choose to simply choose to allow authorized mechanics to send an email or make a phone call to an aftersales support person with the details of the new ECU, and have that person manually enter the details.
+* A larger automaker might choose to deploy a dealer portal (i.e. a private, authenticated website) to allow authorized service centers to enter the details of the new ECU configuration themselves.
+
+Another option for updating the ECU configuration is to have a process that temporarily "unlocks" an ECU configuration, allowing the vehicle's Primary to directly report its new configuration (as opposed to having the mechanic enter the details of the replaced ECU). There is a tradeoff here: it streamlines the repair process, but more automation increases the risk that a real attack could go unnoticed.
+
+Note, however, that these are only recommendations. Uptane does not prescribe a protocol for this use case, because it is an orthogonal problem to software _update_ security. The advantage of this approach is that an OEM is free to solve this problem using existing solutions that it may already have in place.
+
+### Aftermarket ECUs
+
+A slightly more difficult use case to deal with are aftermarket ECUs--for example, 3rd-party replacement parts, or add-on ECUs that add functionality for commercial fleet management. One approach is to work with the ECU manufacturer, and treat them like any other tier-1. (The addition of the aftermarket ECU would be managed in one of the ways recommended in the previous section.) However, this is likely not economically feasible in many/most cases. The easiest alternative is to simply exclude the aftermarket ECU from receiving OTA updates.
+
+Many aftermarket ECUs for fleet management, monitoring, or  have their own independent internet connection, and thus do not need to be integrated into the OEM's update system at all.
 
 ## Adding or removing a supplier
 
