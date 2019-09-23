@@ -36,8 +36,6 @@ Second, the OEM SHOULD test the updated metadata and images on reserved vehicles
 
 Finally, the OEM SHOULD update the inventory database, so that the Director repository is able to instruct appropriate ECUs on all affected vehicles on how to install these updated images.
 
-### TODO Write rationale for the SHOULDs in the section above.
-
 ## Backup and garbage collection for the Image repository
 
 The OEM SHOULD regularly perform backup and garbage collection of the metadata and images on the Image repository. This is done to ensure the OEM is able to safely recover from a repository compromise, and that the repository continues to have sufficient storage space. To do so, an OEM MAY use either the following steps, or its own corporate backup and garbage collection policy.
@@ -45,5 +43,3 @@ The OEM SHOULD regularly perform backup and garbage collection of the metadata a
 First, an automated process SHOULD store every file on the Image repository, as well as its cryptographic hash on a separate, offline system. A copy of the inventory database from the Director repository SHOULD also be stored on this offline system. This allows administrators to detect and recover from a repository compromise. 
 
 Second, the automated process SHOULD remove expired metadata from the image repository to reclaim storage space. If the OEM is interested in supporting delta updates for vehicles that have not been updated for a long time, then the automated process SHOULD NOT remove images associated with expired metadata, because these images MAY be needed in order to compute delta images. (See [Delta Update Strategies](https://github.com/uptane/deployment-considerations/blob/master/customizations.md#delta-update-strategies) on the Customizing Uptane page).
-
-### TODO Write rationale for the SHOULDs in the section above.
