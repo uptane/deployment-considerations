@@ -45,7 +45,7 @@ We recommend dealing with this use case by establishing an out-of-band process t
 * A small luxury automaker might choose to simply choose to allow authorized mechanics to send an email or make a phone call to an aftersales support person with the details of the new ECU, and have that person manually enter the details.
 * A larger automaker might choose to deploy a dealer portal (i.e. a private, authenticated website) to allow authorized service centers to enter the details of the new ECU configuration themselves.
 
-Another option for updating the ECU configuration is to have a process that temporarily "unlocks" an ECU configuration, allowing the vehicle's Primary to directly report its new configuration (as opposed to having the mechanic enter the details of the replaced ECU). There is a trade-off here: it streamlines the repair process, but more automation increases the risk that a real attack could go un-noticed.
+Another option for updating the ECU configuration is to have a process that temporarily "unlocks" an ECU configuration, allowing the vehicle's Primary to directly report its new configuration (as opposed to having the mechanic enter the details of the replaced ECU). There is a tradeoff here: it streamlines the repair process, but more automation increases the risk that a real attack could go unnoticed.
 
 Note, however, that these are only recommendations. Uptane does not prescribe a protocol for this use case, because it is an orthogonal problem to software _update_ security. The advantage of this approach is that an OEM is free to solve this problem using existing solutions that it may already have in place.
 
