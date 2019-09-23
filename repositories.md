@@ -5,9 +5,75 @@ css_id: repositories
 
 # Setting up Uptane repositories
 
-### TODO This section should be reviewed carefully, particularly anything dealing wtih the timeserver. I know what was stipulated for providing time has been changed, but I do not have the technical expertise to determine what should be deleted on this topic.
+This page outlines recommended procedures for the one-time operations that an OEM and its suppliers SHOULD perform when they set up Uptane for the first time. In particular, they SHOULD correctly configure the director and image repositories, as well as the time server, so that the impact of a repository / server compromise is limited to as few ECUs as possible.
 
-This page outlines recommended procedures for the one-time operations that an OEM and its suppliers MUST perform when they set up Uptane for the first time. In particular, they SHOULD correctly configure the director and image repositories, as well as the time server, so that the impact of a repository / server compromise is limited to as few ECUs as possible.
+## Secure Source of Time
+
+Without access to a secure source of time, ECUs may be prevented from receiving the most recent updates. If the ECU's time is too high, the ECU will detect that the current valid metadata is expired and will be unable to perform an update. If the ECU's time is too low, an attacker can freeze or replay old metadata to the ECU.  (ECUs in Uptane will not accept an earlier time than what has been seen before signed with the same key.)
+
+To prevent these issues, ECUs need access to a secure source of time. If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. This section describes how a Time Server can be used in an Uptane implementation.
+
+### Time server
+
+A Time Server is a server that is responsible for providing a secure source of time.
+
+The Time Server exists to inform ECUs about the current time in a cryptographically secure way, since many ECUs in a vehicle do not have a reliable source of time. The Time Server receives a list of tokens from vehicles, and returns back a list of signed records containing every token in the original list of tokens received and at least one instance of the current time.
+
+If the Time Server is used, it is CONDITIONALLY REQUIRED to conform to the following requirements:
+
+* When the Time Server receives a sequence of tokens from a vehicle, it will provide one or more signed responses, containing the time along with these tokens. It MAY produce either one signed time attestation containing the current time and all tokens, or multiple time attestations each containing the current time and one or more tokens. All tokens should be included in the response.
+
+* The Time Server will expose a public interface allowing primaries to communicate with it. This communication MAY occur over FTP, FTPS, SFTP, HTTP, HTTPS, or another transport control of the implementor's choice.
+
+* Rotation of the the Time Server's key is performed by listing the new key in the Director's Root metadata, in the same manner as other role keys are listed, and also in the custom field of the Director repository's Targets metadata (for partial verification Secondaries).
+
+#### Changes to the Director repository
+If a Time Server is in use, a representation of the Time Server public key is CONDITIONALLY REQUIRED in Director repository root metadata.
+
+If a Time Server is implemented AND partial verification Secondaries are used, the following metadata is CONDITIONALLY REQUIRED in the Director repository's Targets metadata:
+
+* A representation of the public key(s) for the Time Server, similar to the representation of public keys in Root metadata.
+
+Listing the public key of the Time Server in Director Targets metadata is necessary to allow partial verification Secondaries to perform Time Server key rotation.
+
+#### Changes to a Primary
+
+If the Time Server is implemented, the primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the ["Download and check current time"](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) step of the Uptane Standard.
+
+1. Gather the tokens from each secondary ECU's version report.
+2. Send the list of tokens to the Time Server to fetch the current time. The Time Server responds as described in the [Time Server section](#time-server), providing a cryptographic attestation of the last known time.
+3. If the Time Server's response meets the criteria below, update the primary ECU's clock and retain the Time Server's response for distribution to secondary ECUs, otherwise discard it and proceed without an updated time.  The criteria for checking the Time Server's response are:
+  - The signature over the Time Server's response is valid.
+  - All the tokens provided to the Time Server have been included in the response.
+  - The time in the Time Server's response is later than the last time verified in this manner.
+
+#### ECU Version Report
+
+The ECU version report from each Secondary will contain a token to be sent to the Time Server. This token SHOULD be unique for each update cycle to prevent a replay. Since we expect updates to be relatively infrequent (e.g., due to limited number of write cycles), and that there are a large number of possible tokens, it should be possible to produce a unique token for every update.
+
+The payload of the ECU version report sent to the Director might contain the token sent to the Time Server. This token is in the version report sent from secondaries to the primary, and so is in the signed version of the version report. If the token is removed, the signature will not match.
+
+#### Changes to all ECUs
+
+At build time, ECUs will be provisioned with an attestation of the current time downloaded from the Time Server.
+
+As the first step to verifying metadata, described for both the [Primary](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) and [Secondaries](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#verify_time) in the Standard, the ECU SHOULD load and verify the most recent time from the Time Server using the following procedure:
+
+1. Verify that the signatures on the downloaded time are valid.
+2. Verify that the list of tokens in the downloaded time includes the token that the ECU sent in its version report.
+3. Verify that the time downloaded is greater than the previous time.
+
+If all three steps complete without error, the ECU is CONDITIONALLY REQUIRED to overwrite its current attested time with the time it has just downloaded, and generate a new token for the next request to the Time Server.
+
+If any check fails, the ECU is CONDITIONALLY REQUIRED to NOT overwrite its current attested time, and jump to the last step ([Create and Send Version Report](https://uptane.github.io/uptane-standard/uptane-standard.html#create_version_report)), and report the error.
+
+#### Changes to checking Root metadata
+
+In order to prevent a new Time Server from accidentally causing a rollback warning, the clock will be reset when switching to a new Time Server. To do this, check the Time Server key after updating to the most recent Root metadata file. If the Time Server key is listed in the Root metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value (e.g. zero, or any time that is guaranteed to not be in the future based on other evidence).  It will be updated in the next cycle.
+
+#### Changes to Partial Verification Secondaries
+
+As partial verification Secondaries only check the Targets metadata from the Director repository, the Time Server key will be checked when verifying the Targets metadata on partial verification Secondaries. To do this, check the Time Server key after verifying the most recent Targets metadata file. If the Time Server key is listed in the Targets metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value as described in [Changes to checking Root metadata](#changes-to-checking-root-metadata).
 
 ## What suppliers should do
 
