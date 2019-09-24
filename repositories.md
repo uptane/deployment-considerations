@@ -198,9 +198,3 @@ An OEM MUST define a public API to the image repository for  Primaries to use in
 
 Depending on the OEM's requirements, this API MAY require authentication before primaries are allowed to download updates. The OEM is free to use any authentication method. Such a choice affects only how certain the OEM can be that it is communicating with authentic primaries, and does not affect how resilient ECUs are to a compromise of the image repository.
 
-## Deploying/developing your own
-#### TODO I could not determine what text in the original document might belong here or the two subsections below. Does new text need to be drafted?
-
-### Director
-
-### Image
