@@ -5,22 +5,22 @@ css_id: key_management
 
 # Key management
 
-(Intro text here)
+This page addresses both set-up and maintenance issues for the signing keys used by Uptane. These include understanding the function of online vs. offline keys, the use of signing thresholds to improve security, and the management of metadata expiration dates.
 
 ## Repository keys
 
-On both the Director and the Image repository, the OEM maintains the keys to the Root, Timestamp, Snapshot, and Targets roles. However, for any delegated Targets roles on the Image repository, the corresponding keys are expected to be maintained by the delegated supplier. For example, If a tier-1 supplier signs its own images, then the supplier maintains its offline keys. Otherwise, the OEM would sign on behalf of the supplier, and thus maintain its keys.
+On both the Director and the Image repository, the OEM maintains the keys to the Root, Timestamp, Snapshot, and Targets roles. However, for any delegated Targets roles on the Image repository, the corresponding keys are expected to be maintained by the supplier to which they have been delegated. For example, if a tier-1 supplier signs its own images, then the supplier would maintains its offline keys. 
 
 
 ### Online vs. offline keys
 
 Repository administrators SHOULD use offline keys to sign the Root metadata on the Director repository, so attackers cannot tamper with this file after a repository compromise. The Timestamp, Snapshot, and Targets metadata SHOULD be signed using online keys, so that an automated process can instantly generate fresh metadata.
 
-On the Image repository, the Timestamp and Snapshot metadata SHOULD be signed using online keys, so that an automated process can instantly generate fresh metadata. There are two options for signing the Timestamp and Snapshot metadata, each with the opposite trade-off from the other. In the first option, the OEM uses online keys meaning automated processes can automatically renew the Timestamp and Snapshot metadata to indicate that there are new Targets metadata and/or images available. However, attackers who have compromised a supplier's key would now have access to the Image repository and can instantly publish malicious images. If they additionally compromise the Director repository, then they can execute arbitrary software attacks by selecting these malicious images on the Image repository for installation. Such an attack could also facilitate mix-and-match attacks.
+On the Image repository, the Timestamp and Snapshot metadata SHOULD be signed using online keys, so that an automated process can instantly generate fresh metadata. There are two options for signing the Timestamp and Snapshot metadata, each with the opposite trade-off from the other. In the first option, the OEM uses online keys, meaning automated processes can automatically renew the Timestamp and Snapshot metadata to indicate that new Targets metadata and/or images are available. However, in this scenario, attackers who have compromised a supplier's key would now have access to the Image repository and can instantly publish malicious images. If these attackers also compromise the Director repository, then they can execute arbitrary software attacks by selecting these malicious images on the Image repository for installation. Such an attack could also facilitate mix-and-match attacks.
 
 In the second option, the OEM uses offline keys to sign Timestamp and Snapshot metadata, which reduces the risk of attackers immediately publishing malicious images. The downside deals with expiration of Timestamp and Snapshot.  If the Timestamp and Snapshot metadata expire relatively quickly, then it is more cumbersome to use offline keys to renew their signatures. However, if a longer expiration time is used, then a man-in-the-middle attacker has more time with which to execute freeze attacks, hence defeating the purpose of the Timestamp role.
 
-The keys to all other roles (Root, Targets, and all delegations) on the Image repository SHOULD be kept offline. This is because these metadata are expected to be updated relatively infrequently and so that a repository compromise does not immediately affect full verification ECUs. It does not matter where an offline key is stored (e.g., in a Hardware Security Module, YubiKey, or a USB stick in a safe deposit box), as long as the key is not accessible from the repository. Each key SHOULD be kept separately from others, so that a compromise of one does not affect them all.
+The keys to all other roles (Root, Targets, and all delegations) on the Image repository SHOULD be kept offline. This is because these metadata are expected to be updated relatively infrequently and so that a repository compromise does not immediately affect full verification ECUs. It does not matter where an offline key is stored (e.g., in a Hardware Security Module, YubiKey, or a USB stick in a safe deposit box), as long as the key is not accessible from the repository. Each key SHOULD be kept separate from others, so that a compromise of one does not affect them all.
 
 
 ### Key thresholds
@@ -39,13 +39,15 @@ The Timestamp, Snapshot, and Targets metadata files SHOULD expire relatively qui
 
 Table 1 lists an example of expiration times for metadata files on the Director repository.
 
-##### TODO: Insert Table 1 (expiration dates-director)
+<img align="center" src="assets/images/keys_table1_metadata_expire.png" width="500" style="margin: 0px 20px"/>
+
+**Table 1.** *An example of the duration of time until the metadata for a role expires.*
 
 #### Image repository
 
-For the Image repository, each role MAY use as many keys as is desired. However, the greater the impact when the keys for a role are compromised, then the greater the number of keys that it SHOULD use. Also, a threshold number of keys SHOULD be used, so that a single key compromise is generally insufficient to sign new metadata. To further increase compromise-resilience, each key SHOULD be unique across all roles.
+For the Image repository, each role MAY use as many keys as is desired. However, the greater the impact should the keys for a role be compromised, then the greater the number of keys that it SHOULD use. Also, a threshold number of keys SHOULD be used, so that a single key compromise is generally insufficient to sign new metadata. To further increase compromise-resilience, each key SHOULD be unique across all roles.
 
-Since the Root role has the highest impact when its keys are compromised, it SHOULD use a sufficiently large threshold number of keys. Each key MAY belong to a repository administrator. For example, if there are 8 administrators, then at least 5 keys SHOULD be required to sign the root metadata file, so that a quorum is required trust the metadata.
+Since the Root role has the highest impact when its keys are compromised, it SHOULD use a sufficiently large threshold number of keys. Each key MAY belong to a repository administrator. For example, if there are 8 administrators, then at least 5 keys SHOULD be required to sign the Root metadata file, so that a quorum is required trust the metadata.
 
 Since the Targets role also a high impact when its keys are compromised, it SHOULD also use a sufficiently large threshold number of keys. For example, 3 out of 4 keys MAY be required to sign the Targets metadata file.
 
@@ -55,14 +57,15 @@ Finally, each delegated Targets role SHOULD use at least 1 out of 2 keys to sign
 
 ##### Metadata expiration times
 
-The Uptane Standards require all metadata files to have expiration times in order to prevent or limit freeze attacks. If ECUs know the time, then attackers can not indefinitely replay outdated metadata, and hence, images. In general, the expiration date for a metadata file depends on how often it is updated. The more often that it is updated, then the faster it SHOULD expire, so that attackers cannot execute freeze attacks. Even if it is not updated frequently, it SHOULD expire after a bounded period of time, so that stolen or lost keys can be revoked and replaced.
+The Uptane Standard requires all metadata files to have expiration times in order to prevent or limit freeze attacks. If ECUs know the time, then attackers can not indefinitely replay outdated metadata, and hence, images. In general, the expiration date for a metadata file depends on how often it is updated. The more often that it is updated, then the faster it SHOULD expire, so that attackers cannot execute freeze attacks. Even if it is not updated frequently, it SHOULD expire after a bounded period of time, so that stolen or lost keys can be revoked and replaced.
 
 Since the Root role keys are expected to be revoked and replaced relatively rarely, its metadata file MAY expire after a relatively long time, such as one year.
 
 Table 2 lists an example of expiration times for metadata files on the Image repository.
 
-##### TODO: Insert Table 2 (expiration dates-image)
+<img align="center" src="assets/images/keys_table2_threshold.png" width="500" style="margin: 0px 20px"/>
 
+**Table 2.** *An example number of keys that MAY be used by each role. Each role uses a threshold of (n, m) keys, where n out of m signatures are required to trust the signed metadata.*
 
 ## What to do in case of key compromise
 
@@ -74,11 +77,11 @@ Since the Director repository MUST keep at least some software signing keys onli
 
 First, the OEM SHOULD use the Root role to revoke and replace the keys to the Timestamp, Snapshot, and Targets roles, because only the Root role can replace these keys. Following the type and placement of keys prescribed for the Director repository, we assume that attackers have compromised the online keys to the Timestamp, Snapshot, and Targets roles, but not the offline keys to the Root role.
 
-Second, the OEM SHOULD consider a manual recall of all vehicles in order to replace these keys, particularly if the vehicle has partial verification secondaries. This recall MAY be done by requiring vehicle owners to visit the nearest dealership. Although an OEM could replace these keys on a full verification ECU by using over-the-air broadcasts, a manual recall is recommended because:
+Second, the OEM SHOULD consider a manual recall of all vehicles in order to replace these keys, particularly if the vehicle has partial verification Secondaries. This recall MAY be done by requiring vehicle owners to visit the nearest dealership. Although an OEM could replace these keys on a full verification ECU by using over-the-air broadcasts, a manual recall is recommended because:
 1. the OEM SHOULD perform a safety inspection of the vehicles, in case of security attacks, and
-2. partial verification secondaries are not designed to handle key revocation and replacement over-the-air. In order to update keys for partial verification secondaries, the OEM SHOULD overwrite their copies of the Root metadata file, perhaps using new images.
+2. partial verification Secondaries are not designed to handle key revocation and replacement over-the-air. In order to update keys for partial verification Secondaries, the OEM SHOULD overwrite their copies of the Root metadata file, perhaps using new images.
 
-After inspecting the vehicle, the OEM SHOULD replace and update metadata and images on all ECUs to ensure that the images are known to be safe and that partial verification secondaries have replaced the keys for the Director repository.
+After inspecting the vehicle, the OEM SHOULD replace and update metadata and images on all ECUs to ensure that the images are known to be safe and that partial verification Secondaries have replaced the keys for the Director repository.
 
 ### Image repository
 
@@ -88,11 +91,11 @@ If the recommendations for the type and placement of keys described above for th
 
 In the first case, where a tier-1 supplier or one of its delegatees has had one or more of its keys compromised, the supplier and its affected delegatees (if any), SHOULD revoke and replace keys. They SHOULD update metadata, including delegations and images, and send them to the OEM.
 
-The OEM SHOULD then manually recall only affected vehicles that run software maintained by this supplier in order to replace metadata and images. This MAY be done by requiring vehicle owners to visit the nearest dealership. A manual recall SHOULD be done, because without trusted hardware (such as TPM), it is difficult to ensure that compromised ECUs can be remotely and securely updated. After having inspected the vehicle, the OEM SHOULD replace and update metadata and images on all ECUs so that these images are known to be safe.
+The OEM SHOULD then manually recall only affected vehicles that run software maintained by this supplier in order to replace metadata and images. This MAY be done by requiring vehicle owners to visit the nearest dealership. A manual recall SHOULD be done because, without trusted hardware (such as TPM), it is difficult to ensure that compromised ECUs can be remotely and securely updated. After having inspected the vehicle, the OEM SHOULD replace and update metadata and images on all ECUs so that these images are known to be safe.
 
 #### OEM-managed keys
 
-The second case, where the OEM has had a key compromised, is potentially far more serious than the first one. An attacker in such a position may be able to execute attacks on all vehicles depending on which keys have been compromised. If the keys are for the Timestamp and Snapshot roles, or the Targets role, or the Root role, then the OEM SHOULD use the following recovery procedure.
+The second case, where the OEM has had a key compromised, is potentially far more serious than the first one. An attacker in such a position may be able to execute attacks on all vehicles, depending on which keys have been compromised. If the keys are for the Timestamp and Snapshot roles, or the Targets or Root roles, then the OEM SHOULD use the following recovery procedure.
 
 First, the OEM SHOULD use the Root role to revoke and replace keys for all affected roles. Second, it SHOULD restore all metadata and images on the Image repository to a known good state using an offline backup. Third, the OEM SHOULD manually recall all vehicles in order to replace metadata and images. A manual recall SHOULD be done, because without trusted hardware (such as TPM), it is difficult to ensure that compromised ECUs can be remotely and securely updated.
 
