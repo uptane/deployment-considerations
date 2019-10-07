@@ -75,6 +75,7 @@ Uptane's security is orthogonal to security systems at other network layers, suc
 
 - It does not weaken Uptane's security to use Uptane over a transport layer security system.  If the cost is low, then this can be viewed in some situations as adding defense-in-depth, especially if the security system can improve detection, mitigation, or reporting of network disruptions.
 
+- Security at the transport layer may offer forensic proof of origin and destination (when strong mutual authentication is used).  This may be necessary for compliance to OTA update standards and various current draft regulations.
 
 ## Multiple primaries
 
