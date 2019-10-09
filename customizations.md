@@ -73,7 +73,7 @@ Uptane's security is orthogonal to security systems at other network layers, suc
 
 - Regulation may require or recommend that security at the transport layer is provided.  Hence it may be required for non-technical reasons.
 
-- - Use of transport layer security adds defense-in-depth, a security best practice, to the extent to which the transport layer security system can improve the detection, mitigation, or reporting of network disruptions.
+- Use of transport layer security adds defense-in-depth, a security best practice, to the extent to which the transport layer security system can improve the detection, mitigation, or reporting of network disruptions.
 
 - Security at the transport layer provides forensic proof of origin and destination (when strong mutual authentication is used).  This may be necessary for compliance to OTA update standards and various current draft regulations.
 
