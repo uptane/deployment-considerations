@@ -71,7 +71,7 @@ Uptane's security is orthogonal to security systems at other network layers, suc
 
 - If a security system at the transport layer is already deployed for other services or is effectively free to deploy, there is little reason not to use it.  For example, it may be beneficial to have authentication provided for all services in a vehicle by a common system.
 
-- Transport layer security may be required for non-technical reasons, such as regulations that require or recommend it.
+- Regulations may require or recommend that security be provided at the transport layer. Hence, a secure transport system may be required for non-technical reasons.
 
 - Use of transport layer security adds defense-in-depth, a security best practice, to the extent to which the transport layer security system can improve the detection, mitigation, or reporting of network disruptions.
 
