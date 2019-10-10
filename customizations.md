@@ -69,7 +69,7 @@ Uptane is designed to retain strong security guarantees even in the face of a ne
 
 Uptane's security is orthogonal to security systems at other network layers, such as transport security, data link security, etc.  However, there are several reasons why a party may wish to use a security system at the transport layer in coordination with Uptane:
 
-- If a security system at the transport layer is already deployed for other services or is effectively free to deploy, there is little reason not to use it.  For example, it may be beneficial to have authentication provided by a common system for all services in a vehicle, so this may be considered desirable from a uniformity standpoint.
+- If a security system at the transport layer is already deployed for other services or is effectively free to deploy, there is little reason not to use it.  For example, it may be beneficial to have authentication provided for all services in a vehicle by a common system.
 
 - Transport layer security may be required for non-technical reasons, such as regulations that require or recommend it.
 
