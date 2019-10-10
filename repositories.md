@@ -179,7 +179,7 @@ An OEM and its suppliers MAY use the repository and supplier tools from the [Ref
 
 #### Roles
 
-<img align="center" src="assets/images/repo_5_rolesonimage.png" width="500" style="margin: 0px 20px"/>
+<img align="center" src="assets/images/repo_5_roles_on_image.png" width="500" style="margin: 0px 20px"/>
 
 **Figure 4.** *A proposed configuration of roles on the Image repository.*
 
