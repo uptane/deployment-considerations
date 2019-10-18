@@ -45,3 +45,7 @@ If you choose to use symmetric ECU keys, it would be a good idea to store the ke
 2. Given an ECU identifier and an image identifier, encrypt the image for that ECU.
 
 Unencrypted images should be loaded onto the symmetric key server by some out-of-band physical channel (for example, via USB stick).
+
+## Encryption of images on ECUs
+
+The Director repository may encrypt images if required ([Section 5.3.2 of the Uptane Standard](https://github.com/uptane/uptane-standard/blob/master/uptane-standard.md#director-repository-director_repository). However, no Uptane implementation should support interactive requests from an ECU for encryption.
