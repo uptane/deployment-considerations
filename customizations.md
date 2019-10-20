@@ -51,7 +51,7 @@ To send precomputed delta updates the Director precomputes various probable diff
 Implementers MAY use Uptane in conjunction with other protocols already being used
 to send updates to the vehicle, such as in the following cases:
 
-Implementers MAY use [SSL / TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) to encrypt the connection between
+Implementers MAY use [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) to encrypt the connection between
 Primaries and the Image and Director repositories, as well to whatever source is used to provide the current time.
 
 Implementers MAY use [OMA Device Management](https://en.wikipedia.org/wiki/OMA_Device_Management) (OMA-DM) to send Uptane
@@ -62,6 +62,20 @@ Implementers MAY use [Unified Diagnostic Services](https://en.wikipedia.org/wiki
 Any system being used to transport images to ECUs needs to modified only to permit transport of Uptane metadata and other messages. Note that Uptane does not require authentication of network traffic between the Director and Image repositories and Primaries, or between Primaries and Secondaries.
 
 However, in order for an implementation to be Uptane-compliant, no ECU can cause another ECU to install an image without performing either full or partial verification of metadata. This is done in order to prevent attackers from being able to bypass Uptane, and thus execute arbitrary software attacks. Thus, in an Uptane-compliant implementation, an ECU performs either full or partial verification of metadata and images before installing any image, regardless of how the metadata and images were transmitted to the ECU.
+
+
+## Using Uptane with transport security
+Uptane is designed to retain strong security guarantees even in the face of a network attacker.  This includes situations where there either is no transport security or where the transport security is compromised by an attacker.  Should this occur, Uptane may not be able to prevent an attacker from disrupting communication between the vehicle and the OEM (e.g., by jamming the signal or dropping packets).  However, malicious packages cannot be installed, mix-and-match attacks are not possible, etc.  This is similar to how a network attacker who has not compromised a key can cause a TLS connection to fail to connect or disconnect (e.g., by dropping network packets), but cannot compromise the integrity or confidentiality of the connection.
+
+Uptane's security is orthogonal to security systems at other network layers, such as transport security, data link security, etc.  However, there are several reasons why a party may wish to use a security system at the transport layer in coordination with Uptane:
+
+- If a security system at the transport layer is already deployed for other services or is effectively free to deploy, there is little reason not to use it.  For example, it may be beneficial to have authentication provided for all services in a vehicle by a common system.
+
+- Regulations may require or recommend that security be provided at the transport layer. Hence, a secure transport system may be required for non-technical reasons.
+
+- Using Uptane over a transport layer security system does not weaken its own security properties. If the cost is low, then this may be viewed as adding defense-in-depth, especially if the security system can improve detection, mitigation, or reporting of network disruptions.
+
+- Security at the transport layer provides forensic proof of origin and destination (when strong mutual authentication is used).  This may be necessary for compliance to OTA update standards and various current draft regulations.
 
 ## Multiple primaries
 
