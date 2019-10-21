@@ -29,9 +29,9 @@ As these images are produced on demand by the Director repository, Primaries SHO
 
 Finally, in order to install a delta image, an ECU SHOULD take one of the actions described in Table 1, depending on whether or not the delta image has been encrypted, and if the ECU has additional storage. Note that the OEM MAY use stream ciphers in order to enable on-the-fly decryption on ECUs that do not have additional storage. In this case, the ECU would decrypt the delta image as it is downloaded, then follow the remainder of the steps in the third box below.
 
-### TODO Write rationale for the SHOULDs throughout the section above.
+<img align="center" src="assets/images/custom_table1_delta.png" width="500" style="margin: 0px 20px"/>
 
-### TODO Recreate and insert Table D.2a from google doc and label it as Table 1.
+**Table 1.** *The actions an ECU SHOULD take to install a delta image as determined by access to additional storage and whether or not the image is encrypted*
                                                                                                                              
 ### Dynamic delta updates vs. precomputed delta updates
 
@@ -81,13 +81,9 @@ Uptane's security is orthogonal to security systems at other network layers, suc
 
 We expect that the most common deployment configuration of Uptane on vehicles would feature one Primary per vehicle. However, we observe that there are cases where it may be useful to have multiple, active Primaries in a vehicle. For example, such a setup provides redundancy when some, but not all, primaries could fail permanently. The OEM MAY use this setup to design a failover system where one Primary takes over when another fails. If so, then the OEM SHOULD take note of the following considerations, in order to prevent safety issues.
 
-### TODO Write rationale for the SHOULD noted above.
-
 It is highly RECOMMENDED that in any given vehicle there be a single, active Primary. This is because using multiple, active Primaries to update Secondaries can lead to problems in consistency, especially when different Primaries try to update the same Secondaries. If an implementation is not careful, race conditions could cause Secondaries to install an inconsistent set of updates (for example, some ECUs would install updates from one Primary, whereas others would install updates from another Primary). This can cause ECUs to fail to interoperate.
 
 If multiple Primaries are active in the vehicle at the same time, then each Primary SHOULD control a mutually exclusive set of Secondaries, so that each Secondary is controlled by one Primary.
-
-### TODO Write rationale for the SHOULD noted above.
 
 ## Atomic installation of a bundle of images
 
@@ -120,8 +116,6 @@ In the second option, a fleet manager would configure the map file on ECUs such 
 In its default implementation, Uptane allows only the OEM to fully control which updates are installed on which ECUs on which vehicles. Thus, there is no third party input about updates from a dealership, mechanic, fleet manager, or the end-user. There are very good reasons, such as legal considerations, for enforcing this constraint. However, sharing this capability exists to the point that the OEM wishes to make it available. We discuss two options for doing so.
 
 In the first option, an OEM MAY elect to receive input from a third party as to which updates should be installed. The process is illustrated in Figure 3. In the first step, the vehicle would submit its vehicle version manifest to the Director repository controlled by the OEM. The manifest lists which updates are currently installed. In the second step, the Director repository would perform dependency resolution using this manifest, and propose a set of updates. In the third step, the third party would either agree with the OEM, or propose a different set of updates. This step SHOULD be authenticated (e.g., using client certificates, or username and password encrypted over TLS), so that only authorized third parties are allowed to negotiate with the OEM. In fourth step, the OEM would either agree with the third party, or propose a different set of updates. The third and fourth steps MAY be repeated up to a maximum number of retries, until both the OEM and the third party agree as to which updates should be installed.
-
-### TODO Write rationale for the SHOULD noted above.
 
 In the second option, the third party MAY choose to override the root of trust for ECUs, provided that the OEM makes this possible. Specifically, the third party may overwrite the map and root metadata file on ECUs, so that updates are trusted and installed from repositories managed by the third party, instead of the OEM. The OEM may infer whether a vehicle has done so, by monitoring from its inventory database whether the vehicle has recently updated from its repositories. The OEM MAY choose not to make this option available to third parties by, for example, using a Hardware Security Module (HSM) to store Uptane code and data, so that third parties cannot override the root of trust.
 
