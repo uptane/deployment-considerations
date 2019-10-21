@@ -159,7 +159,7 @@ Sending an update from the Director repository to a Primary requires the followi
 
 Since the automated process is continually producing new metadata files (and, possibly, encrypted images), these files SHOULD be deleted as soon as Primaries have consumed them, so that storage space can be reclaimed. This MAY be done by simply tracking whether Primaries have successfully downloaded these files within a reasonable amount of time.
 
-## Image repository
+### Image repository
 *Note that all information about setting up signing keys for this repository can be found on the [Key Management](https://github.com/uptane/deployment-considerations/blob/master/key_management.md) page of this website*
 
 Finally, in order to provide compromise-resilience, the OEM will build the Image repository following the guidance in the Uptane Standard. The Image repository differs from the Director repository in a number of ways. First, it is managed by human administrators who use offline keys to sign targets metadata. It also MAY delegate images to suppliers, and provides the same metadata to all Primaries. Lastly, it does not encrypt images per ECU, and updates its metadata and images relatively infrequently (e.g., every two weeks, or monthly).
@@ -179,7 +179,7 @@ An OEM and its suppliers MAY use the repository and supplier tools from the [Ref
 
 #### Roles
 
-<img align="center" src="assets/images/repo_5_rolesonimage.png" width="500" style="margin: 0px 20px"/>
+<img align="center" src="assets/images/repo_5_roles_on_image.png" width="500" style="margin: 0px 20px"/>
 
 **Figure 4.** *A proposed configuration of roles on the Image repository.*
 
@@ -198,3 +198,9 @@ An OEM MUST define a public API to the image repository for  Primaries to use in
 
 Depending on the OEM's requirements, this API MAY require authentication before primaries are allowed to download updates. The OEM is free to use any authentication method. Such a choice affects only how certain the OEM can be that it is communicating with authentic primaries, and does not affect how resilient ECUs are to a compromise of the image repository.
 
+## Specifying wireline formats
+In setting up the Uptane program, an implementer will need to specify how information, such as metadata files, and vehicle version manifests, should be encoded. As a guiding principle of the Uptane framework is to give each implementer as much design flexibility as possible, the Uptane Standard does not specify particular data binding formats. Instead, OEMs and suppliers can continue to use the protocols and formats of existing update systems, or they can select formats that best  ensure interoperability with other essential technologies. 
+
+To facilitate coordination between implementations, an Uptane adopter can choose to write a POUF, an added layer to the Standard in which an implementer can specify choices of Protocols, Operations, Usage and Formats. A POUF provides an easy way for an implementer to specify the elements that can ensure interoperability. It can also be customized for the special needs of fleet owners in a particular industry, such as taxis, car sharing networks, police forces, or the military.
+
+Information on writing a POUF can be found on the POUF [Purpose and Guidelines](https://uptane.github.io/pouf.html) page on this website. A sample POUF, written for the [Uptane Reference Implementation](https://uptane.github.io/reference_pouf.html) offers sample metadata written in [ASN.1/DER](https://github.com/uptane/uptane.github.io/blob/master/reference_pouf.md#file-formats).
