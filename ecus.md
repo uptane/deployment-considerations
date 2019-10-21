@@ -45,3 +45,7 @@ If you choose to use symmetric ECU keys, it would be a good idea to store the ke
 2. Given an ECU identifier and an image identifier, encrypt the image for that ECU.
 
 Unencrypted images should be loaded onto the symmetric key server by some out-of-band physical channel (for example, via USB stick).
+
+## Encryption of images on ECUs
+
+The Director repository may encrypt images if required (see [Section 5.3.2](https://github.com/uptane/uptane-standard/blob/master/uptane-standard.md#director-repository-director_repository)of the Uptane Standard). However, no Uptane implementation should support interactive requests from an ECU for encryption.  Allowing the Target ECU to explicitly request an encrypted image at download time would not only increase the attack surface, but could also be used to turn off encryption. This would make it easy for attackers to reverse engineer unencrypted firmware and steal intellectual property. Only the OEM and its suppliers should determine policy on encrypting particular binaries, and this policy should be configured for use by the Director repository, rather than being toggled by the Target ECU.
