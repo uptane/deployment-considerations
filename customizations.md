@@ -21,7 +21,7 @@ Examples of code updates include the bootloader, shared libraries, and the appli
 ## Delta update strategies
 
 In order to save bandwidth costs, Uptane allows an OEM to deliver updates as
-delta images. A delta image update contains only the code and/or data that differs from the image installed by the ECU. In order to use delta images, the OEM SHOULD make the following changes.
+delta images. A delta image update contains only the code and/or data that differs from the image currently installed on the ECU. In order to use delta images, the OEM SHOULD make the following changes.
 
 The OEM SHOULD add two types of information to the custom Targets metadata used by the Director repository: (1) the algorithm used to apply a delta image, and (2) the Targets metadata about the delta image. This is done so that ECUs know how to apply and verify the delta image. The Director repository SHOULD also be modified to produce delta images, because Uptane does not require it to compute deltas by default. The Director repository can use the vehicle version manifest and dependency resolution to determine the differences between the previous and latest images. If desired, then the Director repository MAY encrypt the delta image.
 
