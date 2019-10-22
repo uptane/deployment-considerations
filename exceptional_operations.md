@@ -52,7 +52,7 @@ Note, however, that these are only recommendations. Uptane does not prescribe a 
 
 ### Aftermarket ECUs
 
-A slightly more difficult use case to deal with are aftermarket ECUs--for example, 3rd-party replacement parts, or add-on ECUs that add functionality for commercial fleet management. One approach is to work with the ECU manufacturer and treat them like any other tier-1. (The addition of the aftermarket ECU would be managed in one of the ways recommended in the previous section.) However, this is likely not economically feasible in many/most cases. The easiest alternative is to simply exclude the aftermarket ECU from receiving OTA updates.
+A slightly more difficult use case to deal with are aftermarket ECUs--for example, 3rd-party replacement parts, or add-on ECUs that add functionality for commercial fleet management. One approach is to work with the ECU manufacturer and treat them like any other tier-1. (The addition of the aftermarket ECU would be managed in one of the ways recommended in the previous section.) However, this may not be economically feasible in many cases. The easiest alternative is to simply exclude the aftermarket ECU from receiving OTA updates.
 
 Many aftermarket ECUs for fleet management or monitoring have their own independent internet connection, and thus do not need to be integrated into the OEM's update system at all.
 
