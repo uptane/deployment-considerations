@@ -143,7 +143,7 @@ Most inputs to ECUs are delivered as signed Targets files, stored on the Image d
 
 ### Accessing dynamic directions through signed images from the Director repository
 
-The first option for providing dynamic directions is to slightly modify the standard delivery procedure described above. An  image signed by the Director, Timestamp, and Metadata roles would still be sent to the ECU from the Director repository, but this file would not be stored on—-or validated by—-the Image repository. As the Image repository is controlled by offline keys, it can not validate a file created dynamically by the Director.
+The first option for providing dynamic directions is to slightly modify the standard delivery procedure described above. The Director repository would still send a signed image to the ECU, but this file would not be stored on—-or validated by—-the Image repository. As the Image repository is controlled by offline keys, it can not validate a file created dynamically by the Director.
 
 Even though the Image repository can not sign the file, this modification still provides some security protections. The ECU would continue to have rollback protection for a file sent this way, as a release counter will still be included in the metadata, and incremented for each new version. If additional validation is needed, the file could be put on multiple repositories created for this purpose. These repositories could behave similar to the Director repository, but would all have separate keys to allow for additional security. The Primary ECU will be aware of these extra repositories so it can check for consistency by downloading and comparing the image from all repositories.
 
