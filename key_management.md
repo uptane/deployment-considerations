@@ -20,7 +20,7 @@ On the Image repository, there are two options for signing the Timestamp and Sna
 
 In the second option, the OEM uses offline keys to sign Timestamp and Snapshot metadata, which reduces the risk of attackers immediately publishing malicious images. Here again, though, there are trade-offs, in this case related to the metadata expiration dates. If the Timestamp and Snapshot metadata expire relatively quickly, then it may be cumbersome to use offline keys to renew their signatures. However, if a longer expiration time is used, then a man-in-the-middle attacker has more time with which to execute freeze attacks, hence defeating the purpose of the Timestamp role. 
 
-In most use cases, the online option may be best, but if you want stronger security guarantees, consider using  online for the Timestamp and Snapshot roles.
+For most use cases, the online option may be best, but if stronger security guarantees are desired, consider using the offline option instead for the Timestamp and Snapshot roles.
 
 The keys to all other roles (Root, Targets, and all delegations, which includes suppliers' keys) on the Image repository SHOULD be kept offline. This prevents a repository compromise from immediately affecting full verification ECUs. It is also a practical decision as these metadata are infrequently updated. It does not matter where an offline key is stored (e.g., in a Hardware Security Module, YubiKey, or a USB stick in a safe deposit box), as long as the key is not accessible from the repository. Each key SHOULD be kept separate from others, so that a compromise of one does not affect them all.
 
