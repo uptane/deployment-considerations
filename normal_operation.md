@@ -4,7 +4,7 @@ css_id: normal_operation
 ---
 
 # Normal operating procedures
-In this section, we discuss how to perform regular maintenance operations. Since these operations are performed on a regular basis, it is important to ensure they be performed in a systematic manner so that software updates are delivered securely to ECUs.
+In this section, we discuss how to perform regular maintenance operations. Since these operations are performed on a regular basis, it is important to ensure they are performed in a systematic manner so that software updates are delivered securely to ECUs.
 
 ## Updating metadata and images
 
@@ -14,15 +14,15 @@ An OEM SHOULD perform the following steps whenever a new update is delivered. Fi
 
 In order to prevent updates from being tampered with by man-in-the-middle attackers, images SHOULD be delivered from the tier-1 supplier to the OEM in a manner that provides an extremely high degree of confidence in the timeliness and authenticity of the files provided. This may entail any manner of technical, physical, and/or personnel controls.
 
-An OEM and its suppliers MAY use any transport mechanism in order to deliver these files. For example, an OEM MAY maintain a private web portal where metadata and/or images from suppliers can be uploaded. This private server MAY be managed by either the OEM or the tier-1 supplier, and SHOULD require authentication, so that only certain users are allowed to read and/or write certain files. Alternatively, the OEM and its suppliers MAY use email or courier mail.
+An OEM and its suppliers MAY use any transport mechanism to deliver these files. For example, an OEM MAY maintain a private web portal where metadata and/or images from suppliers can be uploaded. This private server MAY be managed by either the OEM or the tier-1 supplier, and SHOULD require authentication, so that only certain users are allowed to read and/or write certain files. Alternatively, the OEM and its suppliers MAY use email or courier mail.
 
-If the supplier signs its own images, then it delivers all of its metadata, including delegations, and associated images. Otherwise, if the OEM signs images on behalf of the supplier, then the supplier needs to update ONLY images, and the OEM is responsible for producing signed metadata. Regardless of which party produces signed metadata, the release counters associated with images SHOULD be incremented, so that attackers who compromise the Director repository are not able to rollback to obsolete images (see the opening section of the [Security page](https://github.com/uptane/deployment-considerations/blob/master/security_considerations.md) for more on this attack.)
+If the supplier signs its own images, then it delivers all of its metadata, including delegations, and associated images. Otherwise, if the OEM signs images on behalf of the supplier, then the supplier needs to update only images, leaving the OEM responsible for producing signed metadata. Regardless of which party produces signed metadata, the release counters associated with images SHOULD be incremented, so that attackers who may compromise the Director repository can not rollback to obsolete images (see the opening section of the [Security page](https://github.com/uptane/deployment-considerations/blob/master/security_considerations.md) for more on this attack.)
 
-Regardless of the transport mechanism used to deliver images, the OEM needs to ensure that the images received are authentic and have not been altered. The OEM SHOULD verify these images using some out-of-band mechanism so that the authenticity and integrity of these images can be double-checked. For example, to obtain a higher degree of assurance, and for additional validation, the OEM MAY also require the supplier's update team to send a PGP/GPG signed email to the OEM's security team listing the cryptographic hashes of the new files.
+Regardless of the transport mechanism used to deliver them, the OEM needs to ensure that the images received are authentic and have not been altered. The OEM SHOULD verify these images using some out-of-band mechanism so that their authenticity and integrity can be double-checked. For example, to obtain a higher degree of assurance, and for additional validation, the OEM MAY also require the supplier's update team to send a PGP/GPG signed email to the OEM's security team listing the cryptographic hashes of the new files.
 
-Alternatively, the OEM MAY require that updates be transmitted via a digital medium that is delivered by bonded and insured couriers. To validate the provided files, the OEM and a known contact at the supplier MAY have a video call where the cryptographic hashes of the metadata and/or images are provided by the supplier, and confirmed by the OEM.
+Alternatively, the OEM MAY require that updates be transmitted via a digital medium that is delivered by a bonded and insured courier. To validate the provided files, the OEM and a known contact at the supplier MAY have a video call in which the supplier provides the cryptographic hashes of the metadata and/or images, and OEM confirms if the hashes match.
 
-An OEM SHOULD perform this verification even if a trusted transport mechanism is used to ensure whether the transport mechanism has been compromised. If the suppliers have signed metadata, then the OEM SHOULD verify metadata and images by checking version numbers, expiration timestamps, delegations, signatures, and hashes, so that it can be sure that the metadata matches the images.
+An OEM SHOULD perform this verification even if a trusted transport mechanism is used to ensure the mechanism has not been compromised. If the suppliers have signed metadata, then the OEM SHOULD verify metadata and images by checking version numbers, expiration timestamps, delegations, signatures, and hashes, so that it can be sure that the metadata matches the images.
 
 ### Testing metadata and images
 
