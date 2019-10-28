@@ -15,7 +15,7 @@ If an ECU does not have a secure clock, we recommend the use of a Time Server fo
 
 ### Time server
 
-As the name suggests, a Time Server is a dedicated server that is responsible for providing a secure source of current time to ECUs that would not otherwise have access to this information. It informs ECUs in a cryptographically secure way through signed records and an exchange of tokens. The Time Server receives a list of tokens from vehicles, and returns back a list of signed records containing every token from the original received list, and at least one instance of the current time.
+As the name suggests, a Time Server is a dedicated server that is responsible for providing a secure source of current time to ECUs that would not otherwise have access to this information. It informs ECUs in a cryptographically secure way through signed records and an exchange of tokens. The Time Server receives a list of tokens from vehicles, and returns back a list of signed records containing every token from the originally received list and at least one instance of the current time.
 
 If the Time Server is used, it is CONDITIONALLY REQUIRED to conform to the following requirements:
 
