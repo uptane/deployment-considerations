@@ -47,7 +47,8 @@ If the Time Server is implemented, the primary is CONDITIONALLY REQUIRED to use 
 
 #### ECU Version Report
 
-The ECU version report from each Secondary will contain a token to be sent to the Time Server. To prevent a replay, this token SHOULD be unique for each update cycle. This stipulation should be possible to achieve as we expect updates to be relatively infrequent (e.g., due to limited number of write cycles), and that there will be a large number of possible tokens.
+The ECU version report from each Secondary will contain a token to be sent to the Time Server. To prevent a replay, this token SHOULD be unique for each update cycle. As we expect that these updates will be relatively infrequent (e.g., due to a limited number of write cycles), there will be a sufficient number of tokens to make this possible.
+
 
 The payload of the ECU version report sent to the Director may contain the token sent to the Time Server. This token is part of the version report sent from Secondaries to the Primary. If the token is removed, the signature will not match.
 
