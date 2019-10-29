@@ -21,7 +21,7 @@ If the Time Server is used, it is CONDITIONALLY REQUIRED to conform to the follo
 
 * When the Time Server receives a sequence of tokens from a vehicle, it will provide one or more signed responses, containing the time along with these tokens. It MAY produce either one signed time attestation containing the current time and all tokens, or multiple time attestations each containing the current time and one or more tokens. All tokens should be included in the response.
 
-* The Time Server will expose a public interface for communicating with primaries. This communication MAY occur over FTP, FTPS, SFTP, HTTP, HTTPS, or any other transport control the implementor may choose.
+* The Time Server will expose a public interface for communicating with Primaries. This communication MAY occur over FTP, FTPS, SFTP, HTTP, HTTPS, or any other transport control the implementor may choose.
 
 * The Time Server's key is rotated in the same manner as other roles' keys by listing the new key in the Director's Root metadata. It is also listed in the custom field of the Director repository's Targets metadata (for partial verification Secondaries).
 
@@ -36,9 +36,9 @@ Listing the public key of the Time Server in Director Targets metadata is necess
 
 #### Changes to a Primary
 
-If the Time Server is implemented, the primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the ["Download and check current time"](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) step of the Uptane Standard.
+If the Time Server is implemented, the Primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the ["Download and check current time"](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) step of the Uptane Standard.
 
-1. Gather the tokens from each secondary ECU's version report.
+1. Gather the tokens from each Secondary ECU's version report.
 2. Send the list of tokens to the Time Server to fetch the current time. The Time Server responds, as described in the [Time Server section](#time-server), by providing a cryptographic attestation of the last known time.
 3. If the Time Server's response meets the criteria below, update the Primary ECU's clock and retain the Time Server's response for distribution to Secondary ECUs. If it fails to meet this criteria, discard the response and continue the procedure without an updated time.  The criteria for checking the Time Server's response are:
   - The signature over the Time Server's response is valid.
@@ -48,7 +48,6 @@ If the Time Server is implemented, the primary is CONDITIONALLY REQUIRED to use 
 #### ECU Version Report
 
 The ECU version report from each Secondary will contain a token to be sent to the Time Server. To prevent a replay, this token SHOULD be unique for each update cycle. As we expect that these updates will be relatively infrequent (e.g., due to a limited number of write cycles), there will be a sufficient number of tokens to make this possible.
-
 
 The payload of the ECU version report sent to the Director may contain the token sent to the Time Server. This token is part of the version report sent from Secondaries to the Primary. If the token is removed, the signature will not match.
 
@@ -198,7 +197,7 @@ Every delegation SHOULD be prefixed with the unique name of a tier-1 supplier, s
 #### Public API to download files
 An OEM SHOULD define a public API for Primaries to use when downloading metadata and images to the Image repository. This API can be defined however the OEM wishes.
 
-Depending on the OEM's requirements, this API MAY require authentication before primaries are allowed to download updates.  Such a choice affects only how certain the OEM can be that it is communicating with authentic primaries, and not how resilient ECUs are to a repository compromise. The OEM is free to use any authentication method.
+Depending on the OEM's requirements, this API MAY require authentication before Primaries are allowed to download updates.  Such a choice affects only how certain the OEM can be that it is communicating with authentic Primaries, and not how resilient ECUs are to a repository compromise. The OEM is free to use any authentication method.
 
 ## Specifying wireline formats
 In setting up the Uptane program, an implementer will need to specify how information, such as metadata files, and vehicle version manifests, should be encoded. As a guiding principle of the Uptane framework is to give each implementer as much design flexibility as possible, the Uptane Standard does not specify particular data binding formats. Instead, OEMs and suppliers can continue to use the protocols and formats of existing update systems, or they can select formats that best  ensure interoperability with other essential technologies. 
