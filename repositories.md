@@ -69,7 +69,7 @@ In order to prevent a new Time Server from accidentally causing a rollback warni
 
 #### Changes to partial verification Secondaries
 
-As partial verification Secondaries only check the Targets metadata from the Director repository, the Time Server key on these ECUs will be checked when verifying the Targets metadata. To do this, check the Time Server key after verifying the most recent Targets metadata file. If the Time Server key is listed in the Targets metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value as described in [Changes to checking Root metadata](#changes-to-checking-root-metadata).
+As partial verification Secondaries only check the Targets metadata from the Director repository, the Time Server key on these ECUs will be checked when verifying the Targets metadata. To do this, check the Time Server key after verifying the most recent Targets metadata file. If the Time Server key is listed in the Targets metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value as described above.
 
 ## What suppliers should do
 
@@ -77,7 +77,7 @@ As partial verification Secondaries only check the Targets metadata from the Dir
 
 **Figure 1.** *Diagram showing supplier signing arrangements. Suppliers are free to ask the OEM to sign images on its behalf (supplier A), or can sign them itself (supplier B). In the latter case, it MAY also delegate some or all of this responsibility to others (supplier C).*
 
-Either the OEM or a tier-1 supplier SHOULD sign for images for any ECUs produced by that supplier, so unsigned images are never installed. This provides security against arbitrary software attacks. An OEM will decide whether or not a tier-1 supplier SHOULD sign its own images. Otherwise, the OEM will sign images on behalf of the supplier, and the supplier SHOULD only deliver update images to the OEM as outlined in the [Normal Operations](https://github.com/uptane/deployment-considerations/blob/master/normal_operation.md#what-suppliers-should-do) document. If the supplier signs its own images, it MUST first set up roles and metadata using the following steps:
+Either the OEM or a tier-1 supplier SHOULD sign for images for any ECUs produced by that supplier, so unsigned images are never installed. This provides security against arbitrary software attacks. An OEM will decide whether or not a tier-1 supplier SHOULD sign its own images. Otherwise, the OEM will sign images on behalf of the supplier, and the supplier SHOULD only deliver update images to the OEM as outlined under the [Normal Operations](https://uptane.github.io/deployment-considerations/normal_operation.html) guidelines. If the supplier signs its own images, it MUST first set up roles and metadata using the following steps:
 
 1. Generate a number of offline keys used to sign its metadata. In order to provide compromise-resilience, these keys SHOULD NOT be accessible from the Image repository. The supplier SHOULD take great care to secure these keys, so a compromise affects only some, but not all, of its ECUs. The supplier SHOULD use the threshold number of keys chosen by the OEM.
 2. Optionally, delegate images to members of its organization (such as its developers), or to tier-2 suppliers (who MAY further delegate to tier-3 suppliers). Delegatees SHOULD recursively follow these same steps.
@@ -94,7 +94,7 @@ The OEM sets up and configures the Director and Image repositories. To host thes
 
 ### Director Repository
 
-*Note that all information about setting up signing keys for this repository can be found on the [Key Management](https://github.com/uptane/deployment-considerations/blob/master/key_management.md) page of this website*
+*Note that all information about setting up signing keys for this repository can be found on the [Key Management](https://uptane.github.io/deployment-considerations/key_management.html) page of this website*
 In order to provide on-demand customization of vehicles, the OEM MUST also build the Director repository, following the guidance in the Uptane Standard [https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#rfc.section.5.3.2.] In addition, an OEM must keep in mind the following factors. Unlike the Image repository, the Director repository: (1) is managed by automated processes, (2) uses online keys to sign Targets metadata, (3) does not delegate images, (4) generally provides different metadata to different Primaries, (5) MAY encrypt images per ECU, and (6) produces new metadata on every request by Primaries.
 
 **Steps to initialize the repository**
@@ -158,7 +158,7 @@ Sending an update from the Director repository to a Primary requires the followi
 Since the automated process is continually producing new metadata files (and, possibly, encrypted images), these files SHOULD be deleted as soon as Primaries have consumed them, so that storage space can be reclaimed. This MAY be done by simply tracking whether Primaries have successfully downloaded these files within a reasonable amount of time.
 
 ### Image repository
-*Note that all information about setting up signing keys for this repository can be found on the [Key Management](https://github.com/uptane/deployment-considerations/blob/master/key_management.md) page of this website*
+*Note that all information about setting up signing keys for this repository can be found on the [Key Management](https://uptane.github.io/deployment-considerations/key_management.html) page of this website*
 
 Finally, in order to provide compromise-resilience, the OEM will build the [Image repository](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#rfc.section.5.3.1) following the guidance in the Uptane Standard. The Image repository differs from the Director repository in a number of ways. First, it is managed by human administrators who use offline keys to sign targets metadata. It also MAY delegate images to suppliers, and provides the same metadata to all Primaries. Lastly, it does not encrypt images per ECU, and updates its metadata and images relatively infrequently (e.g., every two weeks, or monthly).
 
