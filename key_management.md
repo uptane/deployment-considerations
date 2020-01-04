@@ -3,7 +3,7 @@ layout: default
 css_id: key_management
 ---
 
-# Key management
+# Managing signing keys and metadata expiration
 
 This page addresses both set-up and maintenance issues for the signing keys used by Uptane. These include understanding the function of online vs. offline keys, the use of signing thresholds to improve security, and the management of metadata expiration dates.
 
