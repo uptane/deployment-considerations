@@ -160,3 +160,12 @@ In choosing whether to send dynamic directions through the custom field of the T
 Using the Director repository to encode dynamic directions provides more flexibility, as directions can be made or changed on demand. But, there is a significant trade off in terms of  security.  Should the Directory repository be compromised, attackers would have this same power. This has important ramifications for ECUs that perform partial, or even full, verification. On the other hand, using the Image repository provides the opposite tradeoff. Dynamic directions are more secure, but there is now less flexibility to make changes or set dynamic directions.
 
 It is important to consider this tradeoff when deciding how to send dynamic directions. If the ECU is security critical, these directions should be sent using the custom field of Targets metadata and stored on the Image repository. In any case, using either repository should not result in significant bandwidth costs for ECUs, as ECUs that perform partial verification should continue to receive only directions for itself from the Director repository.
+
+
+## Location-based updates
+
+Certain types of updates, like maps, rules-of-the-road, or traffic notifications, are only relevant to vehicles within a specific location. These location-based updates require that a device be able to report its location in some way. For example, the device could obtain its location by using a GPS sensor and report it as custom metadata in the vehicle version manifest using the "geo:" UI scheme defined in [https://tools.ietf.org/html/rfc5870](RFC 5870).
+
+A way to reference location in the custom section of the Targets metadata for the Image repository would then be required for all applicable targets. The Director would then be responsible for identifying devices whose locations match those of targets in the Image repository. If a match is found, the Director SHOULD update its Targets metadata to instruct the relevant devices to install the location-based updates appropriate for their positions.
+
+It is possible that the vehicle's position may have changed by the time the vehicle receives a location-based update. The device MAY check that its current position matches that of the target before installation, and the implementer MAY decide to abort the update if the location no longer matches.
