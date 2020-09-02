@@ -9,7 +9,7 @@ This page addresses both set-up and maintenance issues for the signing keys used
 
 ## Normative References
 
-There is much prior work on securely manageing cryptographic key material. Implementers of Uptane SHOULD follow best practices outlined in [IETF RFC 4107](https://tools.ietf.org/html/rfc410) / [BCP 107](https://tools.ietf.org/html/bcp107) - Guidelines for Cryptographic Key Management.
+There is much prior work on securely managing cryptographic key material. Implementers of Uptane SHOULD follow best practices outlined in [IETF RFC 4107](https://tools.ietf.org/html/rfc410) / [BCP 107](https://tools.ietf.org/html/bcp107) - Guidelines for Cryptographic Key Management.
 
 ## Repository keys
 
