@@ -7,6 +7,10 @@ css_id: key_management
 
 This page addresses both set-up and maintenance issues for the signing keys used by Uptane. These include understanding the function of online vs. offline keys, the use of signing thresholds to improve security, and the management of metadata expiration dates.
 
+## Normative References
+
+There is much prior work on securely managing cryptographic key material. Implementers of Uptane SHOULD follow best practices outlined in [IETF RFC 4107](https://tools.ietf.org/html/rfc410) / [BCP 107](https://tools.ietf.org/html/bcp107) - Guidelines for Cryptographic Key Management.
+
 ## Repository keys
 
 On both the Director and the Image repository, the OEM maintains the keys to the Root, Timestamp, Snapshot, and Targets roles. However, for any delegated Targets roles on the Image repository, the corresponding keys are expected to be maintained by the supplier to which the corresponding images have been delegated. For example, if a tier-1 supplier signs its own images, then the supplier would maintain its own (ideally offline) keys. 
@@ -79,7 +83,7 @@ Since the Director repository MUST keep at least some software signing keys onli
 
 First, the OEM SHOULD use the Root role to revoke and replace the keys to the Timestamp, Snapshot, and Targets roles, because only the Root role can replace these keys. Following the type and placement of keys prescribed for the Director repository, we assume that attackers have compromised the online keys to the Timestamp, Snapshot, and Targets roles, but not the offline keys to the Root role.
 
-Second, the OEM SHOULD consider a manual recall of all vehicles in order to replace these keys, particularly if the vehicle has partial verification Secondaries. This recall MAY be done by requiring vehicle owners to visit the nearest dealership. Although an OEM could replace these keys on a full verification ECU by using over-the-air broadcasts, a manual recall is recommended because:
+Second, the OEM SHOULD consider a manual update of all vehicles in order to replace these keys, particularly if the vehicle has partial verification Secondaries. This update MAY be done by requiring vehicle owners to visit the nearest dealership. Although an OEM could replace these keys on a full verification ECU by using over-the-air broadcasts, a manual update is recommended because:
 1. the OEM SHOULD perform a safety inspection of the vehicles, in case of security attacks, and
 2. partial verification Secondaries are not designed to handle key revocation and replacement over-the-air. In order to update keys for partial verification Secondaries, the OEM SHOULD overwrite their copies of the Root metadata file, perhaps using new images.
 
@@ -93,16 +97,16 @@ If the recommendations for the type and placement of keys described above for th
 
 In the first case, where a tier-1 supplier or one of its delegatees has had one or more of its keys compromised, the supplier and its affected delegatees (if any), SHOULD revoke and replace keys. They SHOULD update metadata, including delegations and images, and send them to the OEM.
 
-The OEM SHOULD then manually recall only affected vehicles that run software maintained by this supplier in order to replace metadata and images. This MAY be done by requiring vehicle owners to visit the nearest dealership. A manual recall SHOULD be done because, without trusted hardware (such as TPM), it is difficult to ensure that compromised ECUs can be remotely and securely updated. After having inspected the vehicle, the OEM SHOULD replace and update metadata and images on all ECUs so that these images are known to be safe.
+The OEM SHOULD then manually update only affected vehicles that run software maintained by this supplier in order to replace metadata and images. This MAY be done by requiring vehicle owners to visit the nearest dealership. A manual update SHOULD be done because, without trusted hardware (such as TPM), it is difficult to ensure that compromised ECUs can be remotely and securely updated. After having inspected the vehicle, the OEM SHOULD replace and update metadata and images on all ECUs so that these images are known to be safe.
 
 #### OEM-managed keys
 
 The second case, where the OEM has had a key compromised, can be far more serious than the first case. An attacker in such a position may be able to execute attacks on all vehicles, depending on which keys have been compromised. If the keys are for the Timestamp and Snapshot roles, or the Targets or Root roles, then the OEM SHOULD use the following recovery procedure.
 
-First, the OEM SHOULD use the Root role to revoke and replace keys for all affected roles. Second, it SHOULD restore all metadata and images on the Image repository to a known good state using an offline backup. Third, the OEM SHOULD manually recall all vehicles in order to replace metadata and images. A manual recall SHOULD be done, because without trusted hardware (such as TPM), it is difficult to ensure that compromised ECUs can be remotely and securely updated.
+First, the OEM SHOULD use the Root role to revoke and replace keys for all affected roles. Second, it SHOULD restore all metadata and images on the Image repository to a known good state using an offline backup. Third, the OEM SHOULD manually update all vehicles in order to replace metadata and images. A manual update SHOULD be done, because without trusted hardware (such as TPM), it is difficult to ensure that compromised ECUs can be remotely and securely updated.
 
 ### ECU keys
 
-If ECU keys are compromised, then the OEM SHOULD manually recall vehicles to replace these keys. This is the safest course of action because after a key compromise, an OEM cannot be sure whether it is remotely replacing keys controlled by attackers or the intended ECUs.
+If ECU keys are compromised, then the OEM SHOULD manually update vehicles to replace these keys. This is the safest course of action because after a key compromise, an OEM cannot be sure whether it is remotely replacing keys controlled by attackers or the intended ECUs.
 
 An OEM MAY use the Director repository and its inventory database to infer whether ECU keys have been compromised. This database is used to record vehicle version manifests that list what images an ECU has installed over time. Therefore, an OEM MAY check for any abnormal patterns of installation that could have been caused by an ECU key compromise. Note, however, that this method is not perfect, because if attackers control ECU keys, then they can also use these keys to send fraudulent ECU version manifests.
