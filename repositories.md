@@ -203,11 +203,11 @@ Depending on the OEM's requirements, this API MAY require authentication before 
 
 #### Using images from multiple locations
 
-When implementing Uptane, it is often the case that existing software may come from several different locations. It may be tempting to assume that this means that the equivalent Uptane implementation will require multiple different image repositories. However, this is rarely actually necessary, and using multiple image repositories (implemented via [repository mapping metadata as described in TAP-4](https://github.com/theupdateframework/taps/blob/master/tap4.md)) represents a significantly larger effort.
+Uptane implementations may sometimes need to accommodate update systems where existing software comes from several different locations. Implementers may assume that this would mandate the use of multiple different image repositories in any equivalent Uptane implementation. However, this is rarely necessary, and using multiple image repositories (implemented via [repository mapping metadata as described in TAP-4](https://github.com/theupdateframework/taps/blob/master/tap4.md)) would require a significantly larger effort.
 
-In almost all cases, it is preferable to have a single image repository containing all of the Uptane metadata, and redirect clients to download the actual images from other locations. This can be implemented via an API on the image repository, or via a custom field in the Targets metadata directing the clients to one or more alternate URLs where the images are available.
+In almost all cases, it is preferable to have a single image repository containing all of the Uptane metadata, and redirect clients to download the actual images from other locations. This can be implemented via an API on the Image repository, or via a custom field in the Targets metadata directing the clients to one or more alternate URL where the images are available.
 
-The API solution could be as simple as an HTTP 3xx redirect to the appropriate download location, for example. More complex schemes, e.g. cases where existing legacy repositories have a custom authentication scheme, can usually be implemented by adding custom metadata. See the [related section of the standard](https://uptane.github.io/uptane-standard/uptane-standard.html#custom-metadata-about-images) for more information on how custom metadata can be added.
+An API solution could be as simple as an HTTP 3xx redirect to the appropriate download location. More complex schemes, e.g. cases where existing legacy repositories have a custom authentication scheme, can usually be implemented by adding custom metadata. See the [related section of the standard](https://uptane.github.io/uptane-standard/uptane-standard.html#custom-metadata-about-images) for more information on how custom metadata can be added.
 
 ## Specifying wireline formats
 
