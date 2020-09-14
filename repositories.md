@@ -51,7 +51,7 @@ The ECU version report from each Secondary will contain a token to be sent to th
 
 #### Changes to all ECUs
 
-At build time, ECUs will receive an attestation of the current time as downloaded from the Time Server.
+After the vehicle has been assembled, ECUs MAY receive an attestation of the current time as downloaded from the Time Server.
 
 As the first step to verifying metadata, described in the Standard for both the [Primary](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) and [Secondaries](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#verify_time), the ECU SHOULD load and verify the most recent time from the Time Server using the following procedure:
 
