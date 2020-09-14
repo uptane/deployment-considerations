@@ -201,6 +201,14 @@ An OEM SHOULD define a public API for Primaries to use when downloading metadata
 
 Depending on the OEM's requirements, this API MAY require authentication before Primaries are allowed to download updates.  Such a choice affects only how certain the OEM can be that it is communicating with authentic Primaries, and not how resilient ECUs are to a repository compromise. The OEM is free to use any authentication method.
 
+#### Using images from multiple locations
+
+Uptane implementations may sometimes need to accommodate update systems where existing software comes from several different locations. Implementers may assume that this would mandate the use of multiple different image repositories in any equivalent Uptane implementation. However, this is rarely necessary, and using multiple image repositories (implemented via [repository mapping metadata as described in TAP-4](https://github.com/theupdateframework/taps/blob/master/tap4.md)) would require a significantly larger effort.
+
+In almost all cases, it is preferable to have a single image repository containing all of the Uptane metadata, and redirect clients to download the actual images from other locations. This can be implemented via an API on the Image repository, or via a custom field in the Targets metadata directing the clients to one or more alternate URL where the images are available.
+
+An API solution could be as simple as an HTTP 3xx redirect to the appropriate download location. More complex schemes, e.g. cases where existing legacy repositories have a custom authentication scheme, can usually be implemented by adding custom metadata. See the [related section of the standard](https://uptane.github.io/uptane-standard/uptane-standard.html#custom-metadata-about-images) for more information on how custom metadata can be added.
+
 ## Specifying wireline formats
 
 In setting up the Uptane program, an implementer will need to specify how information, such as metadata files, and vehicle version manifests, should be encoded. As a guiding principle of the Uptane framework is to give each implementer as much design flexibility as possible, the Uptane Standard does not specify particular data binding formats. Instead, OEMs and suppliers can continue to use the protocols and formats of existing update systems, or they can select formats that best  ensure interoperability with other essential technologies. 
