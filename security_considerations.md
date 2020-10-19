@@ -3,7 +3,7 @@ layout: default
 css_id: security_considerations
 ---
 
-# Additional security recommendations
+# Enhanced security practices
 
 Uptane is a flexible system and therefore can be adapted for increased security
 if an OEM or supplier deems it necessary. In this section, we discuss several of these techniques.
@@ -112,4 +112,6 @@ A partial verification Secondary merely retrieves Targets metadata when it chang
 
 Note also that, if used, Time Server costs are typically one signature verification per ECU per time period of update (e.g., daily).  This cost varies based upon the algorithm and thus its measurement can only be estimated based upon the algorithm.
 
+### Using encrypted images on the Image repository
 
+Images stored on the Image repository may have previously been encrypted or not, at the discretion of the implementer.  The Standard does not explicitly mention using encrypted images on the Image repository because Uptane treats these blobs exactly the same as unencrypted blobs. It only imposes special requirements on images that are per-ECU encrypted on the Director repository. Therefore, there is no reason that encrypted images cannot be on the Image repository should an implementer wish to use them.  
