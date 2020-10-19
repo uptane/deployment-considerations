@@ -114,4 +114,4 @@ Note also that, if used, Time Server costs are typically one signature verificat
 
 ### Using encrypted images on the Image repository
 
-Images stored on the Image repository may have previously been encrypted or not, at the discretion of the implementer.  The Standard does not explicitly mention using encrypted images on the Image repository because Uptane treats these blobs exactly the same as unencrypted blobs. It only imposes special requirements on images that are per-ECU encrypted on the Director repository. Therefore, there is no reason that such images can not be on the Image repository should an implementer wish to use them.  
+Images stored on the Image repository may have previously been encrypted or not, at the discretion of the implementer.  The Standard does not explicitly mention using encrypted images on the Image repository because Uptane treats these blobs exactly the same as unencrypted blobs. It only imposes special requirements on images that are per-ECU encrypted on the Director repository. Therefore, there is no reason that encrypted images cannot be on the Image repository should an implementer wish to use them.  
