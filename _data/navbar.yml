@@ -55,8 +55,12 @@
       url: /deployment-considerations/exceptional_operations.html
     - text: Customizing Uptane
       url: /deployment-considerations/customizations.html
-    - text: Additional security recommendations
+    - text: Enhanced security practices
       url: /deployment-considerations/security_considerations.html
+    - text: Frequently Asked Questions
+      url: /deployment-considerations/faq.html
+    - text: Changelog
+      url: /deployment-considerations/changelog.html
     - text: Reference Implementation and Demonstration Code
       url: https://github.com/uptane/uptane
       external: true
