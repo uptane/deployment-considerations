@@ -18,7 +18,7 @@ The following is a brief summary of those edits:
 
 - Corrected/changed several numbering references in the full verification process and “Step 0” in the procedure for checking root metadata.
 
-- Presented the option to use a counter, instead of a nonce in the ECU Version Report, and specified the purpose of the nonce in the step-by-step instructions for preparing this report. 
+- Presented the option to use a counter (instead of a nonce) in the ECU Version Report, and specified the purpose of the nonce in the step-by-step instructions for preparing this report. 
 
 - Specified that the Director SHOULD check that the nonce or counter in each ECU Version Report has not been used before to prevent a replay of the ECU Version Report. If the nonce or counter is reused the Director SHOULD drop the request. 
 
@@ -41,6 +41,5 @@ The following is a brief summary of those edits:
 - Specified in the procedure for checking hashes that the ECU SHOULD check that the length of the image matches the length listed in the metadata. 
 
 - Modified wording to make verifying a time message optional if the ECU does not have the capacity to verify a time message. 
-
 
 
