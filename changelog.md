@@ -32,7 +32,7 @@ The following is a brief summary of those edits:
 
 - Resolved an  inconsistency in how checking hashes of images is discussed.
 
-- Clarified the manner in which we identify images by their hash to specify that If the Primary has received multiple hashes for a given image binary via the Targets role,  then it SHALL verify every hash for this image. This step is to be performed  even if the image is identified by a single hash as part of its filename. 
+- Clarified the manner in which we identify images by their hash to specify that if the Primary has received multiple hashes for a given image binary via the Targets role, then it SHALL verify every hash for this image. This step is to be performed even if the image is identified by a single hash as part of its filename. 
 
 - Improved naming of example hashes to align with NIST policy (https://csrc.nist.gov/projects/hash-functions/nist-policy-on-hash-functions) on hash functions. This change was also made to demonstrate that Uptane is not tied to any particular set of algorithms.
 
@@ -41,5 +41,4 @@ The following is a brief summary of those edits:
 - Specified in the procedure for checking hashes that the ECU SHOULD check that the length of the image matches the length listed in the metadata. 
 
 - Modified wording to make verifying a time message optional if the ECU does not have the capacity to verify a time message. 
-
 
