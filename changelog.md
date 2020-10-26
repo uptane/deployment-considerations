@@ -36,9 +36,8 @@ The following is a brief summary of those edits:
 
 - Improved naming of example hashes to align with NIST policy (https://csrc.nist.gov/projects/hash-functions/nist-policy-on-hash-functions) on hash functions. This change was also made to demonstrate that Uptane is not tied to any particular set of algorithms.
 
-- Clarified that Full verification MUST be performed by Primary ECUS and MAY be performed by Secondary ECUs. 
+- Clarified that full verification MUST be performed by Primary ECUs and MAY be performed by Secondary ECUs. 
 
 - Specified in the procedure for checking hashes that the ECU SHOULD check that the length of the image matches the length listed in the metadata. 
 
 - Modified wording to make verifying a time message optional if the ECU does not have the capacity to verify a time message. 
-
