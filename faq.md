@@ -19,7 +19,7 @@ css_id: faq
 ### **Must all signatures be valid for a threshold of signatures to be valid?**
 The threshold requirement of Uptane, mentioned in [Section 5.4.4.3](https://uptane.github.io/uptane-standard/uptane-standard.html#check_root) and in descriptions of other roles, stipulates that a set number of keys are required to sign a metadata file. This is designed to prevent attacks by requiring would-be hackers to compromise multiple keys in order to install malware. However, what happens if this threshold is met, but one or more of the keys is not valid?
 
-As currently configured, the Uptane Standard allows each implementer to decide whether these keys would be accepted. Take the following example:
+The Uptane Standard allows each implementer to decide whether these keys would be accepted. Take the following example:
 
 Root metadata says valid top-level targets keyids are A, B, C, and D, with a threshold of 2. Should the following two metadata files be considered valid?
 
