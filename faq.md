@@ -21,7 +21,7 @@ The threshold requirement of Uptane, mentioned in [Section 5.4.4.3](https://upta
 
 The Uptane Standard allows each implementer to decide whether these keys would be accepted. Take the following example:
 
-Root metadata says valid top-level targets keyids are A, B, C, and D, with a threshold of 2. Should the following two metadata files be considered valid?
+Root metadata lists valid top-level Targets key identifiers are A, B, C, and D, with a threshold of 2. Should the following two metadata files be considered valid?
 
 * Signed by A, B, and X, where X is not present at all in root metadata
 
