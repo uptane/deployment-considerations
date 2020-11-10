@@ -7,8 +7,8 @@ css_id: faq
 
 ### **What makes Uptane different from other SOTA security mechanisms?**
 
-Security problems occur due to accidental disclosures, malicious attacks, disgruntled insiders.  It is not
-a matter of whether a successful attack will occur, but when.  One key feature of a security system is the
+Security problems can occur due to accidental disclosures, malicious attacks, or disgruntled insiders.  It is not
+a matter of whether a successful attack will occur, but when.  One key feature of a security system is its
 ability to securely recover from an attack.  This means that an update system must have a way to securely 
 recover from a key loss or compromise.  
 
