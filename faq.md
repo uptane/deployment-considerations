@@ -23,7 +23,7 @@ The Uptane Standard allows each implementer to decide whether these keys would b
 
 Root metadata lists valid top-level Targets key identifiers are A, B, C, and D, with a threshold of 2. Should the following two metadata files be considered valid?
 
-* Signed by A, B, and X, where X is not present at all in root metadata
+* Signed by A, B, and X, where X is not present at all in Root metadata
 
 * Signed by A, B, and C, but B's signature doesn't actually match the signed content
 
