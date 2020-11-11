@@ -11,13 +11,7 @@ Security problems can occur due to accidental disclosures, malicious attacks, or
 
 For example, suppose a nation-state actor steals a signing key and wants to use it to distribute software (as has happened before) [cite Iran, etc.].  The update system must provide a way to revoke the current trusted information even if the adversary is able to be a man-in-the-middle for future communications.  Uptane is designed to provide strong security in cases like these and is designed so that failures are compartmentalized and limited in scope.  
 
-No other automotive update system has been designed to work in such rigorous situations or has 
-received the public scrutiny of Uptane.  We follow best practice in the security community by having
-wide-scale, public review.  This has been proven to be essential time and time again to ensure a 
-design will hold up against attackers, especially those as strong as nation-state actors.  Furthermore,
-Uptane's design is heavily influenced by the design of [TUF](https://theupdateframework.io/), a widely used software update system 
-with a strong track record of usability and security across millions of devices.  As a free and open
-standard, with no cost to use or adopt, Uptane stands alone in the automotive update space.
+No other automotive update system has been designed to work in such rigorous situations or has received the public scrutiny of Uptane.  We follow best practice in the security community by having wide-scale, public review.  This has been proven to be essential time and time again to ensure a design will hold up against attackers, especially those as strong as nation-state actors.  Furthermore, Uptane's design is heavily influenced by the design of [TUF](https://theupdateframework.io/), a widely used software update system with a strong track record of usability and security across millions of devices.  As a free and open standard, with no cost to use or adopt, Uptane stands alone in the automotive update space.```
 
 
 ### **How does Uptane work with other systems and protocols?**
