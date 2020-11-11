@@ -7,8 +7,7 @@ css_id: faq
 
 ### **What makes Uptane different from other SOTA security mechanisms?**
 
-Security problems can occur due to accidental disclosures, malicious attacks, or disgruntled insiders.  It is not
-a matter of whether a successful attack will occur, but when.  Because of the very real threat of a compromise, a security system must be able to securely recover from an attack. This means that an update system must have a way to restore its operations in a timely fashion when a key is lost or compromised.  
+Security problems can occur due to accidental disclosures, malicious attacks, or disgruntled insiders.  It is not a matter of whether a successful attack will occur, but when.  Because of the very real threat of a compromise, a security system must be able to securely recover from an attack. This means that an update system must have a way to restore its operations in a timely fashion when a key is lost or compromised.  
 
 For example, suppose a nation-state actor steals a signing key and wants to use it to distribute software (as has
 happened before) [cite Iran, etc.].  The update system must provide a way to revoke the current trusted
