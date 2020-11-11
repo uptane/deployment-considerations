@@ -9,11 +9,7 @@ css_id: faq
 
 Security problems can occur due to accidental disclosures, malicious attacks, or disgruntled insiders.  It is not a matter of whether a successful attack will occur, but when.  Because of the very real threat of a compromise, a security system must be able to securely recover from an attack. This means that an update system must have a way to restore its operations in a timely fashion when a key is lost or compromised.  
 
-For example, suppose a nation-state actor steals a signing key and wants to use it to distribute software (as has
-happened before) [cite Iran, etc.].  The update system must provide a way to revoke the current trusted
-information even if the adversary is able to be a man-in-the-middle for future communications.  Uptane 
-is designed to provide strong security in cases like these and is designed so that failures are 
-compartmentalized and limited in scope.  
+For example, suppose a nation-state actor steals a signing key and wants to use it to distribute software (as has happened before) [cite Iran, etc.].  The update system must provide a way to revoke the current trusted information even if the adversary is able to be a man-in-the-middle for future communications.  Uptane is designed to provide strong security in cases like these and is designed so that failures are compartmentalized and limited in scope.  
 
 No other automotive update system has been designed to work in such rigorous situations or has 
 received the public scrutiny of Uptane.  We follow best practice in the security community by having
