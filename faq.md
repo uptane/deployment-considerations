@@ -7,13 +7,15 @@ css_id: faq
 
 ### **What makes Uptane different from other SOTA security mechanisms?**
 
+Security problems can occur due to accidental disclosures, malicious attacks, or disgruntled insiders.  It is not a matter of whether a successful attack will occur, but when.  Because of the very real threat of a compromise, a security system must be able to securely recover from an attack. This means that an update system must have a way to restore its operations in a timely fashion when a key is lost or compromised.  
 
+For example, suppose a nation-state actor steals a signing key and wants to use it to distribute software. Something similar happened in the 2011 [DigiNotar](https://en.wikipedia.org/wiki/DigiNotar) case, widely attributed to the Iranian government, in which 300,000 Iranian Gmail users were the main targets of a hack against the Dutch company. Following such an attack, a secure update system must provide a way to revoke the current trusted information, even if the adversary is able to be a man-in-the-middle for future communications.  Uptane is designed to provide strong security in cases like these and is designed so that failures are compartmentalized and limited in scope.  
 
+No other automotive update system has been designed to work in such rigorous situations or has received the public scrutiny of Uptane.  We follow best practice in the security community by opening our design to wide-scale, public review.  This has been proven to be essential time and time again to ensure a design will hold up against attackers, especially those as strong as nation-state actors.  Furthermore, Uptane's design is heavily influenced by the design of [TUF](https://theupdateframework.io/), a widely used software update system with a strong track record of usability and security across millions of devices.  As a free and open standard, with no cost to use or adopt, Uptane stands alone in the automotive update space.
 
 
 ### **How does Uptane work with other systems and protocols?**
-
-
+Other mechanisms for performing updates, such as XXX, YYY, ZZZ, are compatible with Uptane. Uptane can use any mechanism for data transport and is designed to provide strong security guarantees even if the underlying network or transport mechanism is compromised. If an automaker wants to move to a secure update system, keeping their existing update system as a transport for Uptane is an effective way to do so.
 
 
 ### **Must all signatures be valid for a threshold of signatures to be valid?**
