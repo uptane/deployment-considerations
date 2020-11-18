@@ -15,10 +15,12 @@ No other automotive update system has been designed to work in such rigorous sit
 
 
 ### **How does Uptane work with other systems and protocols?**
+
 Other mechanisms for performing updates, such as XXX, YYY, ZZZ, are compatible with Uptane. Uptane can use any mechanism for data transport and is designed to provide strong security guarantees even if the underlying network or transport mechanism is compromised. If an automaker wants to move to a secure update system, keeping their existing update system as a transport for Uptane is an effective way to do so.
 
 
 ### **Must all signatures be valid for a threshold of signatures to be valid?**
+
 The threshold requirement of Uptane, mentioned in [Section 5.4.4.3](https://uptane.github.io/uptane-standard/uptane-standard.html#check_root) and in descriptions of other roles, stipulates that a set number of keys are required to sign a metadata file. This is designed to prevent attacks by requiring would-be hackers to compromise multiple keys in order to install malware. However, what happens if this threshold is met, but one or more of the keys is not valid?
 
 The Uptane Standard allows each implementer to decide whether these keys would be accepted. Take the following example:

@@ -65,6 +65,7 @@ However, in order for an implementation to be Uptane-compliant, no ECU can cause
 
 
 ## Using Uptane with transport security
+
 Uptane is designed to retain strong security guarantees even in the face of a network attacker.  This includes situations where there either is no transport security or where the transport security is compromised by an attacker.  Should this occur, Uptane may not be able to prevent an attacker from disrupting communication between the vehicle and the OEM (e.g., by jamming the signal or dropping packets).  However, malicious packages cannot be installed, mix-and-match attacks are not possible, etc.  This is similar to how a network attacker who has not compromised a key can cause a TLS connection to fail to connect or disconnect (e.g., by dropping network packets), but cannot compromise the integrity or confidentiality of the connection.
 
 Uptane's security is orthogonal to security systems at other network layers, such as transport security, data link security, etc.  However, there are several reasons why a party may wish to use a security system at the transport layer in coordination with Uptane:
@@ -95,7 +96,7 @@ Another simple solution is for the Primary and/or Director to retry a bundle ins
 
 If all ECUs do have additional storage, and can perform a rollback, then the OEM may use a [two-phase commit protocol](https://en.wikipedia.org/wiki/Two-phase_commit_protocol). We assume that a gateway ECU would act as the coordinator, which ensures that updates are installed atomically. This technique should ensure atomic installation as long as: (1) the gateway ECU behaves correctly and has not been compromised, and (2) the gateway ECU does not fail permanently. It is considerably less complicated than Byzantine-fault tolerant protocols, which may have a higher computation/communication overhead. However, this technique does not provide other security guarantees. For example, the gateway ECU may show different bundles to different Secondaries at the same time.
 
-## 2nd-party Fleet management
+## 2nd-party fleet management
 
 <img align="center" src="assets/images/custom_2_fleet_management.png" width="500" style="margin: 0px 20px"/>
 

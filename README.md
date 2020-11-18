@@ -5,11 +5,12 @@ the [GitHub pages slate theme](https://github.com/pages-themes/slate).
 
 The site is available [here](https://uptane.github.io/).
 
-This repository is a dedicated place for the deployment best practices text. Whatever is on master will be built automatically by github, and deployed at https://uptane.github.io/deployment-considerations.
+This repository is a dedicated place for the Deployment Best Practices text. Whatever is on master will be built automatically by GitHub and deployed at https://uptane.github.io/deployment-considerations.
 
 ## Maintenance and re-use
 
 ### Basic commands
+
 GitHub pages are served directly from the repository. No pre-building necessary.
 For development deployment, we recommend the following commands (requires
 `jekyll` to be installed and available on your path):
@@ -23,11 +24,13 @@ jekyll serve
 ```
 
 #### Changing the header
+
 Set the variables `title`, `description` and `logo_url`  in
 [`_config.yml`](_config.yml) to customize the header. These variables are used
 in [`_layouts/default.html`](_layouts/default.html) to populate the header.
 
 #### Changing the menu
+
 The menu is populated from the YAML file in
 [`_data/navbar.yml`](_data/navbar.yml). It should be enough to just customize
 this file. The menu has two levels. On the first level you can specify a `text`
@@ -43,27 +46,30 @@ can be found in [`_includes/navbar.html`](_includes/navbar.html), which is
 included in the default layout.
 
 #### Changing the footer
+
 Just customize [`_includes/footer.html`](_includes/footer.html).
 
 #### General styles and layouts
+
 Base styles are inherited from
 [`_sass/jekyll-theme-slate.scss`](_sass/jekyll-theme-slate.scss) and
 [`_sass/rouge-github.scss`](_sass/rouge-github.scss). You should not modify
 those styles, but rather override them in your own `_sass/*.scss` or
 in [`_sass/main.scss`](_sass/main.scss), where currently all custom styles
 are defined. All styles are included in
-[`assets/css/style.scss`](assets/css/style.scss), which gets compiled to css on
+[`assets/css/style.scss`](assets/css/style.scss), which gets compiled to CSS on
 `jekyll build`. The resulting `assets/css/style.css` is included in the default
 layout.
 
 
 ### Customizing and adding content
+
 Adding content is as simple as creating `*.html`, or `*.md` files and filling
 them with content.
 Additionally, you should specify at least two properties in each file's [YAML
 front matter section](https://jekyllrb.com/docs/frontmatter/), to tell jekyll
 that you want to embed your content in the default layout and to give the
-container in which your content will be placed a unique CSS id. This is what
+container in which your content will be placed a unique CSS ID. This is what
 front matter looks like:
 ```yaml
 ---
@@ -80,18 +86,22 @@ You can read more about [creating pages in the jekyll
 docs](https://jekyllrb.com/docs/pages/).
 
 ### Adding assets
+
 Add assets, e.g., images or JavaScript, to [`assets`](assets).
 
 #### Replace favicon.ico
+
 [`favicon.ico`](favicon.ico) should be served from the root of the project.
 Just replace the current one with the `favicon.ico` of your project.
 
 ## License
+
 This work is [dual-licensed](https://en.wikipedia.org/wiki/Multi-licensing) and
 distributed under (1) Apache License, Version 2.0 and (1) MIT License.  Please
 see LICENSE and LICENSE-MIT.
 
 ## Acknowledgements
+
 This project is managed by Prof. Justin Cappos and other members of the [Secure
 Systems Lab](https://ssl.engineering.nyu.edu/) at NYU.
 
