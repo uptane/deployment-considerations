@@ -89,7 +89,7 @@ In order to analyze this problem, let us recap what new information should be do
 3. All ECUs download, verify, and write the latest downloaded time from the Time Server, or whatever source is used to provide the current accurate time.
 4. All ECUs download, verify, and write metadata from the Director and/or Image repositories.
 5. At some point, ECUs download, verify, and write images.
-6. At some point, ECUs install new images. Then, they sign, and write the latest ECU version manifests.
+6. At some point, ECUs install new images. Then, they sign, and write the latest ECU version reports.
 
 Let us make two important observations.
 
@@ -99,7 +99,7 @@ Indeed, there is a risk to implementers updating time information too frequently
 
 However, there is a trade-off between frequently updating the current time (and thus, exhausting EEPROM), and the efficacy of the system to prevent freeze attacks from a compromised Director repository. If it is essential to frequently update the time to prevent freeze attacks, and EEPROM must be used, there are ways to make that use more efficient. For example, the ECU may write data to EEPROM in a circular fashion that can expand its lifetime of wear.
 
-Second, it is not necessary for ECUs to write and sign an ECU version manifest upon every boot or reboot cycle. At a minimum, an ECU should write and sign a new ECU version manifest only upon the successful verification and installation of a new image.
+Second, it is not necessary for ECUs to write and sign an ECU version report upon every boot or reboot cycle. At a minimum, an ECU should write and sign a new ECU version report only upon the successful verification and installation of a new image.
 
 
 ### Balancing security and bandwidth
