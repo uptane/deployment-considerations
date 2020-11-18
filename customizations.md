@@ -32,7 +32,7 @@ Finally, in order to install a delta image, an ECU SHOULD take one of the action
 <img align="center" src="assets/images/custom_table1_delta.png" width="500" style="margin: 0px 20px"/>
 
 **Table 1.** *The actions an ECU SHOULD take to install a delta image as determined by its access to additional storage and whether or not the image is encrypted*
-                                                                                                                             
+
 ### Dynamic delta updates vs. precomputed delta updates
 
 Delta updates can be computed two different ways: dynamically for each ECU during the installation process (dynamic delta updates), or in advance of installation by precomputing likely possible delta images (precomputed delta updates). Both types of updates appear below in the subsection on [custom installation instructions](#custom-installation-instructions-for-ecus).
@@ -48,7 +48,7 @@ To send precomputed delta updates the Director precomputes various probable diff
 
 ## Uptane in conjunction with other protocols
 
-Implementers MAY use Uptane in conjunction with existing protocols 
+Implementers MAY use Uptane in conjunction with existing protocols
 for sending updates to the vehicle, such as in the following scenarios:
 
 Implementers MAY use [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) to encrypt the connection between
@@ -91,7 +91,7 @@ An OEM may wish to require atomic installation of a bundle of images, which mean
 
 The simplest solution is to use the vehicle version manifest to report any atomic installation failures to the Director repository, and then not retry installation. After receiving the report, it is up to the OEM to decide how to respond. For example, the OEM MAY require the owner of the vehicle to diagnose the failure at the nearest dealership or authorized mechanic.
 
-Another simple solution is for the Primary and/or Director to retry a bundle installation until it either succeeds or reaches a set maximum number of retries. This solution has the advantage of not requiring ECUs to perform a rollback if a bundle is not fully installed, a step ECUs without additional storage cannot perform. 
+Another simple solution is for the Primary and/or Director to retry a bundle installation until it either succeeds or reaches a set maximum number of retries. This solution has the advantage of not requiring ECUs to perform a rollback if a bundle is not fully installed, a step ECUs without additional storage cannot perform.
 
 If all ECUs do have additional storage, and can perform a rollback, then the OEM may use a [two-phase commit protocol](https://en.wikipedia.org/wiki/Two-phase_commit_protocol). We assume that a gateway ECU would act as the coordinator, which ensures that updates are installed atomically. This technique should ensure atomic installation as long as: (1) the gateway ECU behaves correctly and has not been compromised, and (2) the gateway ECU does not fail permanently. It is considerably less complicated than Byzantine-fault tolerant protocols, which may have a higher computation/communication overhead. However, this technique does not provide other security guarantees. For example, the gateway ECU may show different bundles to different Secondaries at the same time.
 
@@ -115,15 +115,15 @@ In the second option, a fleet manager would configure the mapping metadata on EC
 
 In its default implementation, Uptane allows only the OEM to fully control which updates are installed on which ECUs on which vehicles. Thus, there is no third party input about updates from a dealership, mechanic, fleet manager, or the end-user. There are very good reasons, such as legal considerations, for enforcing this constraint. However, sharing this capability exists to the point that the OEM wishes to make it available. We discuss two options for doing so.
 
-In the first option, an OEM MAY elect to receive input from a third party as to which updates should be installed. The process is illustrated in Figure 3. 
+In the first option, an OEM MAY elect to receive input from a third party as to which updates should be installed. The process is illustrated in Figure 3.
 
-**Step 1:** The vehicle submits its vehicle version manifest to the Director repository controlled by the OEM. The manifest lists which updates are currently installed. 
+**Step 1:** The vehicle submits its vehicle version manifest to the Director repository controlled by the OEM. The manifest lists which updates are currently installed.
 
-**Step 2:** The Director repository performs dependency resolution using the manifest, and proposes a set of updates. 
+**Step 2:** The Director repository performs dependency resolution using the manifest, and proposes a set of updates.
 
-**Step 3:** The third party either agrees with the OEM, or proposes a different set of updates. This step SHOULD be authenticated (e.g., using client certificates, or username and password encrypted over TLS), so that only authorized third parties are allowed to negotiate with the OEM. 
+**Step 3:** The third party either agrees with the OEM, or proposes a different set of updates. This step SHOULD be authenticated (e.g., using client certificates, or username and password encrypted over TLS), so that only authorized third parties are allowed to negotiate with the OEM.
 
-**Step 4:** The OEM either agrees with the third party, or proposes a different set of updates. 
+**Step 4:** The OEM either agrees with the third party, or proposes a different set of updates.
 
 The third and fourth steps MAY be repeated up to a maximum number of retries, until both the OEM and the third party agree as to which updates should be installed.
 

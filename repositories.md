@@ -47,7 +47,7 @@ If the Time Server is implemented, the Primary is CONDITIONALLY REQUIRED to use 
 
 #### ECU Version Report
 
-The ECU version report from each Secondary will contain a token to be sent to the Time Server in whatever manner the implementer chooses.  For example, the payload of the ECU version report sent from the Primary to the Director MAY contain the tokens sent to the Time Server. In this case, if any token is removed or changed, the signature will not match.  To detect a replay attack, each token SHOULD be unique per ECU. As we expect that these updates will be relatively infrequent (e.g., due to a limited number of write cycles), there will be a sufficient number of tokens to make this possible.  
+The ECU version report from each Secondary will contain a token to be sent to the Time Server in whatever manner the implementer chooses.  For example, the payload of the ECU version report sent from the Primary to the Director MAY contain the tokens sent to the Time Server. In this case, if any token is removed or changed, the signature will not match.  To detect a replay attack, each token SHOULD be unique per ECU. As we expect that these updates will be relatively infrequent (e.g., due to a limited number of write cycles), there will be a sufficient number of tokens to make this possible.
 
 #### Changes to all ECUs
 
@@ -122,7 +122,7 @@ Unlike the Image repository, the Director repository does not delegate images. T
 
 #### Private API to update images and the inventory database
 
-An OEM SHOULD define a private API for the Director repository, so that it is able to: (1) upload images, and (2) update the inventory database. This API is private in the sense that only the OEM should be able to perform these actions. 
+An OEM SHOULD define a private API for the Director repository, so that it is able to: (1) upload images, and (2) update the inventory database. This API is private in the sense that only the OEM should be able to perform these actions.
 
 This API SHOULD require authentication, so that each user is allowed to access only certain information. The OEM is free to use any authentication method, as long as it is suitably strong, such as [client certificates](https://blogs.msdn.microsoft.com/kaushal/2012/02/17/client-certificates-vs-server-certificates/), or [two-factor authentication](https://en.wikipedia.org/wiki/Multi-factor_authentication), such as a username coupled with a password, or an API key encrypted over TLS,.
 
@@ -190,7 +190,7 @@ Using delegations allows the OEM to: (1) control which roles sign for which imag
 * There SHOULD be a delegated Targets role for every tier-1 supplier, so that the OEM can:
   * limit the impact of a key compromise
   * precisely control which Targets metadata vehicles need to download.
-  
+
 The metadata for each tier-1 supplier MAY be signed by the OEM (e.g., supplier A), or the supplier itself (e.g., suppliers B and C). In turn, a tier-1 supplier MAY delegate images to members of its organization, such as supplier C, who has delegated a subset of its images to one of its developers, or its tier-2 suppliers who MAY delegate further to tier-3 suppliers.
 
 Every delegation SHOULD be prefixed with the unique name of a tier-1 supplier, so that the filenames of images do not conflict with each other. Other than this constraint, a tier-1 supplier is free to name its images however it likes. For example, it MAY use the convention “supplier-X-ECU-Y-version-Z.img” to denote an image produced by supplier X, for ECU model Y, and with a version number Z.
@@ -211,7 +211,7 @@ An API solution could be as simple as an HTTP 3xx redirect to the appropriate do
 
 ## Specifying wireline formats
 
-In setting up the Uptane program, an implementer will need to specify how information, such as metadata files, and vehicle version manifests, should be encoded. As a guiding principle of the Uptane framework is to give each implementer as much design flexibility as possible, the Uptane Standard does not specify particular data binding formats. Instead, OEMs and suppliers can continue to use the protocols and formats of existing update systems, or they can select formats that best  ensure interoperability with other essential technologies. 
+In setting up the Uptane program, an implementer will need to specify how information, such as metadata files, and vehicle version manifests, should be encoded. As a guiding principle of the Uptane framework is to give each implementer as much design flexibility as possible, the Uptane Standard does not specify particular data binding formats. Instead, OEMs and suppliers can continue to use the protocols and formats of existing update systems, or they can select formats that best  ensure interoperability with other essential technologies.
 
 To facilitate coordination between implementations, an Uptane adopter can choose to write a POUF, an added layer to the Standard in which an implementer can specify choices of Protocols, Operations, Usage and Formats. A POUF provides an easy way for an implementer to specify the elements that can ensure interoperability. It can also be customized for the special needs of fleet owners in a particular industry, such as taxis, car sharing networks, police forces, or the military.
 

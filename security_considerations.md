@@ -52,7 +52,7 @@ Generally speaking, the Director repository SHOULD NOT issue a new bundle that m
 
 **Figure 1.** *A series of hypothetical exchanges between a Director repository and a vehicle.*
 
-Consider the series of messages exchanged between a Director repository and a vehicle in Figure 1. 
+Consider the series of messages exchanged between a Director repository and a vehicle in Figure 1.
 
 * In the first bundle of updates, the Director repository instructs ECUs A and B to install the images A-1.0.img and B-1.0.img, respectively. Later, the vehicle sends a vehicle version manifest stating that these ECUs have now installed these images.
 
@@ -83,7 +83,7 @@ Many ECUs use EEPROM which, practically speaking, can be written to only for a l
 In order to analyze this problem, let us recap what new information should be downloaded in every software update cycle:
 
 1. The Primary writes and sends the latest vehicle version manifest to the Director repository.
-2. If a Time Server is used, all Secondaries write and send fresh tokens to the Primary. 
+2. If a Time Server is used, all Secondaries write and send fresh tokens to the Primary.
 3. All ECUs download, verify, and write the latest downloaded time from the Time Server, or whatever source is used to provide the current accurate time.
 4. All ECUs download, verify, and write metadata from the Director and/or Image repositories.
 5. At some point, ECUs download, verify, and write images.
@@ -102,7 +102,7 @@ Second, it is not necessary for ECUs to write and sign an ECU version manifest u
 
 ### Balancing security and bandwidth
 
-When deploying any system, it is important to think about the costs involved.  Those can roughly be partitioned into computational, network (bandwidth), and storage.  To understand these costs, this section gives a rough sense of how those costs may vary depending upon the deployment scenario.  These numbers are not authoritative, but are meant to give a rough sense of order of magnitude costs.  
+When deploying any system, it is important to think about the costs involved.  Those can roughly be partitioned into computational, network (bandwidth), and storage.  To understand these costs, this section gives a rough sense of how those costs may vary depending upon the deployment scenario.  These numbers are not authoritative, but are meant to give a rough sense of order of magnitude costs.
 
 A Primary will end up retrieving and verifying any updated metadata from the repositories it communicates with, which usually means an Image repository and a Director repository will be contacted.  Whenever an image is added to the Image repository, a Primary will download a new Targets, Snapshot, and Timestamp role file.  The Root file is updated less frequently, but when this is done, it may also need to be verified.  Verifying these repositories and roles entails checking a signature on each of the files.  Whenever the vehicle is requested to install an update, the Primary also receives a new piece of metadata for the Targets, Snapshot, and Timestamp roles, and on rare occasions, from the Root file. As noted above, this verification requires a signature check.  A Primary must also compute the secure hash of all images it will serve to ECUs.  The previous known good version of all metadata files must be retained.  It is also wise to retain any images until Secondaries have confirmed installation.
 
@@ -114,4 +114,4 @@ Note also that, if used, Time Server costs are typically one signature verificat
 
 ### Using encrypted images on the Image repository
 
-Images stored on the Image repository may have previously been encrypted or not, at the discretion of the implementer.  The Standard does not explicitly mention using encrypted images on the Image repository because Uptane treats these blobs exactly the same as unencrypted blobs. It only imposes special requirements on images that are per-ECU encrypted on the Director repository. Therefore, there is no reason that encrypted images cannot be on the Image repository should an implementer wish to use them.  
+Images stored on the Image repository may have previously been encrypted or not, at the discretion of the implementer.  The Standard does not explicitly mention using encrypted images on the Image repository because Uptane treats these blobs exactly the same as unencrypted blobs. It only imposes special requirements on images that are per-ECU encrypted on the Director repository. Therefore, there is no reason that encrypted images cannot be on the Image repository should an implementer wish to use them.
