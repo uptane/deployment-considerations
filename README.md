@@ -73,14 +73,14 @@ css_id: my-funky-page
 ```
 
 When running `jekyll build` each file in the project directory gets processed,
-e.g. embedded in the the specified layout, and, in the case of markdown,
-converted to `HTML`. The result is copied to the build directory, i.e. `_site`,
+e.g., embedded in the the specified layout, and, in the case of markdown,
+converted to `HTML`. The result is copied to the build directory, i.e., `_site`,
 preserving relative paths, but changing the file extension to `.html`.
 You can read more about [creating pages in the jekyll
 docs](https://jekyllrb.com/docs/pages/).
 
 ### Adding assets
-Add assets, e.g. images or JavaScript, to [`assets`](assets).
+Add assets, e.g., images or JavaScript, to [`assets`](assets).
 
 #### Replace favicon.ico
 [`favicon.ico`](favicon.ico) should be served from the root of the project.

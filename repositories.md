@@ -65,7 +65,7 @@ If any check fails, the ECU is CONDITIONALLY REQUIRED to NOT overwrite its curre
 
 #### Changes to check Root metadata
 
-In order to prevent a new Time Server from accidentally causing a rollback warning, the clock will be reset when switching to a new Time Server. To do this, check the Time Server key after updating to the most recent Root metadata file. If the Time Server key is listed in the Root metadata and has been rotated, reset the clock used to set the expiration of metadata to a minimal value (e.g. zero, or any time that is guaranteed to not be in the future based on other evidence).  It will be updated in the next cycle.
+In order to prevent a new Time Server from accidentally causing a rollback warning, the clock will be reset when switching to a new Time Server. To do this, check the Time Server key after updating to the most recent Root metadata file. If the Time Server key is listed in the Root metadata and has been rotated, reset the clock used to set the expiration of metadata to a minimal value (e.g., zero, or any time that is guaranteed to not be in the future based on other evidence).  It will be updated in the next cycle.
 
 #### Changes to partial verification Secondaries
 
@@ -82,7 +82,7 @@ Either the OEM or a tier-1 supplier SHOULD sign for images for any ECUs produced
 1. Generate a number of offline keys used to sign its metadata. In order to provide compromise-resilience, these keys SHOULD NOT be accessible from the Image repository. The supplier SHOULD take great care to secure these keys, so a compromise affects only some, but not all, of its ECUs. The supplier SHOULD use the threshold number of keys chosen by the OEM.
 2. Optionally, delegate images to members of its organization (such as its developers), or to tier-2 suppliers (who MAY further delegate to tier-3 suppliers). Delegatees SHOULD recursively follow these same steps.
 3. Set an expiration timestamp on its metadata using a duration prescribed by the OEM.
-4. Register its public keys with the OEM using some out-of-band mechanism (e.g., telephone calls, or certified mail).
+4. Register its public keys with the OEM using some out-of-band mechanism (e.g., telephone calls or certified mail).
 5. Sign its metadata using the digital signature scheme chosen by the OEM.
 6. Send all metadata, including delegations, and associated images to the OEM
 
@@ -163,7 +163,7 @@ Since the automated process is continually producing new metadata files (and, po
 
 *Note that all information about setting up signing keys for this repository can be found on the [Key Management](https://uptane.github.io/deployment-considerations/key_management.html) page of this website*
 
-Finally, in order to provide compromise-resilience, the OEM will build the [Image repository](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#image-repository) following the guidance in the Uptane Standard. The Image repository differs from the Director repository in a number of ways. First, it is managed by human administrators who use offline keys to sign targets metadata. It also MAY delegate images to suppliers, and provides the same metadata to all Primaries. Lastly, it does not encrypt images per ECU, and updates its metadata and images relatively infrequently (e.g., every two weeks, or monthly).
+Finally, in order to provide compromise-resilience, the OEM will build the [Image repository](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#image-repository) following the guidance in the Uptane Standard. The Image repository differs from the Director repository in a number of ways. First, it is managed by human administrators who use offline keys to sign targets metadata. It also MAY delegate images to suppliers, and provides the same metadata to all Primaries. Lastly, it does not encrypt images per ECU, and updates its metadata and images relatively infrequently (e.g., every two weeks or monthly).
 
 **Steps to initialize the repository**
 
@@ -173,7 +173,7 @@ the specific set up instructions governed by the users' choices of storage mecha
 2. Set up the transport protocol.
 3. Set up the private and public APIs to interact over the chosen transport protocol.
 4. Set up the Timestamp, Snapshot, Root, and Targets roles.
-5. Sign delegations from the Targets role to all tier-1 supplier roles. The public keys of tier-1 suppliers SHOULD be verified using some out-of-band mechanism (e.g., telephone calls, certified mail), so that the OEM can double-check their authenticity and integrity.
+5. Sign delegations from the Targets role to all tier-1 supplier roles. The public keys of tier-1 suppliers SHOULD be verified using some out-of-band mechanism (e.g., telephone calls or certified mail), so that the OEM can double-check their authenticity and integrity.
 6. Upload metadata and images from all delegated Targets roles (including tier-1 suppliers). Verify the metadata and images, and add them to the storage mechanism.
 
 An OEM and its suppliers MAY use the repository and supplier tools from the [Reference Implementation](https://github.com/uptane/uptane) to produce new metadata.
