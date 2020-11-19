@@ -44,7 +44,7 @@ Sometimes, it may be necessary for a dealership or mechanic to replace a particu
 We recommend dealing with this use case by establishing an out-of-band process that allows authorized mechanics to report a change to the OEM. By doing so, the change in ECU configuration is recorded in the inventory database. Exactly what that process looks like will depend on the size of the automaker and the relative frequency of ECU replacements.
 
 * A small luxury automaker might simply choose to allow authorized mechanics to send an email or make a phone call to an aftersales support person with the details of the new ECU, and have that person manually enter the details.
-* A larger automaker might choose to deploy a dealer portal (i.e. a private, authenticated website) to allow authorized service centers to enter the details of the new ECU configuration themselves.
+* A larger automaker might choose to deploy a dealer portal (i.e., a private, authenticated website) to allow authorized service centers to enter the details of the new ECU configuration themselves.
 
 Another option for updating the ECU configuration is to have a process that temporarily "unlocks" an ECU configuration, allowing the vehicle's Primary to directly report its new configuration (as opposed to having the mechanic enter the details of the replaced ECU). There is a tradeoff here. While it streamlines the repair process, automating this step increases the risk that a real attack could go unnoticed.
 

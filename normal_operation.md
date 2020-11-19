@@ -4,6 +4,7 @@ css_id: normal_operation
 ---
 
 # Normal operating procedures
+
 In this section, we discuss how to perform regular maintenance operations. Since these operations are performed on a regular basis, it is important to ensure they are performed in a systematic manner so that software updates are delivered securely to ECUs.
 
 ## Updating metadata and images
