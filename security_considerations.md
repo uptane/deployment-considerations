@@ -27,6 +27,7 @@ First, they SHOULD diligently remove obsolete images from new versions of Target
 Second, they SHOULD decrease the expiration timestamps on all Targets metadata uploaded to the Image repository so they expire more quickly. This can prevent attackers who compromise the Director repository from being able to choose these obsolete images. Unfortunately, Targets metadata that expires quickly needs to be updated more frequently. This may make it harder to prevent accidental freeze attacks, as an ECU needs to be able to update both the time from the Time Server, and metadata from the Image repository.  In the event that the ECU is able to update metadata, but not the time, it can continue working with the previously installed image, but would be unable to update to the latest image. The Director repository can detect this unlikely event using the vehicle version manifest. In this case, the OEM MAY require the owner of the vehicle to diagnose the problem at the nearest dealership or authorized mechanic.
 
 ### Broadcasting vs. unicasting metadata inside the vehicle
+
 An implementation of Uptane MAY have a Primary unicast metadata to Secondaries. In this scenario, the Primary would send metadata separately to each Secondary. However, this method is vulnerable to network disruptions can cause ECUs to see different versions of metadata released by repositories at different times.
 
 In order to mitigate this problem, it is RECOMMENDED that a Primary use a broadcast network such as CAN, CAN FD, or Ethernet to transmit metadata to all of its Secondaries at the same time. Note that this still does not guarantee that ECUs will always see the same versions of metadata at any time. This is because network traffic between Primaries and Secondaries may still get disrupted, especially if they are connected through intermediaries, such as gateways. Nevertheless, it should still be better than unicasting.
@@ -46,13 +47,14 @@ There are three options for checking dependencies and conflicts:
 3. **Both ECUs and the Director repository check dependencies and conflicts.** To save computational costs, and avoid having each ECU perform dependency resolutions, only the Primaries and full verification Secondaries may be required to double-check the dependency resolution performed by the Director repository. Note that this is not an NP-hard problem because these ECUs simply need to check that there is no conflict between the Director and Image repositories. The trade-off is that when Primaries are compromised, Secondaries have to depend on the Director repository.
 
 #### Managing dependencies and conflicts
+
 Generally speaking, the Director repository SHOULD NOT issue a new bundle that may conflict with images listed on the last vehicle version manifest and thereby known with complete certainty to have been installed on the vehicle. This is because a partial bundle installation attack could mean the ECUs have only partly installed any images sent after the last vehicle version manifest. If the Director repository is not careful in handling this issue, the vehicle may end up installing conflicting images, causing ECUs to fail to interoperate.
 
 <img align="center" src="assets/images/security_1_exchange_director_vehicle.png" width="500" style="margin: 0px 20px"/>
 
 **Figure 1.** *A series of hypothetical exchanges between a Director repository and a vehicle.*
 
-Consider the series of messages exchanged between a Director repository and a vehicle in Figure 1. 
+Consider the series of messages exchanged between a Director repository and a vehicle in Figure 1.
 
 * In the first bundle of updates, the Director repository instructs ECUs A and B to install the images A-1.0.img and B-1.0.img, respectively. Later, the vehicle sends a vehicle version manifest stating that these ECUs have now installed these images.
 
@@ -83,11 +85,11 @@ Many ECUs use EEPROM which, practically speaking, can be written to only for a l
 In order to analyze this problem, let us recap what new information should be downloaded in every software update cycle:
 
 1. The Primary writes and sends the latest vehicle version manifest to the Director repository.
-2. If a Time Server is used, all Secondaries write and send fresh tokens to the Primary. 
+2. If a Time Server is used, all Secondaries write and send fresh tokens to the Primary.
 3. All ECUs download, verify, and write the latest downloaded time from the Time Server, or whatever source is used to provide the current accurate time.
 4. All ECUs download, verify, and write metadata from the Director and/or Image repositories.
 5. At some point, ECUs download, verify, and write images.
-6. At some point, ECUs install new images. Then, they sign, and write the latest ECU version manifests.
+6. At some point, ECUs install new images. Then, they sign, and write the latest ECU version reports.
 
 Let us make two important observations.
 
@@ -97,12 +99,12 @@ Indeed, there is a risk to implementers updating time information too frequently
 
 However, there is a trade-off between frequently updating the current time (and thus, exhausting EEPROM), and the efficacy of the system to prevent freeze attacks from a compromised Director repository. If it is essential to frequently update the time to prevent freeze attacks, and EEPROM must be used, there are ways to make that use more efficient. For example, the ECU may write data to EEPROM in a circular fashion that can expand its lifetime of wear.
 
-Second, it is not necessary for ECUs to write and sign an ECU version manifest upon every boot or reboot cycle. At a minimum, an ECU should write and sign a new ECU version manifest only upon the successful verification and installation of a new image.
+Second, it is not necessary for ECUs to write and sign an ECU version report upon every boot or reboot cycle. At a minimum, an ECU should write and sign a new ECU version report only upon the successful verification and installation of a new image.
 
 
 ### Balancing security and bandwidth
 
-When deploying any system, it is important to think about the costs involved.  Those can roughly be partitioned into computational, network (bandwidth), and storage.  To understand these costs, this section gives a rough sense of how those costs may vary depending upon the deployment scenario.  These numbers are not authoritative, but are meant to give a rough sense of order of magnitude costs.  
+When deploying any system, it is important to think about the costs involved.  Those can roughly be partitioned into computational, network (bandwidth), and storage.  To understand these costs, this section gives a rough sense of how those costs may vary depending upon the deployment scenario.  These numbers are not authoritative, but are meant to give a rough sense of order of magnitude costs.
 
 A Primary will end up retrieving and verifying any updated metadata from the repositories it communicates with, which usually means an Image repository and a Director repository will be contacted.  Whenever an image is added to the Image repository, a Primary will download a new Targets, Snapshot, and Timestamp role file.  The Root file is updated less frequently, but when this is done, it may also need to be verified.  Verifying these repositories and roles entails checking a signature on each of the files.  Whenever the vehicle is requested to install an update, the Primary also receives a new piece of metadata for the Targets, Snapshot, and Timestamp roles, and on rare occasions, from the Root file. As noted above, this verification requires a signature check.  A Primary must also compute the secure hash of all images it will serve to ECUs.  The previous known good version of all metadata files must be retained.  It is also wise to retain any images until Secondaries have confirmed installation.
 
@@ -114,4 +116,4 @@ Note also that, if used, Time Server costs are typically one signature verificat
 
 ### Using encrypted images on the Image repository
 
-Images stored on the Image repository may have previously been encrypted or not, at the discretion of the implementer.  The Standard does not explicitly mention using encrypted images on the Image repository because Uptane treats these blobs exactly the same as unencrypted blobs. It only imposes special requirements on images that are per-ECU encrypted on the Director repository. Therefore, there is no reason that encrypted images cannot be on the Image repository should an implementer wish to use them.  
+Images stored on the Image repository may have previously been encrypted or not, at the discretion of the implementer.  The Standard does not explicitly mention using encrypted images on the Image repository because Uptane treats these blobs exactly the same as unencrypted blobs. It only imposes special requirements on images that are per-ECU encrypted on the Director repository. Therefore, there is no reason that encrypted images cannot be on the Image repository should an implementer wish to use them.
