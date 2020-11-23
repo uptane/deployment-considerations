@@ -102,8 +102,8 @@ see LICENSE and LICENSE-MIT.
 
 ## Acknowledgements
 
-This project is managed by Prof. Justin Cappos and other members of the [Secure
-Systems Lab](https://ssl.engineering.nyu.edu/) at NYU.
+Uptane is a Joint Development Foundation project of the Linux Foundation, operating under the formal title of Joint Development Foundation Projects, LLC, Uptane Series. This project is managed by Prof. Justin Cappos and other members of the [Secure
+Systems Lab](https://ssl.engineering.nyu.edu/) at NYU. Contributors and maintainers are governed by the CNCF Community Code of Conduct.
 
 Uptane is supported by U.S. Department of Homeland Security grants D15PC00239 and
 D15PC00302. The views and conclusions contained herein are the authors’ and should
