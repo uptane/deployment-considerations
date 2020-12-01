@@ -47,7 +47,7 @@ The following is a brief summary of those edits:
  
 * Corrected additional capitalization and punctuation usages for consistency, including imposing the consistent use of the Oxford comma in a series of items within a sentence, and placing a comma after e.g. and i.e.
  
-* Corrected other stylistic/formatting issues that interfered with clarity, such as extraneous commas and use of whitespace, 
+* Corrected other stylistic/formatting issues that interfered with clarity, such as extraneous commas and use of whitespace.
  
 * Remove the use of the phrase “best practices” when not referring to the *Uptane Deployment Best Practices.*
  
@@ -60,4 +60,3 @@ The following is a brief summary of those edits:
 * Removed words from the opening definition section that are not used in the Standard.
  
 * Changed the document’s author credit from the Uptane Alliance Community to the Uptane Community, and the organization from the Uptane Alliance to Joint Development Foundation Projects, LLC, Uptane Series.
-
