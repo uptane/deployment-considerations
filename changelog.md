@@ -49,7 +49,7 @@ The following is a brief summary of those edits:
  
 * Corrected other stylistic/formatting issues that interfered with clarity, such as extraneous commas and use of whitespace.
  
-* Remove the use of the phrase “best practices” when not referring to the *Uptane Deployment Best Practices.*
+* Removed the use of the phrase “best practices” when not referring to the *Uptane Deployment Best Practices.*
  
 * Added a missing reference to the Standard pointing to the Time Server description in *Uptane Deployment Best Practices.*
  
