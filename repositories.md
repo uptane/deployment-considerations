@@ -5,7 +5,7 @@ css_id: repositories
 
 # Setting up Uptane repositories
 
-This page outlines recommended procedures for the one-time operations that an OEM and its suppliers SHOULD perform when they set up Uptane for the first time. In particular, they SHOULD correctly configure the Director and Image repositories, and, if used, the Time Server, so that the impact of a repository/server compromise is limited to as few ECUs as possible.
+This section outlines recommended procedures for the one-time operations that an OEM and its suppliers SHOULD perform when they set up Uptane for the first time. In particular, they SHOULD correctly configure the Director and Image repositories, and, if used, the Time Server, so that the impact of a repository/server compromise is limited to as few ECUs as possible.
 
 ## Secure source of time
 
@@ -37,7 +37,7 @@ Listing the public key of the Time Server in Director Targets metadata is necess
 
 #### Changes to a Primary
 
-If the Time Server is implemented, the Primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the ["Download and check current time"](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) step of the Uptane Standard.
+If the Time Server is implemented, the Primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the [Download and check current time](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) step of the Uptane Standard.
 
 1. Gather the tokens from each Secondary ECU's version report.
 2. Send the list of tokens to the Time Server to fetch the current time. The Time Server responds, as described in the [Time Server section](#time-server), by providing a cryptographic attestation of the last known time.
@@ -78,9 +78,9 @@ As partial verification Secondaries only check the Targets metadata from the Dir
 
 **Figure 1.** *Diagram showing supplier signing arrangements. Suppliers are free to ask the OEM to sign images on its behalf (supplier A), or can sign them itself (supplier B). In the latter case, it MAY also delegate some or all of this responsibility to others (supplier C).*
 
-Either the OEM or a tier-1 supplier SHOULD sign for images for any ECUs produced by that supplier, so unsigned images are never installed. This provides security against arbitrary software attacks. An OEM will decide whether or not a tier-1 supplier SHOULD sign its own images. Otherwise, the OEM will sign images on behalf of the supplier, and the supplier SHOULD only deliver update images to the OEM as outlined under the [Normal Operations](https://uptane.github.io/deployment-considerations/normal_operation.html) guidelines. If the supplier signs its own images, it MUST first set up roles and metadata using the following steps:
+Either the OEM or a tier-1 supplier SHOULD sign for images for any ECUs produced by that supplier, so unsigned images are never installed. This provides security against arbitrary software attacks. An OEM will decide whether or not a tier-1 supplier SHOULD sign its own images. Otherwise, the OEM will sign images on behalf of the supplier, and the supplier SHOULD only deliver update images to the OEM as outlined under the [Guidelines for routine maintenance operations](https://uptane.github.io/deployment-considerations/normal_operation.html) section of this document. If the supplier signs its own images, it MUST first set up roles and metadata using the following steps:
 
-1. Generate a number of offline keys used to sign its metadata. In order to provide compromise-resilience, these keys SHOULD NOT be accessible from the Image repository. The supplier SHOULD take great care to secure these keys, so a compromise affects only some, but not all, of its ECUs. The supplier SHOULD use the threshold number of keys chosen by the OEM.
+1. Generate a number of offline keys used to sign its metadata. In order to provide compromise resilience, these keys SHOULD NOT be accessible from the Image repository. The supplier SHOULD take great care to secure these keys, so a compromise affects only some, but not all, of its ECUs. The supplier SHOULD use the threshold number of keys chosen by the OEM.
 2. Optionally, delegate images to members of its organization (such as its developers), or to tier-2 suppliers (who MAY further delegate to tier-3 suppliers). Delegatees SHOULD recursively follow these same steps.
 3. Set an expiration timestamp on its metadata using a duration prescribed by the OEM.
 4. Register its public keys with the OEM using some out-of-band mechanism (e.g., telephone calls or certified mail).
@@ -95,7 +95,7 @@ The OEM sets up and configures the Director and Image repositories. To host thes
 
 ### Director repository
 
-*Note that all information about setting up signing keys for this repository can be found on the [Key Management](https://uptane.github.io/deployment-considerations/key_management.html) page of this website.*
+*Note that all information about setting up signing keys for this repository can be found on the [Managing signing keys and metadata operations](https://uptane.github.io/deployment-considerations/key_management.html) section of this document.*
 
 In order to provide on-demand customization of vehicles, the OEM MUST also build the Director repository, following the guidance in the [Uptane Standard](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#director_repository). In addition, an OEM must keep in mind the following factors. Unlike the Image repository, the Director repository: (1) is managed by automated processes, (2) uses online keys to sign Targets metadata, (3) does not delegate images, (4) generally provides different metadata to different Primaries, (5) MAY encrypt images per ECU, and (6) produces new metadata on every request by Primaries.
 
@@ -123,9 +123,9 @@ Unlike the Image repository, the Director repository does not delegate images. T
 
 #### Private API to update images and the inventory database
 
-An OEM SHOULD define a private API for the Director repository, so that it is able to: (1) upload images, and (2) update the inventory database. This API is private in the sense that only the OEM should be able to perform these actions.
+An OEM SHOULD define a private API for the Director repository that is able to: (1) upload images, and (2) update the inventory database. This API is private in the sense that only the OEM should be able to perform these actions.
 
-This API SHOULD require authentication, so that each user is allowed to access only certain information. The OEM is free to use any authentication method, as long as it is suitably strong, such as [client certificates](https://blogs.msdn.microsoft.com/kaushal/2012/02/17/client-certificates-vs-server-certificates/), or [two-factor authentication](https://en.wikipedia.org/wiki/Multi-factor_authentication), such as a username coupled with a password, or an API key encrypted over TLS,.
+This API SHOULD require authentication, so that each user is allowed to access only certain information. The OEM is free to use any authentication method, as long as it is suitably strong, such as [client certificates](https://blogs.msdn.microsoft.com/kaushal/2012/02/17/client-certificates-vs-server-certificates/), or [two-factor authentication](https://en.wikipedia.org/wiki/Multi-factor_authentication), such as a username coupled with a password, or an API key encrypted over TLS.
 
 In order to allow automated processes on the Director repository to perform their respective functions, without also allowing any attackers who might compromise the repository to tamper with the inventory database, it is strongly RECOMMENDED that these processes should have some boundaries. That is, the automated processes SHOULD be able to read any record in the database and write new records, but SHOULD NOT be able to update or delete existing records.
 
@@ -162,14 +162,14 @@ Since the automated process is continually producing new metadata files (and, po
 
 ### Image repository
 
-*Note that all information about setting up signing keys for this repository can be found on the [Key Management](https://uptane.github.io/deployment-considerations/key_management.html) page of this website.*
+*Note that all information about setting up signing keys for this repository can be found in the [Managing signing keys and metadata operations](https://uptane.github.io/deployment-considerations/key_management.html) section of this document.*
 
-Finally, in order to provide compromise-resilience, the OEM will build the [Image repository](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#image-repository) following the guidance in the Uptane Standard. The Image repository differs from the Director repository in a number of ways. First, it is managed by human administrators who use offline keys to sign targets metadata. It also MAY delegate images to suppliers, and provides the same metadata to all Primaries. Lastly, it does not encrypt images per ECU, and updates its metadata and images relatively infrequently (e.g., every two weeks or monthly).
+Finally, in order to provide compromise resilience, the OEM will build the [Image repository](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#image-repository) following the guidance in the Uptane Standard. The Image repository differs from the Director repository in a number of ways. First, it is managed by human administrators who use offline keys to sign targets metadata. It also MAY delegate images to suppliers, and provides the same metadata to all Primaries. Lastly, it does not encrypt images per ECU, and updates its metadata and images relatively infrequently (e.g., every two weeks or monthly).
 
 **Steps to initialize the repository**
 
-In order to initialize the repository, an OEM SHOULD perform the following steps. Note that, as with the Director repository, all users are expected to follow-up basic set up instructions, as well as
-the specific set up instructions governed by the users' choices of storage mechanisms and protocols.
+In order to initialize the repository, an OEM SHOULD perform the following steps. Note that, as with the Director repository, all users are expected to follow basic set up instructions, as well as
+the specific set up instructions mandated by the users' choices of storage mechanisms and protocols.
 1. Set up the storage mechanism.
 2. Set up the transport protocol.
 3. Set up the private and public APIs to interact over the chosen transport protocol.
@@ -189,16 +189,16 @@ Using delegations allows the OEM to: (1) control which roles sign for which imag
 
 * The OEM maintains the Root, Timestamp, Snapshot, and Targets roles, with the Targets role delegating images to their respective tier-1 suppliers.
 * There SHOULD be a delegated Targets role for every tier-1 supplier, so that the OEM can:
-  * limit the impact of a key compromise
+  * limit the impact of a key compromise.
   * precisely control which Targets metadata vehicles need to download.
 
-The metadata for each tier-1 supplier MAY be signed by the OEM (e.g., supplier A), or the supplier itself (e.g., suppliers B and C). In turn, a tier-1 supplier MAY delegate images to members of its organization, such as supplier C, who has delegated a subset of its images to one of its developers, or its tier-2 suppliers who MAY delegate further to tier-3 suppliers.
+The metadata for each tier-1 supplier MAY be signed by the OEM (e.g., supplier A), or the supplier itself (e.g., suppliers B and C). In turn, a tier-1 supplier MAY delegate images to members of its organization, such as supplier C who has delegated a subset of its images to one of its developers, or its tier-2 suppliers who MAY delegate further to tier-3 suppliers.
 
 Every delegation SHOULD be prefixed with the unique name of a tier-1 supplier, so that the filenames of images do not conflict with each other. Other than this constraint, a tier-1 supplier is free to name its images however it likes. For example, it MAY use the convention “supplier-X-ECU-Y-version-Z.img” to denote an image produced by supplier X, for ECU model Y, and with a version number Z.
 
 #### Public API to download files
 
-An OEM SHOULD define a public API for Primaries to use when downloading metadata and images to the Image repository. This API can be defined however the OEM wishes.
+An OEM SHOULD define a public API for Primaries to use when downloading metadata and images to the Image repository. This API can be defined in whatever manner the OEM wishes.
 
 Depending on the OEM's requirements, this API MAY require authentication before Primaries are allowed to download updates.  Such a choice affects only how certain the OEM can be that it is communicating with authentic Primaries, and not how resilient ECUs are to a repository compromise. The OEM is free to use any authentication method.
 
@@ -212,8 +212,8 @@ An API solution could be as simple as an HTTP 3xx redirect to the appropriate do
 
 ## Specifying wireline formats
 
-In setting up the Uptane program, an implementer will need to specify how information, such as metadata files, and vehicle version manifests, should be encoded. As a guiding principle of the Uptane framework is to give each implementer as much design flexibility as possible, the Uptane Standard does not specify particular data binding formats. Instead, OEMs and suppliers can continue to use the protocols and formats of existing update systems, or they can select formats that best  ensure interoperability with other essential technologies.
+In setting up the Uptane program, an implementer will need to specify how information, such as metadata files and vehicle version manifests, should be encoded. As a guiding principle of the Uptane framework is to give each implementer as much design flexibility as possible, the Uptane Standard does not specify particular data binding formats. Instead, OEMs and suppliers can continue to use the protocols and formats of existing update systems, or they can select formats that best ensure interoperability with other essential technologies.
 
 To facilitate coordination between implementations, an Uptane adopter can choose to write a POUF, an added layer to the Standard in which an implementer can specify choices of Protocols, Operations, Usage and Formats. A POUF provides an easy way for an implementer to specify the elements that can ensure interoperability. It can also be customized for the special needs of fleet owners in a particular industry, such as taxis, car sharing networks, police forces, or the military.
 
-Information on writing a POUF can be found on the [POUF Purpose and Guidelines](https://uptane.github.io/pouf.html) page on this website. A sample POUF, written for the [Uptane Reference Implementation](https://uptane.github.io/reference_pouf.html), offers sample metadata written in [ASN.1/DER](https://github.com/uptane/uptane.github.io/blob/master/reference_pouf.md#file-formats).
+Information on writing a POUF can be found on the [POUF Purpose and Guidelines](https://uptane.github.io/pouf.html) page of the Uptane website. A sample POUF, written for the [Uptane Reference Implementation](https://uptane.github.io/reference_pouf.html), offers sample metadata written in [ASN.1/DER](https://github.com/uptane/uptane.github.io/blob/master/reference_pouf.md#file-formats).
