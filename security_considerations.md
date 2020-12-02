@@ -36,7 +36,7 @@ If an update is intended to be applied to a gateway itself, it should be updated
 
 ### Dependencies and conflicts between ECUs
 
-When installing an image on any given ECU, there will be *dependencies*, or a set of other images that SHOULD also be installed on other ECUs in order for the image to work. Likewise, the same image and ECU will have *conflicts*,  or a set of other images that SHOULD NOT be installed on other ECUs. *Dependency resolution* is the process of determining which versions of the latest images and their dependencies can be installed without conflicts.
+When installing an image on any given ECU, there may be *dependencies*, or a set of other images that SHOULD also be installed on other ECUs in order for the image to work. Likewise, the same image and ECU may have *conflicts*, or a set of other images that SHOULD NOT be installed on other ECUs. *Dependency resolution* is the process of determining which versions of the latest images and their dependencies can be installed without conflicts.
 
 #### Checking dependencies and conflicts
 
