@@ -10,7 +10,7 @@ if an OEM or supplier deems it necessary. In this section, we discuss several of
 
 ### Restricting image installation with custom hardware IDs
 
-Before an ECU installs a new image, it SHOULD always check the hardware type of the image. This can prevent attackers from causing an ECU to install arbitrary images it was not intended to have. Furthermore, to prevent attackers who compromise the Director repository from causing unintended images to be installed on any ECU, an OEM and/or its suppliers SHOULD include certain information about images in the Targets metadata.
+Before an ECU installs a new image, it SHOULD always check the hardware type of the image. This can prevent attackers from causing an ECU to install arbitrary images it was not intended to have. Furthermore, an OEM and/or its suppliers SHOULD include certain information about images in the Targets metadata to prevent the installation of these arbitrary images if the Director repository should be compromised. 
 
 Consider the following example in which attackers have compromised the Director repository. If certain mitigating steps have been taken, such as using release counters, they can not rollback software updates. Furthermore, without an additional key compromise, attackers cannot cause arbitrary software attacks on Primaries and full verification Secondaries. However, attackers can cause the ECUs of one hardware type to install images intended for another hardware type. To use an analogy, this is similar to causing [Linkedsys](https://www.linksys.com/us/) routers to install images intended for [NetGear](https://www.netgear.com/) routers.
 
@@ -20,7 +20,7 @@ In order to avoid this problem, the custom Targets metadata about unencrypted im
 
 ### Preventing rollback attacks in case of Director compromise
 
-On the [Exceptional Operations](https://uptane.github.io/deployment-considerations/exceptional_operations.html#rolling-back-software) page, we discuss how an OEM and/or its suppliers SHOULD use release counters in order to prevent rollback attacks in case of a Director repository compromise. To further limit the impact of such an attack scenario, the OEM and/or its suppliers SHOULD also use the following recommendations.
+In the [Performing Exceptional Operations](https://uptane.github.io/deployment-considerations/exceptional_operations.html#rolling-back-software) section of this document, we discuss how an OEM and/or its suppliers SHOULD use release counters in order to prevent rollback attacks in case of a Director repository compromise. To further limit the impact of such an attack scenario, the OEM and/or its suppliers SHOULD also use the following recommendations.
 
 First, they SHOULD diligently remove obsolete images from new versions of Targets metadata files uploaded to the Image repository. This can prevent attackers who compromise the Director repository from being able to choose these obsolete images for installation. This method has a downside in that it complicates the update process for vehicles that require an intermediate update step. For example, an ECU has previously installed image A, and C is the latest image it should install. However, the ECU should install image B before it installs C, and B has already been removed from the Targets metadata on the Image repository in order to prevent or limit rollback attacks. Thus, the OEM and/or its suppliers needs to carefully balance these requirements in making the decision to remove obsolete images from the Targets metadata.
 
@@ -28,15 +28,15 @@ Second, they SHOULD decrease the expiration timestamps on all Targets metadata u
 
 ### Broadcasting vs. unicasting metadata inside the vehicle
 
-An implementation of Uptane MAY have a Primary unicast metadata to Secondaries. In this scenario, the Primary would send metadata separately to each Secondary. However, this method is vulnerable to network disruptions can cause ECUs to see different versions of metadata released by repositories at different times.
+An implementation of Uptane MAY have a Primary unicast metadata to Secondaries. In this scenario, the Primary would send metadata separately to each Secondary. However, this method is vulnerable to network disruptions and can cause ECUs to see different versions of metadata released by repositories at different times.
 
-In order to mitigate this problem, it is RECOMMENDED that a Primary use a broadcast network such as CAN, CAN FD, or Ethernet to transmit metadata to all of its Secondaries at the same time. Note that this still does not guarantee that ECUs will always see the same versions of metadata at any time. This is because network traffic between Primaries and Secondaries may still get disrupted, especially if they are connected through intermediaries, such as gateways. Nevertheless, it should still be better than unicasting.
+In order to mitigate this problem, it is RECOMMENDED that a Primary use a broadcast network, such as CAN, CAN FD, or Ethernet to transmit metadata to all of its Secondaries at the same time. Note that this still does not guarantee that ECUs will always see the same versions of metadata at any time. This is because network traffic between Primaries and Secondaries may still get disrupted, especially if they are connected through intermediaries, such as gateways. Nevertheless, it should still be better than unicasting.
 
 If an update is intended to be applied to a gateway itself, it should be updated either before or after (but not during) update operations to ECUs on the other side of the gateway. This can help to avoid the disruption described above.
 
-### Managing dependencies and conflicts between ECUs
+### Dependencies and conflicts between ECUs
 
-The *dependencies* for a given ECU is the set of other images that SHOULD also be installed on other ECUs in order for that image to work on a particular ECU. The *conflicts* for the same image and ECU is the set of other images that SHOULD NOT be installed on other ECUs if the ECU in question is to work correctly. *Dependency resolution* is the process of determining which versions of the latest images and their dependencies can be installed without conflicts.
+When installing an image on any given ECU, there may be *dependencies*, or a set of other images that SHOULD also be installed on other ECUs in order for the image to work. Likewise, the same image and ECU may have *conflicts*, or a set of other images that SHOULD NOT be installed on other ECUs. *Dependency resolution* is the process of determining which versions of the latest images and their dependencies can be installed without conflicts.
 
 #### Checking dependencies and conflicts
 
@@ -48,7 +48,7 @@ There are three options for checking dependencies and conflicts:
 
 #### Managing dependencies and conflicts
 
-Generally speaking, the Director repository SHOULD NOT issue a new bundle that may conflict with images listed on the last vehicle version manifest and thereby known with complete certainty to have been installed on the vehicle. This is because a partial bundle installation attack could mean the ECUs have only partly installed any images sent after the last vehicle version manifest. If the Director repository is not careful in handling this issue, the vehicle may end up installing conflicting images, causing ECUs to fail to interoperate.
+Generally speaking, the Director repository SHOULD NOT issue a new bundle that may conflict with images listed on the last vehicle version manifest, and therefore known with complete certainty to have been installed on the vehicle. This is because a partial bundle installation attack could mean the ECUs have only partly installed any images sent after the last vehicle version manifest. If the Director repository is not careful in handling this issue, the vehicle may end up installing conflicting images that will cause ECUs to fail to interoperate.
 
 <img align="center" src="assets/images/security_1_exchange_director_vehicle.png" width="500" style="margin: 0px 20px"/>
 
@@ -104,7 +104,7 @@ Second, it is not necessary for ECUs to write and sign an ECU version report upo
 
 ### Balancing security and bandwidth
 
-When deploying any system, it is important to think about the costs involved.  Those can roughly be partitioned into computational, network (bandwidth), and storage.  To understand these costs, this section gives a rough sense of how those costs may vary depending upon the deployment scenario.  These numbers are not authoritative, but are meant to give a rough sense of order of magnitude costs.
+When deploying any system, it is important to think about the costs involved.  Those can roughly be partitioned into computational, network (bandwidth), and storage.  This section gives a rough sense of how those costs may vary depending upon the deployment scenario employed.  The numbers quoted are not authoritative, but do express order of magnitude costs.
 
 A Primary will end up retrieving and verifying any updated metadata from the repositories it communicates with, which usually means an Image repository and a Director repository will be contacted.  Whenever an image is added to the Image repository, a Primary will download a new Targets, Snapshot, and Timestamp role file.  The Root file is updated less frequently, but when this is done, it may also need to be verified.  Verifying these repositories and roles entails checking a signature on each of the files.  Whenever the vehicle is requested to install an update, the Primary also receives a new piece of metadata for the Targets, Snapshot, and Timestamp roles, and on rare occasions, from the Root file. As noted above, this verification requires a signature check.  A Primary must also compute the secure hash of all images it will serve to ECUs.  The previous known good version of all metadata files must be retained.  It is also wise to retain any images until Secondaries have confirmed installation.
 
