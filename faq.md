@@ -15,7 +15,7 @@ No other automotive update system has been designed to work in such rigorous sit
 
 
 ### **How does Uptane work with other systems and protocols?**
-Other mechanisms for performing updates, such as those offered by Red Bend, Movimento, and Tesla, are compatible with Uptane solely for handling data transport. Uptane can use any transport mechanism, and still provide strong security guarantees, even if the underlying network or transport mechanism is compromised. If an automaker wants to move to a secure update system, keeping their existing system as a transport mechanism for Uptane is an effective way to do so.
+Other mechanisms for performing updates, such as those offered by Red Bend, Movimento, and Tesla, are compatible with Uptane solely for handling data transport. Uptane can use any transport mechanism, and still provide strong security guarantees, even if the underlying network or transport mechanism is compromised. If an automaker wants to move to a secure update system, keeping their existing system as a transport mechanism for Uptane is an effective way to do so. See the [Recommendations for secure customized  Uptane implementations](https://github.com/uptane/deployment-considerations/blob/master/customizations.md) section of this document.
 
 
 ### **Must all signatures be valid for a threshold of signatures to be valid?**
