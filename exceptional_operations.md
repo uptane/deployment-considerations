@@ -15,7 +15,7 @@ By default, Uptane does not allow updates to be rolled back and enforces this ac
 
 <img align="center" src="assets/images/except_1_.rollback_prev.png" width="500" style="margin: 0px 20px"/>
 
-**Figure 1.** *Uptane prevents rollback attacks by rejecting older: (1) metadata files, and / or (2) images.*
+**Figure 1.** *Uptane prevents rollback attacks by rejecting older: (1) metadata files, and/or (2) images.*
 
 There are at least two ways to allow rollbacks, each with different advantages and disadvantages.
 

@@ -15,7 +15,7 @@ Examples of code updates delivered via an image include the bootloader, shared l
 
 <img align="center" src="assets/images/custom_1_code_data_image.png" width="500" style="margin: 0px 20px"/>
 
-**Figure 1.** *An example of how code and / or data may constitute an image.*
+**Figure 1.** *An example of how code and/or data may constitute an image.*
 
 
 ## Delta update strategies
