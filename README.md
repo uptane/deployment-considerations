@@ -106,7 +106,7 @@ Uptane is a Joint Development Foundation project of the Linux Foundation, operat
 Systems Lab](https://ssl.engineering.nyu.edu/) at NYU. Contributors and maintainers are governed by the CNCF Community Code of Conduct.
 
 Uptane is supported by U.S. Department of Homeland Security grants D15PC00239 and
-D15PC00302. The views and conclusions contained herein are the authors’ and should
+D15PC00302. The views and conclusions contained herein are the authors' and should
 not be interpreted as necessarily representing the official policies or endorsements,
 either expressed or implied, of the U.S. Department of Homeland Security (DHS)
 or the U.S. government.

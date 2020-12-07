@@ -146,7 +146,7 @@ Regardless of what model is used to send updates, as illustrated in Figure 4, th
 * receive a link to a Timestamp metadata file in return (step 4)
 * download associated files (step 5).
 
-The API MAY require authentication, depending on the OEM’s requirements.
+The API MAY require authentication, depending on the OEM's requirements.
 
 #### Sending an update
 
@@ -194,7 +194,7 @@ Using delegations allows the OEM to: (1) control which roles sign for which imag
 
 The metadata for each tier-1 supplier MAY be signed by the OEM (e.g., supplier A), or the supplier itself (e.g., suppliers B and C). In turn, a tier-1 supplier MAY delegate images to members of its organization, such as supplier C who has delegated a subset of its images to one of its developers, or its tier-2 suppliers who MAY delegate further to tier-3 suppliers.
 
-Every delegation SHOULD be prefixed with the unique name of a tier-1 supplier, so that the filenames of images do not conflict with each other. Other than this constraint, a tier-1 supplier is free to name its images however it likes. For example, it MAY use the convention “supplier-X-ECU-Y-version-Z.img” to denote an image produced by supplier X, for ECU model Y, and with a version number Z.
+Every delegation SHOULD be prefixed with the unique name of a tier-1 supplier, so that the filenames of images do not conflict with each other. Other than this constraint, a tier-1 supplier is free to name its images however it likes. For example, it MAY use the convention "supplier-X-ECU-Y-version-Z.img" to denote an image produced by supplier X, for ECU model Y, and with a version number Z.
 
 #### Public API to download files
 

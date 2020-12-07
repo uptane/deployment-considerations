@@ -14,9 +14,9 @@ The following is a brief summary of those edits:
 
 - Established a document archive policy to add a stable copy of each version of the Standard to the repository, starting with the initial IEEE/ISTO V.1.0.0 document.
 
-- Added “Compromise of the packaged software, such as malware embedded in a trusted package” to the list of what is "Out of scope" for the Standard.
+- Added "Compromise of the packaged software, such as malware embedded in a trusted package" to the list of what is "Out of scope" for the Standard.
 
-- Corrected/changed several numbering references in the full verification process and “Step 0” in the procedure for checking Root metadata.
+- Corrected/changed several numbering references in the full verification process and "Step 0" in the procedure for checking Root metadata.
 
 - Presented the option to use a counter (instead of a nonce) in the ECU Version Report, and specified the purpose of the nonce in the step-by-step instructions for preparing this report.
 
