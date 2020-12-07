@@ -5,7 +5,7 @@ the [GitHub pages slate theme](https://github.com/pages-themes/slate).
 
 The site is available [here](https://uptane.github.io/).
 
-This repository is a dedicated place for the Deployment Best Practices text. Whatever is on master will be built automatically by GitHub and deployed at https://uptane.github.io/deployment-considerations.
+This repository is a dedicated place for the Deployment Best Practices text. The current head of the master branch is built automatically by GitHub and deployed at https://uptane.github.io/deployment-considerations.
 
 ## Maintenance and re-use
 
@@ -102,8 +102,7 @@ see LICENSE and LICENSE-MIT.
 
 ## Acknowledgements
 
-Uptane is a Joint Development Foundation project of the Linux Foundation, operating under the formal title of Joint Development Foundation Projects, LLC, Uptane Series. This project is managed by Prof. Justin Cappos and other members of the [Secure
-Systems Lab](https://ssl.engineering.nyu.edu/) at NYU. Contributors and maintainers are governed by the CNCF Community Code of Conduct.
+Uptane is a Joint Development Foundation project of the Linux Foundation, operating under the formal title of Joint Development Foundation Projects, LLC, Uptane Series. This project is managed by Prof. Justin Cappos and other members of the [Secure Systems Lab](https://ssl.engineering.nyu.edu/) at NYU. Contributors and maintainers are governed by the CNCF Community Code of Conduct.
 
 Uptane is supported by U.S. Department of Homeland Security grants D15PC00239 and
 D15PC00302. The views and conclusions contained herein are the authors' and should

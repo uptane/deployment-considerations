@@ -23,7 +23,7 @@ Examples of code updates delivered via an image include the bootloader, shared l
 In order to save bandwidth costs, Uptane allows an OEM to deliver updates as
 delta images. A delta image update contains only the code and/or data that differs from the image currently installed on the ECU. In order to use delta images, the OEM SHOULD make the following changes.
 
-The OEM SHOULD add two types of information used by the Director repository to the custom Targets metadata: (1) the algorithm used to apply a delta image, and (2) the Targets metadata about the delta image. This is done so that ECUs know how to apply and verify the delta image. The Director repository SHOULD also be modified to produce delta images, because Uptane does not require it to compute deltas by default. The Director repository can use the vehicle version manifest and dependency resolution to determine the differences between the previous and latest images. If desired, then the Director repository MAY encrypt the delta image.
+The OEM SHOULD add two types of information used by the Director repository to the custom Targets metadata: (1) the algorithm used to apply a delta image, and (2) the Targets metadata about the delta image. This is done so that ECUs know how to apply and verify the delta image. The Director repository SHOULD also be modified to produce delta images, because Uptane does not require it to compute deltas by default. The Director repository can use the vehicle version manifest and dependency resolution to determine the differences between the previous and latest images. If desired, the Director repository MAY encrypt the delta image.
 
 As these images are produced on demand by the Director repository, Primaries SHOULD download all delta and/or encrypted images only from that source. After full verification of metadata, Primaries SHOULD also check whether delta images match the Targets metadata from the Director repository in the same manner in which they check such metadata from the Director repository when using non-delta images.
 
@@ -37,22 +37,19 @@ Finally, in order to install a delta image, an ECU SHOULD take one of the action
 
 Delta updates can be computed two different ways: dynamically for each ECU during the installation process (dynamic delta updates), or in advance of installation by precomputing likely possible delta images (precomputed delta updates). Both types of updates appear below in the subsection on [custom installation instructions](#custom-installation-instructions-for-ecus).
 
-Dynamic delta updates reduce the amount of data sent in each update, while allowing for fine grained control of what version is placed on each ECU.  By using the custom field of the Targets metadata, the Director can be configured to specify a particular version of software for every ECU. Dynamic delta updates allow the Director to do file granular resource tracking, which can save bandwidth.
+Dynamic delta updates reduce the amount of data sent in each update, while allowing for fine-grained control of what version is installed on each ECU. By using the custom field of the Targets metadata, the Director can be configured to specify a particular version of software for every ECU. Dynamic delta updates allow the Director to track resources at file granularity, which can save bandwidth.
 
-To send dynamic delta updates, the Director would compute the delta as described
-earlier in this section. The computed images would be made available to the Primary ECU.
+A drawback of dynamic delta updates is that, if many ECUs are updating from the same version, computing the delta of each can result in duplicate computation that could be time consuming or use up a lot of memory. A possible solution to this is to use precomputed delta updates.
 
-One drawback of dynamic delta updates is that, if many ECUs are updating from the same version, computing the delta of each would result in duplicate computation that could be time consuming or use up a lot of memory. A possible solution to this is to use precomputed delta updates.
+To send precomputed delta updates, the Director precomputes various probable diffs and makes these available as images. The Director then specifies which precomputed image to send to each ECU by using the custom field of Targets metadata, as described below in the [Adding dynamic directions](#accessing-dynamic-directions-through-signed-images-from-the-director-repository) subsection. Precomputing the delta images has the added advantage of allowing these images to be stored on the Image repository, which offers additional security against a Director compromise.
 
-To send precomputed delta updates, the Director precomputes various probable diffs and makes these available as images. The Director then specifies which precomputed image to send to each ECU by using the custom field of Targets metadata, as described below under the **Adding dynamic directions** heading. Precomputing the delta images has the added advantage of allowing these images to be stored on the Image repository, which offers additional security against a Director compromise.
 
 ## Uptane in conjunction with other protocols
 
 Implementers MAY use Uptane in conjunction with existing protocols
 for sending updates to the vehicle, such as in the following scenarios:
 
-Implementers MAY use [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) to encrypt the connection between
-Primaries and the Image and Director repositories, as well to whatever source is used to provide the current time.
+Implementers MAY use [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) to encrypt the connection between Primaries and the Image and Director repositories, as well to the source used to provide the current time.
 
 Implementers MAY use [OMA Device Management](https://en.wikipedia.org/wiki/OMA_Device_Management) (OMA-DM) to send Uptane
 metadata, images, and other messages to Primaries.
@@ -61,14 +58,14 @@ Implementers MAY use [Unified Diagnostic Services](https://en.wikipedia.org/wiki
 
 Any system being used to transport images to ECUs will need to be modified only to permit transport of Uptane metadata and other messages. Note that Uptane does not require authentication of network traffic between the Director and Image repositories and Primaries, or between Primaries and Secondaries.
 
-However, in order for an implementation to be Uptane-compliant, no ECU can cause another to install an image without performing either full or partial verification of metadata. This is done in order to prevent attackers from being able to bypass Uptane, and thus execute arbitrary software attacks. Thus, in an Uptane-compliant implementation, an ECU performs either full or partial verification of metadata and images before installing any image, regardless of how the metadata and images were transmitted to the ECU.
+However, in order for an implementation to be Uptane-compliant, no ECU can cause another to install an image without performing either full or partial verification of metadata. This is done in order to prevent attackers from being able to bypass Uptane and execute arbitrary software attacks. Thus, in an Uptane-compliant implementation, an ECU performs either full or partial verification of metadata and images before installing any image, regardless of how the metadata and images were transmitted to the ECU.
 
 
 ## Using Uptane with transport security
 
 Uptane is designed to retain strong security guarantees even in the face of a network attacker.  This includes situations where there either is no transport security or where the transport security is compromised by an attacker.  Should this occur, Uptane may not be able to prevent an attacker from disrupting communication between the vehicle and the OEM (e.g., by jamming the signal or dropping packets).  However, it does prevent malicious packages from being installed or mix-and-match attacks from being launched, and a number of other threat scenarios from being realized.  This is similar to how a network attacker who has not compromised a key may be able to cause a TLS connection to fail to connect or disconnect (e.g., by dropping network packets), but cannot compromise the integrity or confidentiality of the connection.
 
-Uptane's security is orthogonal to security systems at other network layers, such as transport security, or data link security.  However, there are several reasons why a party may wish to use a security system at the transport layer in coordination with Uptane:
+Uptane's security is orthogonal to security systems at other network layers, such as transport security or data link security. However, there are several reasons why a party may wish to use a security system at the transport layer in coordination with Uptane:
 
 - If a security system at the transport layer is already deployed for other services or is effectively free to deploy, there is little reason not to use it.  For example, it may be beneficial to have a common system provide authentication for all services in a vehicle.
 
@@ -76,15 +73,17 @@ Uptane's security is orthogonal to security systems at other network layers, suc
 
 - Using Uptane over a transport layer security system does not weaken its own security properties. If the cost is low, then this may be viewed as adding defense-in-depth, especially if the security system can improve detection, mitigation, or reporting of network disruptions.
 
-- Security at the transport layer provides forensic proof of origin and destination (when strong mutual authentication is used).  This may be necessary for compliance with OTA update standards and various current draft regulations.
+- Security at the transport layer provides forensic proof of origin and destination when strong mutual authentication is used. This may be necessary for compliance with OTA update standards and various current draft regulations.
 
-## Multiple primaries
 
-We expect that the most common deployment configuration of Uptane on vehicles would feature one Primary per vehicle. However, there may be cases where having multiple, active Primaries in a vehicle would be useful. One such case would be providing redundancy if some, but not all, primaries fail permanently. The OEM MAY use this setup to design a failover system in which one Primary takes over when another fails. If so, then the OEM SHOULD take note of the following considerations, in order to prevent safety issues.
+## Multiple Primaries
+
+We expect that the most common deployment configuration of Uptane on vehicles would feature one Primary per vehicle. However, there may be cases where having multiple, active Primaries in a vehicle would be useful. One such case would be providing redundancy if some, but not all, Primaries fail permanently. The OEM MAY use this setup to design a failover system in which one Primary takes over when another fails. If so, then the OEM SHOULD take note of the following considerations in order to prevent safety issues.
 
 It is highly RECOMMENDED that, in any given vehicle, there be a single, active Primary. This is because using multiple, active Primaries to update Secondaries can lead to problems in consistency, especially when different Primaries try to update the same Secondaries. If an implementation is not careful, race conditions could cause Secondaries to install an inconsistent set of updates, with some ECUs installing updates from one Primary, while others take their updates from the second Primary. This can cause ECUs to fail to interoperate.
 
 If multiple Primaries are active in the vehicle at the same time, then each Primary SHOULD control a mutually exclusive set of Secondaries, so that each Secondary is controlled only by one Primary.
+
 
 ## Atomic installation of a bundle of images
 
@@ -96,6 +95,7 @@ Another simple solution is for the Primary and/or Director to retry a bundle ins
 
 If all ECUs do have additional storage, and can perform a rollback, then the OEM may use a [two-phase commit protocol](https://en.wikipedia.org/wiki/Two-phase_commit_protocol). We assume that a gateway ECU would act as the coordinator, which ensures that updates are installed atomically. This technique should ensure atomic installation as long as: (1) the gateway ECU behaves correctly and has not been compromised, and (2) the gateway ECU does not fail permanently. It is considerably less complicated than Byzantine-fault tolerant protocols, which may have a higher computation/communication overhead. However, this technique does not provide other security guarantees. For example, the gateway ECU may show different bundles to different Secondaries at the same time.
 
+
 ## 2nd-party fleet management
 
 <img align="center" src="assets/images/custom_2_fleet_management.png" width="500" style="margin: 0px 20px"/>
@@ -106,7 +106,7 @@ Some parties, such as vehicle rental companies or the military, may wish to exer
 
 In the first option, which we expect to be the common case, a fleet manager would configure the mapping metadata on ECUs such that Primaries and full verification Secondaries would only trust an image that has been signed by *both* the OEM-managed Image repository and the fleet-managed Director repository. Partial verification Secondaries would only trust an image if it has been signed by the fleet-managed Director repository. The upside of this option is that the fleet manager, instead of the OEM, has complete control over which updates are installed on its vehicles. The downside of this option is that if the fleet-managed Directory repository is compromised, attackers can execute mix-and-match attacks.
 
-In the second option, a fleet manager would configure the mapping metadata on ECUs such that Primaries and full verification Secondaries would trust an image that has been signed by *three* repositories: the OEM-managed Image repository, the OEM-managed Director repository, and the fleet-managed Director repository. The upside of this option is that attackers cannot execute mix-and-match attacks if they have compromised only one of the Director repositories. The downside of this option is that updates cannot be installed on vehicles unless both the OEM and fleet agree on which images should be installed. This agreement may require both Director repositories to communicate using an out-of-band channel. Using this option also means that partial verification Secondaries should be configured to trust the Director repository managed by either the OEM or the fleet, but not both, since these Secondaries can only check for one signature.
+In the second option, a fleet manager would configure the mapping metadata on ECUs such that Primaries and full verification Secondaries would trust an image that has been signed by *three* repositories: the OEM-managed Image repository, the OEM-managed Director repository, and the fleet-managed Director repository. The upside of this option is that attackers cannot execute mix-and-match attacks if they have compromised only one of the Director repositories. The downside of this option is that updates cannot be installed on vehicles unless both the OEM and fleet agree on which images should be installed. This agreement may require both Director repositories to communicate using an out-of-band channel. Using this option also means that partial verification Secondaries should be configured to trust the Director repository managed by either the OEM or the fleet, but not both, since these Secondaries may only be able to check for one signature.
 
 ## User-customized updates
 
@@ -114,7 +114,7 @@ In the second option, a fleet manager would configure the mapping metadata on EC
 
 **Figure 3.** *An OEM MAY allow a third party to negotiate which updates are installed.*
 
-In its default implementation, Uptane allows only the OEM to fully control which updates are installed on which ECUs on which vehicles. Thus, there is no third party input about updates from a dealership, mechanic, fleet manager, or the end-user. There are very good reasons, such as legal considerations, for enforcing this constraint. However, sharing this capability exists to the point that the OEM wishes to make it available. We discuss two options for doing so.
+In its default implementation, Uptane allows only the OEM to fully control which updates are installed on which ECUs on which vehicles. Thus, there is no third party input about updates from a dealership, mechanic, fleet manager, or the end-user. There are very good reasons, such as legal considerations, for enforcing this constraint. However, sharing this capability exists to the extent that the OEM wishes to make it available. We discuss two options for doing so.
 
 In the first option, an OEM MAY elect to receive input from a third party as to which updates should be installed. The process is illustrated in Figure 3.
 
@@ -128,7 +128,8 @@ In the first option, an OEM MAY elect to receive input from a third party as to 
 
 The third and fourth steps MAY be repeated up to a maximum number of retries, until both the OEM and the third party agree as to which updates should be installed.
 
-In the second option, the third party MAY choose to override the root of trust for ECUs, provided that the OEM makes this possible. Specifically, the third party may overwrite the map and root metadata file on ECUs, so that updates are trusted and installed from repositories managed by the third party, instead of the OEM. The OEM may infer whether a vehicle has done so by using its inventory database to see if the vehicle has recently been updated from its repositories. The OEM MAY choose not to make this option available to third parties by, for example, using a Hardware Security Module (HSM) to store Uptane code and data, so that third parties cannot override the root of trust.
+In the second option, the third party MAY choose to override the root of trust for ECUs, provided that the OEM makes this possible. Specifically, the third party may overwrite the map and Root metadata file on ECUs, so that updates are trusted and installed from repositories managed by the third party instead of the OEM. The OEM may infer whether a vehicle has done so by using its inventory database to see if the vehicle has recently been updated from its repositories. The OEM MAY choose not to make this option available to third parties by, for example, using a Hardware Security Module (HSM) to store Uptane code and data, so that third parties cannot override the root of trust.
+
 
 ## ECUs without filesystems
 
@@ -138,19 +139,20 @@ First, filenames need not be strings. Even if there is no explicit notion of "fi
 
 Second, ECUs need not have a filesystem in order to use Uptane. It is only important that ECUs are able to recognize distinct metadata and images by using either strings or numbers as *file* names or numbers, and that they can allocate different parts of storage to different *files*.
 
+
 ## Custom installation instructions for ECUs
 
 Most inputs to ECUs are delivered as signed Targets files, stored on the Image directory, and then sent to the ECU by the Director. However, there may be some cases where the inputs required for a particular customization cannot be configured to follow this standard signing process. Variations in input may be due to not knowing the input in advance, or a need to customize instructions for each vehicle. Examples of such inputs could be a command line option that turns on a feature in certain ECUs, a configuration sent by a Director repository to an ECU, or a Director doing a dynamic customization for an ECU. We can collectively call all these non-standard inputs "dynamic directions." Uptane allows ECUs to access dynamic directions in two different ways, each having particular advantages for different use cases.
 
 ### Accessing dynamic directions through signed images from the Director repository
 
-The first option for providing dynamic directions is to slightly modify the standard delivery procedure described above. The Director repository would still send a signed image to the ECU, but this file would not be stored on—-or validated by—-the Image repository. As the Image repository is controlled by offline keys, it can not validate a file created dynamically by the Director.
+The first option for providing dynamic directions is to slightly modify the standard delivery procedure described above. The Director repository would still send a signed image to the ECU, but this file would not be stored on -- or validated by -- the Image repository. As the Image repository is controlled by offline keys, it cannot validate a file created dynamically by the Director.
 
-Even though the Image repository can not sign the file, this modification still provides some security protections. The ECU would continue to have rollback protection for a file sent this way, as a release counter will still be included in the metadata, and incremented for each new version. If additional validation is needed, the file could be put on multiple repositories created for this purpose. These repositories could behave similar to the Director repository, but would all have separate keys to allow for additional security. The Primary ECU will be aware of these extra repositories so it can check for consistency by downloading and comparing the image from all repositories.
+Even though the Image repository cannot sign the file, this modification still provides some security protections. The ECU would continue to have rollback protection for a file sent this way, as a release counter will still be included in the metadata and incremented for each new version. If additional validation is needed, the file could be put on multiple repositories created for this purpose. These repositories could behave similar to the Director repository, but would all have separate keys to allow for additional security. The Primary ECU will be aware of these extra repositories so it can check for consistency by downloading and comparing the image from all repositories.
 
 ### Adding dynamic directions to the custom field of Targets metadata
 
-Another way to provide dynamic directions is to use the custom field of the Targets metadata file. This field provides the option to include custom inputs to individual ECUs. Using the custom field is an especially good option for managing small variations in the existing image. For example, a compilation flag to enable a navigation feature might be set on some ECUs, but not on others. The custom field could contain dynamic directions, and additional subfields would help determine for which ECUs the direction is intended. In the flag example above, the Director can put the ECU ID and the flag into the custom field so the flag will be used during the installation process only on that particular ECU. This custom field can then be included in the Targets metadata received by all ECUs. The intended ECU would be able to check for this flag and use it during an installation or update to enable the navigation system.
+Another way to provide dynamic directions is to use the custom field of the Targets metadata file. This field provides the option to include custom inputs to individual ECUs. Using the custom field is an especially good option for managing small variations in the existing image. For example, a compilation flag to enable a navigation feature might be set on some ECUs, but not on others. The custom field could contain dynamic directions, and additional subfields would help determine for which ECUs the direction is intended. In this flag example, the Director can put the ECU ID and the flag into the custom field so the flag will be used during the installation process only on that particular ECU. This custom field can then be included in the Targets metadata received by all ECUs. The intended ECU would be able to check for this flag and use it during an installation or update to enable the navigation system.
 
 However, note that using this method of providing dynamic directions means that a compromise of the Director repository might be able to cause ECUs to misconfigure their images. One way to mitigate this risk would be to require the Image repository to sign off on exactly the same directions using its own custom Targets metadata. However, this is difficult to achieve considering that such directions are supposed to be dynamic in the first place. Therefore, proceed, if necessary, with caution.
 
@@ -158,7 +160,7 @@ However, note that using this method of providing dynamic directions means that 
 
 In choosing whether to send dynamic directions through the custom field of the Targets metadata from either the Director or the Image repository, one needs to consider how security-sensitive the receiving ECU may be.
 
-Using the Director repository to encode dynamic directions provides more flexibility, as directions can be made or changed on demand. But, there is a significant trade off in terms of security. Should the Directory repository be compromised, attackers would have this same power. This has important ramifications for ECUs that perform partial, or even full, verification. On the other hand, using the Image repository provides the opposite tradeoff. Dynamic directions are more secure, but offer less flexibility to make changes. 
+Using the Director repository to encode dynamic directions provides more flexibility, as directions can be made or changed on demand. However, there is a significant trade off in terms of security. Should the Directory repository be compromised, attackers would have this same power. This has important ramifications for ECUs that perform partial, or even full, verification. On the other hand, using the Image repository provides the opposite tradeoff. Dynamic directions are more secure, but offer less flexibility to make changes.
 
 It is important to consider this tradeoff when deciding how to send dynamic directions. If the ECU is security critical, these directions should be sent using the custom field of Targets metadata and stored on the Image repository. In any case, using either repository should not result in significant bandwidth costs for ECUs, as ECUs that perform partial verification should continue to receive only directions for itself from the Director repository.
 
