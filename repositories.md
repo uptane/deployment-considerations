@@ -11,7 +11,7 @@ This section outlines recommended procedures for the one-time operations that an
 
 Without access to a secure source of time, ECUs may be prevented from receiving the most recent updates. If the ECU's time is set too far ahead, it will determine that the current valid metadata is expired and thus be unable to perform an update. If the ECU's time is set too far behind, an attacker can freeze or replay old metadata to the ECU. (ECUs in Uptane will not accept an earlier time than what has been seen before and signed with the same key.)
 
-If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. This section describes how a Time Server can be used in an Uptane implementation.
+If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. The following subsection describes how a Time Server can be used in an Uptane implementation.
 
 ### Time server
 
@@ -40,7 +40,7 @@ Listing the public key of the Time Server in Director Targets metadata is necess
 If the Time Server is implemented, the Primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the [Download and check current time](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) step of the Uptane Standard.
 
 1. Gather the tokens from each Secondary ECU's version report.
-2. Send the list of tokens to the Time Server to fetch the current time. The Time Server responds, as described in the [Time Server section](#time-server), by providing a cryptographic attestation of the last known time.
+2. Send the list of tokens to the Time Server to fetch the current time. The Time Server responds, as described above in the [Time Server subsection](#time-server), by providing a cryptographic attestation of the last known time.
 3. If the Time Server's response meets the criteria below, update the Primary ECU's clock and retain the Time Server's response for distribution to Secondary ECUs. If it fails to meet this criteria, discard the response and continue the procedure without an updated time.  The criteria for checking the Time Server's response are:
   - The signature over the Time Server's response is valid.
   - All the tokens provided to the Time Server are included in the response.
@@ -121,7 +121,7 @@ The automated process MAY use the repository tools from our [Reference Implement
 
 **Figure 2.** *A proposed configuration of roles on the Director repository.*
 
-Unlike the Image repository, the Director repository does not delegate images. Therefore, the Director repository SHOULD contain only the Root, Timestamp, Snapshot, and Targets roles, as illustrated in Figure 2. In the rest of this section, we will discuss how metadata for each of these roles is produced.
+Unlike the Image repository, the Director repository does not delegate images. Therefore, the Director repository SHOULD contain only the Root, Timestamp, Snapshot, and Targets roles, as illustrated in Figure 2. In the following subsections, we will discuss how metadata for each of these roles is produced.
 
 #### Private API to update images and the inventory database
 

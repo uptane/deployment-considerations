@@ -5,7 +5,7 @@ css_id: exceptional_operations
 
 # Exceptional operations
 
-On this page, we discuss operations that are generally performed only in exceptional cases. As performing these operations may have security implications for software updates, they should be carried out with great care.
+In this section, we discuss operations that are generally performed only in exceptional cases. As performing these operations may have security implications for software updates, they should be carried out with great care.
 
 ## Rolling back software
 
@@ -19,7 +19,7 @@ By default, Uptane does not allow updates to be rolled back and enforces this ac
 
 There are at least two ways to allow rollbacks, each with different advantages and disadvantages.
 
-In the first option, an OEM MAY choose to never increment the release counters of images (see Figure 2). Uptane will accept any new image associated with a release counter, as long as it is equal to the release counter of the previous image in the previous Targets metadata file. If release counters are never incremented, then all images would have the same release counters. In this situation, an ECU would accept the installation of any compatible image referred to in the new Targets metadata. (See the [Enhanced Security Practices](https://uptane.github.io/deployment-considerations/security_considerations.html) section for more details.)
+In the first option, an OEM MAY choose to never increment the release counters of images (see Figure 2). Uptane will accept any new image associated with a release counter, as long as it is equal to the release counter of the previous image in the previous Targets metadata file. If release counters are never incremented, then all images would have the same release counters. In this situation, an ECU would accept the installation of any compatible image referred to in the new Targets metadata. (See the [Enhanced Security Practices](https://uptane.github.io/deployment-considerations/security_considerations.html) section of this document for more details.)
 
 <img align="center" src="assets/images/except_2_diffimage_samecounter.png" width="500" style="margin: 0px 20px"/>
 
@@ -34,7 +34,7 @@ In the second option, an OEM increments the release counter of an image whenever
 **Figure 3.** *Uptane forbids the installation of images with lower release counters than what is currently installed.*
 
 The advantage to this method is that it prevents rollback attacks in a situation
-where attackers compromise only the Director repository.  However, there are two disadvantages. First, the release counters for images have to be maintained, even if role B now signs for images previously signed by role A. This is because release counters are always compared to previous Targets metadata files. Second, it is more cumbersome to roll back updates, or deliberately cause ECUs to install older images, because the release counters of these older images are incremented in the new Targets metadata for the Image repository with offline keys. However, this method SHOULD be preferred, because it is more secure. See the [Enhanced Security Practices](https://uptane.github.io/deployment-considerations/security_considerations.html) section for more techniques that can be used to limit rollback attacks when the Director repository is compromised.
+where attackers compromise only the Director repository.  However, there are two disadvantages. First, the release counters for images have to be maintained, even if role B now signs for images previously signed by role A. This is because release counters are always compared to previous Targets metadata files. Second, it is more cumbersome to roll back updates, or deliberately cause ECUs to install older images, because the release counters of these older images are incremented in the new Targets metadata for the Image repository with offline keys. However, this method SHOULD be preferred, because it is more secure. See the [Enhanced Security Practices](https://uptane.github.io/deployment-considerations/security_considerations.html) section of this document for more techniques that can be used to limit rollback attacks when the Director repository is compromised.
 
 
 ## Adding, removing, or replacing ECUs
@@ -52,7 +52,7 @@ Note, however, that these are only recommendations. Uptane does not prescribe a 
 
 ### Aftermarket ECUs
 
-A slightly more difficult use case to deal with are aftermarket ECUs -- for example, 3rd-party replacement parts, or add-on ECUs that add functionality for commercial fleet management. One approach is to work with the ECU manufacturer and treat them like any other tier-1 supplier. (The addition of the aftermarket ECU would be managed in one of the ways recommended in the previous section.) However, this may not be economically feasible in many cases. The easiest alternative is to simply exclude the aftermarket ECU from receiving OTA updates.
+A slightly more difficult use case to deal with are aftermarket ECUs -- for example, 3rd-party replacement parts, or add-on ECUs that add functionality for commercial fleet management. One approach is to work with the ECU manufacturer and treat them like any other tier-1 supplier. (The addition of the aftermarket ECU would be managed in one of the ways recommended in the previous subsection.) However, this may not be economically feasible in many cases. The easiest alternative is to simply exclude the aftermarket ECU from receiving OTA updates.
 
 Some aftermarket ECUs, such as those designed for fleet management or monitoring, may have their own independent internet connection, and thus do not need to be integrated into the OEM's update system at all.
 
@@ -61,7 +61,7 @@ Some aftermarket ECUs, such as those designed for fleet management or monitoring
 
 Due to changes in business relationships, an OEM may need to add or remove a tier-1 supplier from its repositories.
 
-To add a tier-1 supplier, OEMs SHOULD use the following steps. All three steps should be performed using the guidelines in the [Normal Operating Procedures](https://uptane.github.io/deployment-considerations/normal_operation.html) document. First, if the supplier signs its own images, then the OEM SHOULD add a delegation to the supplier on the Image repository. Second, the supplier SHOULD deliver metadata and/or images to the OEM. Finally, the OEM SHOULD add the metadata and images to its repositories, possibly test them, and then release them to the affected vehicles.
+To add a tier-1 supplier, OEMs SHOULD use the following steps. All three steps should be performed using the guidelines in the [Normal Operating Procedures](https://uptane.github.io/deployment-considerations/normal_operation.html) section of this document. First, if the supplier signs its own images, then the OEM SHOULD add a delegation to the supplier on the Image repository. Second, the supplier SHOULD deliver metadata and/or images to the OEM. Finally, the OEM SHOULD add the metadata and images to its repositories, possibly test them, and then release them to the affected vehicles.
 
 To safely remove a tier-1 supplier, the OEM SHOULD use the following steps. First, it SHOULD delete the corresponding delegation from the Targets role on the Image repository, as well as all metadata and images belonging to that supplier, so that their metadata and images are no longer trusted. Second, it SHOULD also delete information about the supplier from the Director repository, such as its images, as well as its dependencies and conflicts, so that the Director repository no longer chooses these images for installation. In order to continue to update vehicles with ECUs originally maintained by this supplier, the OEM SHOULD replace this supplier with another delegation, either maintained by itself or by another tier-1 supplier.
 
