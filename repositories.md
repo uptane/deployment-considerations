@@ -109,7 +109,7 @@ In order to initialize the repository, an OEM SHOULD perform the following steps
 2. Set up the transport protocol, following the details of the chosen systems. For example, the OEM may need to set up an HTTP server with SSL/TLS enabled.
 3. Set up the private and public APIs to interact over the chosen transport protocol.
 4. Set up the Root, Timestamp, Snapshot, and Targets roles.
-5. Copy all unencrypted images from the Image repository.
+5. If the Director will be serving per-device encrypted images, copy all relevant images from the Image repository.
 6. Initialize the inventory database with the information necessary for the Director repository to perform dependency resolution, or encrypt images per ECU. This information includes: (1) metadata about all available images for all ECUs on all vehicles, (2) dependencies and conflicts between images, and (3) ECU keys.
 7. Set up and run the automated process that communicates with Primaries.
 
