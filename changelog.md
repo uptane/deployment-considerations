@@ -41,3 +41,24 @@ The following is a brief summary of those edits:
 - Specified in the procedure for checking hashes that the ECU SHOULD check that the length of the image matches the length listed in the metadata.
 
 - Modified wording to make verifying a time message optional if the ECU does not have the capacity to verify a time message.
+
+ 
+- Formally changed the name of our deployment considerations document  to *Uptane Deployment Best Practices.* This was done to better reflect naming conventions within the community.
+ 
+- Corrected additional capitalization and punctuation usages for consistency, including imposing the consistent use of the Oxford comma in a series of items within a sentence, and placing a comma after e.g. and i.e.
+ 
+- Corrected other stylistic/formatting issues that interfered with clarity, such as extraneous commas and use of whitespace.
+ 
+- Removed the use of the phrase “best practices” when not referring to the *Uptane Deployment Best Practices.*
+ 
+- Added a missing reference to the Standard pointing to the Time Server description in *Uptane Deployment Best Practices.*
+ 
+- Changed a MAY to a SHOULD  in the statement “Full verification MUST be performed by Primary ECUs and SHOULD be performed by Secondary ECUs” to be consistent with references elsewhere in the Standard.
+ 
+- Removed or changed phrases that were incorrect or could be mistaken for another object or function. These included the phrases *target metadata,* *image metadata,* *ECU version manifest,* and *Uptane Standards* (plural instead of singular).
+ 
+- Removed words from the opening definition section that are not used in the Standard.
+ 
+- Changed the document’s author credit from the Uptane Alliance Community to the Uptane Community, and the organization from the Uptane Alliance to Joint Development Foundation Projects, LLC, Uptane Series.
+
+- Removed references to TAP 5 in three places in the Standard. TAP 5 has been more or less replaced by TAP 13, but the latter has not yet been approved. 
