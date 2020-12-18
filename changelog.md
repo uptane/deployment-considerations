@@ -60,3 +60,5 @@ The following is a brief summary of those edits:
 - Removed words from the opening definition section that are not used in the Standard.
  
 - Changed the document’s author credit from the Uptane Alliance Community to the Uptane Community, and the organization from the Uptane Alliance to Joint Development Foundation Projects, LLC, Uptane Series.
+
+- Removed references to TAP 5 in three places in the Standard.
