@@ -61,4 +61,4 @@ The following is a brief summary of those edits:
  
 - Changed the document’s author credit from the Uptane Alliance Community to the Uptane Community, and the organization from the Uptane Alliance to Joint Development Foundation Projects, LLC, Uptane Series.
 
-- Removed references to TAP 5 in three places in the Standard.
+- Removed references to TAP 5 in three places in the Standard. TAP 5 has been more or less replaced by TAP 13, but the latter has not yet been approved. 
