@@ -75,7 +75,7 @@ As partial verification Secondaries only check the Targets metadata from the Dir
 
 ## What suppliers should do
 
-<img align="center" src="assets/images/repo_1_supplier_sign.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/repo_1_supplier_sign.png)
 
 **Figure 1.** *Diagram showing supplier signing arrangements. Suppliers are free to ask the OEM to sign images on its behalf (supplier A), or can sign them itself (supplier B). In the latter case, it MAY also delegate some or all of this responsibility to others (supplier C).*
 
@@ -117,7 +117,7 @@ The automated process MAY use the repository tools from our [Reference Implement
 
 #### Roles
 
-<img align="center" src="assets/images/repo_2_roleson_director.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/repo_2_roleson_director.png)
 
 **Figure 2.** *A proposed configuration of roles on the Director repository.*
 
@@ -133,7 +133,7 @@ In order to allow automated processes on the Director repository to perform thei
 
 #### Public API to send updates
 
-<img align="center" src="assets/images/repo_4_primarytodirector.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/repo_4_primarytodirector.png)
 
 **Figure 3.** *How Primaries would interact with the Director repository.*
 
@@ -183,7 +183,7 @@ An OEM and its suppliers MAY use the repository and supplier tools from the [Ref
 
 #### Roles
 
-<img align="center" src="assets/images/repo_5_roles_on_image.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/repo_5_roles_on_image.png)
 
 **Figure 4.** *A proposed configuration of roles on the Image repository.*
 

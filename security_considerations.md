@@ -12,7 +12,7 @@ if an OEM or supplier deems it necessary. In this section, we discuss several of
 
 Before an ECU installs a new image, it SHOULD always check the hardware type of the image. This can prevent attackers from causing an ECU to install arbitrary images it was not intended to have. Furthermore, an OEM and/or its suppliers SHOULD include certain information about images in the Targets metadata to prevent the installation of these arbitrary images if the Director repository should be compromised.
 
-Consider the following example in which attackers have compromised the Director repository. If certain mitigating steps have been taken, such as using release counters, they cannot rollback software updates. Furthermore, without an additional key compromise, attackers cannot cause arbitrary software attacks on Primaries and full verification Secondaries. However, attackers can cause the ECUs of one hardware type to install images intended for another hardware type. To use an analogy, this is similar to causing [Linkedsys](https://www.linksys.com/us/) routers to install images intended for [NetGear](https://www.netgear.com/) routers.
+Consider the following example in which attackers have compromised the Director repository. If certain mitigating steps have been taken, such as using release counters, they cannot rollback software updates. Furthermore, without an additional key compromise, attackers cannot cause arbitrary software attacks on Primaries and full verification Secondaries. However, attackers can cause the ECUs of one hardware type to install images intended for another hardware type. To use an analogy, this is similar to causing [Linksys](https://www.linksys.com/us/) routers to install images intended for [NetGear](https://www.netgear.com/) routers.
 
 Simply having ECU identifiers (e.g., serial numbers) specified in the Targets metadata signed by the Director repository does not solve this problem, because: (1) they are used by the Director repository only to instruct which ECU should install which image, and (2) they are not specified in the Targets metadata signed on the Image repository because it is impractical to list all ECU identifiers that pertain to an image.
 
@@ -50,7 +50,7 @@ There are three options for checking dependencies and conflicts:
 
 Generally speaking, the Director repository SHOULD NOT issue a new bundle that may conflict with images listed on the last vehicle version manifest, and therefore known with complete certainty to have been installed on the vehicle. This is because a partial bundle installation attack could mean the ECUs have only partly installed any images sent after the last vehicle version manifest. If the Director repository is not careful in handling this issue, the vehicle may end up installing conflicting images that will cause ECUs to fail to interoperate.
 
-<img align="center" src="assets/images/security_1_exchange_director_vehicle.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/security_1_exchange_director_vehicle.png)
 
 **Figure 1.** *A series of hypothetical exchanges between a Director repository and a vehicle.*
 

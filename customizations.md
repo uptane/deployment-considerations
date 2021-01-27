@@ -13,7 +13,7 @@ An OEM and its suppliers MAY use an image to arbitrarily update some code and da
 
 Examples of code updates delivered via an image include the bootloader, shared libraries, or the application that provides the actual functions of the ECU. Examples of data updates include setup or initialization data, such as engine parameters, application data, such as maps, and user data, such as an address book or system logs.
 
-<img align="center" src="assets/images/custom_1_code_data_image.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/custom_1_code_data_image.png)
 
 **Figure 1.** *An example of how code and/or data may constitute an image.*
 
@@ -29,7 +29,7 @@ As these images are produced on demand by the Director repository, Primaries SHO
 
 Finally, in order to install a delta image, an ECU SHOULD take one of the actions described in Table 1, depending on whether or not the delta image has been encrypted, and if the ECU has additional storage. Note that the OEM MAY use stream ciphers in order to enable on-the-fly decryption on ECUs that do not have additional storage. In this case, the ECU would decrypt the delta image as it is downloaded, then follow the remainder of the steps in the third box.
 
-<img align="center" src="assets/images/custom_table1_delta.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/custom_table1_delta.png)
 
 **Table 1.** *The actions an ECU SHOULD take to install a delta image as determined by its access to additional storage and whether or not the image is encrypted*
 
@@ -98,7 +98,7 @@ If all ECUs do have additional storage, and can perform a rollback, then the OEM
 
 ## 2nd-party fleet management
 
-<img align="center" src="assets/images/custom_2_fleet_management.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/custom_2_fleet_management.png)
 
 **Figure 2.** *Two options for fleet management with Uptane.*
 
@@ -110,7 +110,7 @@ In the second option, a fleet manager would configure the mapping metadata on EC
 
 ## User-customized updates
 
-<img align="center" src="assets/images/custom_3_thirdparty_updates.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/custom_3_thirdparty_updates.png)
 
 **Figure 3.** *An OEM MAY allow a third party to negotiate which updates are installed.*
 
