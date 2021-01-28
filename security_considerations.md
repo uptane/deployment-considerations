@@ -120,13 +120,13 @@ Images stored on the Image repository may have previously been encrypted or not,
 
 ### Avoiding Director replay attacks
 
-Uptane doesn't explicitly require that targets metadata from the Director contain any images at all.
+Uptane doesn't explicitly require that Targets metadata from the Director contain any images at all.
 
-As such, it may be tempting to only include software images that need to be updated in Director's targets metadata, for efficiency and bandwidth-minimization reasons. However, that implies that empty targets metadata would be sent if no updates are available, and sending empty targets metadata with only the required fields present does represent a potential security threat: since empty metadata does not include any ECU- or vehicle-specific information, it could potentially be replayed to another vehicle. This would constitute a "freeze" attack, since the targeted vehicle would continue to believe it was fully updated. (See [uptane-standard issue #202](https://github.com/uptane/uptane-standard/issues/202) for a more detailed discussion.)
+As such, it may be tempting to only include software images that need to be updated in Director's Targets metadata, for efficiency and bandwidth-minimization reasons. However, that implies that empty Targets metadata would be sent if no updates are available, and sending empty Targets metadata with only the required fields present does represent a potential security threat: since empty metadata does not include any ECU- or vehicle-specific information, it could potentially be replayed to another vehicle. This would constitute a "freeze" attack, since the targeted vehicle would continue to believe it was fully updated. (See [uptane-standard issue #202](https://github.com/uptane/uptane-standard/issues/202) for a more detailed discussion.)
 
 There are two straightforward mitigations for this issue:
 
-* Don't allow the Director to issue empty Targets metadata. For example, you could always include the image installed on the primary ECU. This mitigation requires no client-side changes.
-* Include the targeted VIN number (or some other vehicle identifier) in the Director targets metadata. We recommend using a top-level "vin" or "device_id" field for this purpose. The client should then add a verification step checking that the VIN matches its own. If there is a mismatch, the client should abort the update cycle and report an error.
+* Don't allow the Director to issue empty Targets metadata. For example, you could always include the image installed on the Primary ECU. This mitigation requires no client-side changes.
+* Include the targeted VIN number (or some other vehicle identifier) in the Director Targets metadata. We recommend using a top-level "vin" or "device_id" field for this purpose. The client should then add a verification step checking that the VIN matches its own. If there is a mismatch, the client should abort the update cycle and report an error.
 
 The latter mitigation will likely be included as a requirement in a future release of the Uptane standard.
