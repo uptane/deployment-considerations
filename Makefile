@@ -22,8 +22,8 @@ help: ## Print this message and exit
 		| column -s ':' -t
 
 html: ## Create an HTML version of the deployment considerations, using docker
-	@docker run --rm -it -v $(PWD):/data uptane/pandoc $(MKD) --filter pandoc-include --metadata=title:"Uptane Deployment Considerations v.$(RELEASE_VERSION)" -o $(HTML) --self-contained
+	@docker run --rm -it -v $(PWD):/data uptane/pandoc $(MKD) --toc --filter pandoc-include --metadata=title:"Uptane Deployment Considerations v.$(RELEASE_VERSION)" -o $(HTML) --self-contained
 
 pdf: ## Create a PDF version of the deployment considerations, using docker
-	@docker run --rm -it -v $(PWD):/data uptane/pandoc $(MKD) --filter pandoc-include --metadata=title:"Uptane Deployment Considerations v.$(RELEASE_VERSION)" -o $(PDF)
+	@docker run --rm -it -v $(PWD):/data uptane/pandoc $(MKD) --toc --filter pandoc-include --metadata=title:"Uptane Deployment Considerations v.$(RELEASE_VERSION)" -o $(PDF)
 
