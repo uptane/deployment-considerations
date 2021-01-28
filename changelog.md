@@ -10,47 +10,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-The following are open issues for the Standard and Deployment documents.
-
-- Adding guidelines for using repository mapping metadata to have more than one image repository, and how to check that metadata in the more complicated cases.
-
-- Adding a more complete description of the consequences of a Time Server key compromise
-
-- Clarifying that Timestamp metadata can be provided statically or optionally, dynamically
-
-- Introducing a secure software supply chain mechanism, such as in-toto, to Uptane
-
-- Adding a glossary/definition of terms page to Deployment Best Practices
-
-- Adding a list of regulations and standards relevant to Uptane that can serve as a quick reference as the status of these documents
-
-- Clarifying definitions of trust and explaining for "trustworthiness" is implemented
-
-- Proposing a more secure method for ECU hardware identifiers than supplier-name-prefixed serial numbers
-
-- Adding text to the Deployment pages that define methods for crafting stronger software Ids
-
-- Ensuring Uptane references all relevant regulations and standards, and complies with what they stipulate. 
-
-- This thread solicits suggestions for what methods could be proposed that would not serve this function without introducing new threats.
-
-- Examining alternatives to time checks for determining if metadata is malicious.
-
-- Modifying the requirement for secure time in favor of a potential combination of secure attestation of time, secure metadata versioning, secure counter, and update logic
-
-- Removing requirements that all ECU private keys be unique
-
-- Changing the requirement to verify that a downloaded image is the right size to a MUST, rather than a SHOULD
-
-- Addressing the issue of verification for Secondary ECUs without storage
-
-- Mandating a check for slow retrieval attacks to the standard
-
-- Addressing the security issues introduced by the use of aftermarket ECUs
-
-- Designating a Primary for Secondary ECUs in multiple primary configurations
-
-- warning about the risk of using empty director targets metadata. If you really want to minimize the size of director metadata, the minimum safe thing you can do under the current standard is to ensure that all targets metadata issued by the director includes at least one target.
 
 
 ## [1.1.0] - 2021-01-08
