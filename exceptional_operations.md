@@ -13,7 +13,7 @@ Sometimes an OEM may determine that the latest updates are less reliable than pr
 
 By default, Uptane does not allow updates to be rolled back and enforces this action with two mechanisms. First, Uptane rejects any new metadata file with a version number lower than the one contained in the previous metadata file. Second, Uptane will reject any new image associated with a release counter that is lower than the release counter of the previous image in the previous Targets metadata file. The first mechanism prevents an attacker from replaying an old metadata file. The second mechanism prevents an attacker who compromises the Director repository from being able to choose old versions of images, despite being able to sign new metadata. See Figure 1 for an example.
 
-<img align="center" src="assets/images/except_1_.rollback_prev.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/except_1_.rollback_prev.png)
 
 **Figure 1.** *Uptane prevents rollback attacks by rejecting older: (1) metadata files, and/or (2) images.*
 
@@ -21,7 +21,7 @@ There are at least two ways to allow rollbacks, each with different advantages a
 
 In the first option, an OEM MAY choose to never increment the release counters of images (see Figure 2). Uptane will accept any new image associated with a release counter, as long as it is equal to the release counter of the previous image in the previous Targets metadata file. If release counters are never incremented, then all images would have the same release counters. In this situation, an ECU would accept the installation of any compatible image referred to in the new Targets metadata. (See the [Enhanced Security Practices](https://uptane.github.io/deployment-considerations/security_considerations.html) section of this document for more details.)
 
-<img align="center" src="assets/images/except_2_diffimage_samecounter.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/except_2_diffimage_samecounter.png)
 
 **Figure 2.** *Uptane allows the installation of images that have the same release counter as what is currently installed.*
 
@@ -29,7 +29,7 @@ The advantage to this method is that it is simple. It allows the OEM to easily i
 
 In the second option, an OEM increments the release counter of an image whenever it is critical that an ECU not install images with lower release counters. In the example in Figure 3, if an ECU installs "foo.img," then it cannot install "bar.img." This is done to prevent the installation of compatible images with lower release counters that have known security vulnerabilities, rather than newer images in which these vulnerabilities have been fixed.
 
-<img align="center" src="assets/images/except_3_diffimage_samecounter2.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/except_3_diffimage_samecounter2.png)
 
 **Figure 3.** *Uptane forbids the installation of images with lower release counters than what is currently installed.*
 

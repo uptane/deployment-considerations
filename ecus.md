@@ -32,7 +32,7 @@ Partial verification ECUs are expected to have the Root and Targets metadata pre
 
 ### Symmetric vs. asymmetric ECU keys
 
-<img align="center" src="assets/images/ECU_1_sym_asym.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/ECU_1_sym_asym.png)
 
 **Figure 1.** *An arrangement that an OEM SHOULD use when using symmetric ECU keys.*
 

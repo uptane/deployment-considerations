@@ -44,7 +44,7 @@ The Timestamp, Snapshot, and Targets metadata files SHOULD expire relatively qui
 
 Table 1 lists an example of expiration times for metadata files on the Director repository.
 
-<img align="center" src="assets/images/keys_table1_metadata_expire.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/keys_table1_metadata_expire.png)
 
 **Table 1.** *An example of the duration of time until the metadata for a role expires.*
 
@@ -68,7 +68,7 @@ Since the Root role keys are expected to be revoked and replaced relatively rare
 
 Table 2 lists an example of expiration times for metadata files on the Image repository.
 
-<img align="center" src="assets/images/keys_table2_threshold.png" width="500" style="margin: 0px 20px"/>
+![](assets/images/keys_table2_threshold.png)
 
 **Table 2.** *An example number of keys that MAY be used by each role. Each role uses a threshold of (n, m) keys, where n out of m signatures are required to trust the signed metadata.*
 

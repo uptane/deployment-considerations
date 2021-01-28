@@ -7,6 +7,18 @@ The site is available [here](https://uptane.github.io/).
 
 This repository is a dedicated place for the Deployment Best Practices text. The current head of the master branch is built automatically by GitHub and deployed at https://uptane.github.io/deployment-considerations.
 
+## Cutting a release
+
+You can make a PDF or self-contained HTML rendering of the contents of all deployment pages. To do this, you will need GNU make (BSD make won't work) and Docker.
+
+If you've got those prerequisites, just run `make pdf` or `make html` to generate the respective release files.
+
+This builds the document from the file [uptane-deployment-considerations-release.md](uptane-deployment-considerations-release.md), which simply includes all of the relevant markdown files. If a new page is added or a page is removed, this file will need to be edited accordingly.
+
+### Setting the version number
+
+The title of the document will be **Uptane Deployment Considerations v.$(RELEASE_VERSION)**. If the `RELEASE_VERSION` variable is set in the shell, that value will be used. Otherwise, it will look for a git tag; if one is found, that will be used as the version. If there is no tag on the current commit and `RELEASE_VERSION` is not set in the environment, it will be set to **$(DATE)-DRAFT-$(COMMIT_ID)**, e.g. `2021-01-27-DRAFT-a3d478d`.
+
 ## Maintenance and re-use
 
 ### Basic commands
