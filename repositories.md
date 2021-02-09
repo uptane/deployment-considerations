@@ -37,7 +37,7 @@ Listing the public key of the Time Server in Director Targets metadata is necess
 
 #### Changes to a Primary
 
-If the Time Server is implemented, the Primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the [Download and check current time](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) step of the Uptane Standard.
+If the Time Server is implemented, the Primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the [Download and check current time](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) step of the Uptane Standard.
 
 1. Gather the tokens from each Secondary ECU's version report.
 2. Send the list of tokens to the Time Server to fetch the current time. The Time Server responds, as described above in the [Time Server subsection](#time-server), by providing a cryptographic attestation of the last known time.
@@ -54,7 +54,7 @@ The ECU version report from each Secondary will contain a token to be sent to th
 
 After the vehicle has been assembled, ECUs MAY receive an attestation of the current time as downloaded from the Time Server.
 
-As the first step to verifying metadata, described in the Standard for both the [Primary](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#check_time_primary) and [Secondaries](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#verify_time), the ECU SHOULD load and verify the most recent time from the Time Server using the following procedure:
+As the first step to verifying metadata, described in the Standard for both the [Primary](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) and [Secondaries](https://uptane.github.io/papers/uptane-standard.1.1.0.html#verify_time), the ECU SHOULD load and verify the most recent time from the Time Server using the following procedure:
 
 1. Verify that the signatures on the downloaded time are valid.
 2. Verify that the list of tokens in the downloaded time includes the token that the ECU sent in its version report.
@@ -99,7 +99,7 @@ The OEM sets up and configures the Director and Image repositories. To host thes
 
 *Note that all information about setting up signing keys for this repository can be found on the [Managing signing keys and metadata operations](https://uptane.github.io/deployment-considerations/key_management.html) section of this document.*
 
-In order to provide on-demand customization of vehicles, the OEM MUST also set up the Director repository following the guidance in the [Uptane Standard](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#director_repository). In addition, an OEM must keep in mind the following factors. Unlike the Image repository, the Director repository: (1) is managed by automated processes, (2) uses online keys to sign Targets metadata, (3) does not delegate images, (4) generally provides different metadata to different Primaries, (5) MAY encrypt images per ECU, and (6) produces new metadata on every request from Primaries.
+In order to provide on-demand customization of vehicles, the OEM MUST also set up the Director repository following the guidance in the [Uptane Standard](https://uptane.github.io/papers/uptane-standard.1.1.0.html#director_repository). In addition, an OEM must keep in mind the following factors. Unlike the Image repository, the Director repository: (1) is managed by automated processes, (2) uses online keys to sign Targets metadata, (3) does not delegate images, (4) generally provides different metadata to different Primaries, (5) MAY encrypt images per ECU, and (6) produces new metadata on every request from Primaries.
 
 **Steps to initialize the repository**
 
@@ -166,7 +166,7 @@ Since the automated process is continually producing new metadata files (and, po
 
 *Note that all information about setting up signing keys for this repository can be found in the [Managing signing keys and metadata operations](https://uptane.github.io/deployment-considerations/key_management.html) section of this document.*
 
-Finally, in order to provide compromise resilience, the OEM MUST set up the [Image repository](https://uptane.github.io/papers/ieee-isto-6100.1.0.0.uptane-standard.html#image-repository) following the guidance in the Uptane Standard. The Image repository differs from the Director repository in a number of ways. First, it is managed by human administrators who use offline keys to sign Targets metadata. It also MAY delegate images to suppliers, and it provides the same metadata to all Primaries. Lastly, it does not encrypt images per ECU, and it updates its metadata and images relatively infrequently (e.g., every two weeks or monthly).
+Finally, in order to provide compromise resilience, the OEM MUST set up the [Image repository](https://uptane.github.io/papers/uptane-standard.1.1.0.html#image-repository) following the guidance in the Uptane Standard. The Image repository differs from the Director repository in a number of ways. First, it is managed by human administrators who use offline keys to sign Targets metadata. It also MAY delegate images to suppliers, and it provides the same metadata to all Primaries. Lastly, it does not encrypt images per ECU, and it updates its metadata and images relatively infrequently (e.g., every two weeks or monthly).
 
 **Steps to initialize the repository**
 
