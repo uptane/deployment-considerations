@@ -26,7 +26,10 @@
 
 - text: Design Documents
   sub:
-    - text: Uptane Standard
+    - text: Uptane Standard (1.1.0)
+      url: /papers/uptane-standard.1.1.0.html
+
+    - text: Uptane Standard (IEEE-ISTO 6100.1.0.0)
       url: /papers/ieee-isto-6100.1.0.0.uptane-standard.html
 
     - text: POUF Guidelines
@@ -55,12 +58,8 @@
       url: /deployment-considerations/exceptional_operations.html
     - text: Customizing Uptane
       url: /deployment-considerations/customizations.html
-    - text: Enhanced security practices
+    - text: Additional security recommendations
       url: /deployment-considerations/security_considerations.html
-    - text: Frequently Asked Questions
-      url: /deployment-considerations/faq.html
-    - text: Changelog
-      url: /deployment-considerations/changelog.html
     - text: Reference Implementation and Demonstration Code
       url: https://github.com/uptane/uptane
       external: true
