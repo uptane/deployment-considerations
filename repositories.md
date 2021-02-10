@@ -145,8 +145,7 @@ There is also no significant difference between these methods when it comes to r
 
 Regardless of what model is used to send updates, as illustrated in Figure 4, the API SHOULD allow a Primary to:
 * send a vehicle version manifest (step 1)
-* receive a link to a Timestamp metadata file in return (step 4)
-* download associated files (step 5).
+* download associated metadata and image files (step 4).
 
 The API MAY require authentication, depending on the OEM's requirements.
 
@@ -157,8 +156,7 @@ Sending an update from the Director repository to a Primary requires the followi
 1. The Primary sends its latest vehicle version manifest to the Director repository via an automated process.
 2. The automated process performs a dependency resolution. It reads associated information about this vehicle, such as ECU identifiers and keys, from the inventory database. It checks that the signatures on the manifest are correct, and adds the manifest to the inventory database. Then, using the given manifest, it computes which images SHOULD be installed next by these ECUs. It SHOULD record the results of this computation on the inventory database so there is a record of what was chosen for installation. If there is an error at any point of this step, due to incorrect signatures, or anything unusual about the set of updates installed on the vehicle, then the Director repository SHOULD also record it, so the OEM can be alerted to a potential risk. Repository administrators MAY then take manual steps to correct the problem, such as instructing the vehicle owner to visit the nearest dealership.
 3. Using the results of the dependency resolution, the automated process signs fresh Timestamp, Snapshot, and Targets metadata about the images that SHOULD be installed next by these ECUs. Optionally, if the OEM requires it, it MAY encrypt images per ECU, and write them to its storage mechanism. If there are no images to be installed or updated, then the Targets metadata SHOULD contain an empty set of targets.
-4. The automated process returns a link to the Timestamp metadata file to the Primary.
-5. The Primary downloads metadata and images using the link to this Timestamp metadata file.
+4. The Primary downloads the metadata and image files.
 
 Since the automated process is continually producing new metadata files (and, possibly, encrypted images), these files SHOULD be deleted as soon as Primaries have consumed them, so that storage space can be reclaimed. This MAY be done by simply tracking whether Primaries have successfully downloaded these files within a reasonable amount of time.
 
