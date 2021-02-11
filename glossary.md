@@ -5,11 +5,6 @@ css_id: glossary
 
 # Glossary
 
-### Conformance terminology
-The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in {{RFC2119}}.
-
-In order to be considered Uptane-compliant, an implementation MUST follow all of these rules as specified in the document.
-
 ### Terminology
 
 *Bundle:* A set of images released by the repository that is meant to be installed by one or more ECUs on a vehicle during the same update cycle.
@@ -38,8 +33,6 @@ In order to be considered Uptane-compliant, an implementation MUST follow all of
 
 ### Uptane role terminology
 
-These terms are defined in greater detail in {{roles}}.
-
 *Delegation:* A process by which the responsibility of signing metadata about images is assigned to another party. 
 
 *Role:* A party (human or machine) responsible for signing a certain type of metadata. The role controls keys and is responsible for signing metadata entrusted to it with these keys. The roles mechanism of Uptane allows the system to distribute signing responsibilities so that the compromise of one key does not necessarily impact the security of the entire system.
@@ -51,20 +44,4 @@ These terms are defined in greater detail in {{roles}}.
 * *Targets role:* Signs metadata used to verify the image, such as cryptographic hashes and file size.
 
 * *Timestamp role:* Signs metadata that indicates if there are any new metadata or images on the repository.
-
-### Acronyms and abbreviations
-
-*CDN:* Content Delivery Network
-
-*ECUs:* Electronic Control Units, the computing units on a vehicle
-
-*LIN Bus:* Local Interconnect Bus
-
-*OBD:* On-board diagnostics
-
-*SOTA:* Software Updates Over-the-Air
-
-*UDS:* Unified Diagnostic Services
-
-*VIN:* Vehicle Identification Number
 
