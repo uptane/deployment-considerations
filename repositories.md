@@ -72,6 +72,14 @@ In order to prevent a new Time Server from accidentally causing a rollback warni
 
 As partial verification Secondaries only check the Targets metadata from the Director repository, the Time Server key on these ECUs will be checked when verifying the Targets metadata. To do this, check the Time Server key after verifying the most recent Targets metadata file. If the Time Server key is listed in the Targets metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value as described above.
 
+#### Time Server key compromise
+
+In the event of a Time Server key compromise, an attacker would be able to return a time attestation that contains an arbitrary time. The attacker could then either:
+* Make all metadata appear expired. If the Time Server returns a time far in the future, all Uptane metadata will appear expired to the vehicle. The vehicle would be unable to verify the metadata, thus creating a denial of service.
+* Make expired metadata appear current. If the Time Server returns a time in the past, Uptane metadata that was valid at that point in the past will appear valid to the vehicle, thus allowing for a freeze attack. This cannot be used for a rollback attack as the ECU will not accept a time earlier than the time of their previous update.
+
+All of these attacks can be mitigated by rotating the Time Server key in root metadata, as described in [Managing signing keys and metadata expiration](https://uptane.github.io/deployment-considerations/key_management.html).
+
 
 ## What suppliers should do
 
