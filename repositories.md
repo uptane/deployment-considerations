@@ -78,7 +78,7 @@ In the event of a Time Server key compromise, an attacker would be able to retur
 * Make all metadata appear expired. If the Time Server returns a time far in the future, all Uptane metadata will appear expired to the vehicle. The vehicle would be unable to verify the metadata, thus creating a denial of service.
 * Make expired metadata appear current. If the Time Server returns a time in the past, Uptane metadata that was valid at that point in the past will appear valid to the vehicle, thus allowing for a freeze attack. This cannot be used for a rollback attack as the ECU will not accept a time earlier than the time of their previous update.
 
-All of these attacks can be mitigated by rotating the Time Server key in root metadata, as described in [Managing signing keys and metadata expiration](https://uptane.github.io/deployment-considerations/key_management.html).
+All of these attacks can be mitigated by rotating the Time Server key in Root metadata, as described in [Managing signing keys and metadata expiration](https://uptane.github.io/deployment-considerations/key_management.html).
 
 
 ## What suppliers should do
