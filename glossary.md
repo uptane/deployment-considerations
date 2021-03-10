@@ -5,6 +5,12 @@ css_id: glossary
 
 # Glossary
 
+### Conformance terminology
+
+The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in {{RFC2119}}.
+
+In order to be considered Uptane-compliant, an implementation MUST follow all of these rules as specified in the document.
+
 ### Terminology
 
 *Bundle:* A set of images released by the repository that is meant to be installed by one or more ECUs on a vehicle during the same update cycle.
