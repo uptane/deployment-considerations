@@ -33,9 +33,7 @@ In order to be considered Uptane-compliant, an implementation MUST follow all of
 
 *Repository:* A server containing metadata about images, and sometimes the images themselves. Other data may be stored on the repository to be accessed by ECUs during the update process.
 
-*Root of Trust:* Component that needs to always behave in the expected manner because its
-misbehavior cannot be detected.(Source: https://www.iso.org/standard/66510.html from ISO/IEC 11889-1:2015 Information technology — Trusted platform
-module library — Part 1: Architecture)
+*Root of Trust:* Component that needs to always behave in the expected manner because its misbehavior cannot be detected. (Source: https://www.iso.org/standard/66510.html from ISO/IEC 11889-1:2015 Information technology — Trusted platform module library — Part 1: Architecture)
 
 *Suppliers:* Independent companies to which vehicle manufacturers may outsource the production of ECUs. Tier-1 suppliers directly serve the manufacturers. Tier-2 suppliers are those that perform outsourced work for Tier-1 suppliers.
 
@@ -76,4 +74,3 @@ Systems and Organizations)
 * *Targets role:* Signs metadata used to verify the image, such as cryptographic hashes and file size.
 
 * *Timestamp role:* Signs metadata that indicates if there are any new metadata or images on the repository.
-
