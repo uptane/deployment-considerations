@@ -33,7 +33,31 @@ In order to be considered Uptane-compliant, an implementation MUST follow all of
 
 *Repository:* A server containing metadata about images, and sometimes the images themselves. Other data may be stored on the repository to be accessed by ECUs during the update process.
 
+*Root of Trust:* Component that needs to always behave in the expected manner because its misbehavior cannot be detected. (Source: https://www.iso.org/standard/66510.html from ISO/IEC 11889-1:2015 Information technology — Trusted platform module library — Part 1: Architecture)
+
 *Suppliers:* Independent companies to which vehicle manufacturers may outsource the production of ECUs. Tier-1 suppliers directly serve the manufacturers. Tier-2 suppliers are those that perform outsourced work for Tier-1 suppliers.
+
+*Trust:* A characteristic of an entity that indicates its ability to perform
+certain functions or services correctly, fairly and
+impartially, along with assurance that the entity and its identifier are
+genuine. (Source: https://csrc.nist.gov/glossary from US NIST SP800-152 Profile for U.S. Federal Cryptographic Key
+Management Systems )
+
+*Trustworthy:* Data or files stored electronically in an accurate, reliable and usable/readable manner,
+ensuring integrity over time (Source: https://csrc.nist.gov/glossary from ISO TR 15801:2009 Document management — Information stored
+electronically — Recommendations for trustworthiness and reliability)
+
+*Trustworthiness:* The attribute of a person or enterprise that provides confidence to others
+of the qualifications, capabilities, and
+reliability of that entity to perform specific tasks and fulfill assigned
+responsibilities. (Source: https://csrc.nist.gov/glossary from NIST SP800-53rev5 Security and Privacy Controls for Information
+Systems and Organizations)
+
+
+
+
+
+
 
 *Vehicle Version Manifest:* A compilation of all ECU version reports on a vehicle. It serves as a master list of all images currently running on all ECUs in the vehicle.
 
@@ -50,4 +74,3 @@ In order to be considered Uptane-compliant, an implementation MUST follow all of
 * *Targets role:* Signs metadata used to verify the image, such as cryptographic hashes and file size.
 
 * *Timestamp role:* Signs metadata that indicates if there are any new metadata or images on the repository.
-
