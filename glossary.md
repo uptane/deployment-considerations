@@ -17,7 +17,7 @@ In order to be considered Uptane-compliant, an implementation MUST follow all of
 
 *Bus:* An internal communications network that interconnects components within a vehicle. A vehicle can have a number of buses that will vary in terms of power, speed, and resources.
 
-*ECU Identifier:* An attribute used to identify a specific ECU (e.g., a unique serial number).
+*ECU Identifier:* A globally unique attribute used to identify a specific ECU (e.g., a unique serial number).
 
 *ECU Version Manifest:* Metadata which details the software version currently installed on the ECU.
 
@@ -52,12 +52,6 @@ of the qualifications, capabilities, and
 reliability of that entity to perform specific tasks and fulfill assigned
 responsibilities. (Source: https://csrc.nist.gov/glossary from NIST SP800-53rev5 Security and Privacy Controls for Information
 Systems and Organizations)
-
-
-
-
-
-
 
 *Vehicle Version Manifest:* A compilation of all ECU version reports on a vehicle. It serves as a master list of all images currently running on all ECUs in the vehicle.
 
