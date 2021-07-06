@@ -12,17 +12,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [1.2.0] - 2021-07-2
-As this is the second minor release issued in 2021, the short list of changes made to the Uptane Standard between January 8 and July 2 of this year primarily are wordsmithing corrections to improve clarity. As a result, the majority of the text edits and additions seek to correct wording in the original text that could potentially be misleading. Several of these changes 
+As this is the second minor release issued in 2021, the short list of changes made to the Uptane Standard between January 8 and July 2 of this year primarily are wordsmithing corrections to improve clarity. As a result, the majority of the text edits and additions seek to correct wording in the original text that could potentially be misleading. 
 
 ### Added
 
-- A "SHOULD" requirement to the Standard about including vehicle identifiers to help avoid replay attacks. The sentence "Targets metadata from the Director repository SHOULD include a vehicle identifier if there are no images included in the targets metadata" was added to Section 5.2.3.1.
+- A "SHOULD" requirement to the Standard that recommends including vehicle identifiers to targets metadata to help avoid replay attacks. The sentence "Targets metadata from the Director repository SHOULD include a vehicle identifier if there are no images included in the targets metadata" was added to Section 5.2.3.1.
 
-- Added the word "unique" wherever the Standard mentions key thresholds. This is to clarify that multiple signatures from the same key do not count as a threshold. 
+- The word "unique" wherever the Standard mentions key thresholds. This is to clarify that multiple signatures from the same key do not count as a threshold. 
 
 ### Changed
 
-- The location of the "Terminology" sections. All necessary definitions have been moved to the Glossary section of the Deployment Best Practices document.
+- The location of the "Terminology" section. All definitions have been moved to the Glossary section of the Deployment Best Practices document.
 
 ### Removed
 
