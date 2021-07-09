@@ -17,7 +17,7 @@ In order to be considered Uptane-compliant, an implementation MUST follow all of
 
 *Bus:* An internal communications network that interconnects components within a vehicle. A vehicle can have a number of buses that will vary in terms of power, speed, and resources.
 
-*ECU Identifier:* An attribute used to identify a specific ECU (e.g., a unique serial number). This identifier SHOULD be globally unique as per the stipulations of IEEE Standard 802.1AR. 
+*ECU Identifier:* An attribute used to identify a specific ECU (e.g., a unique serial number). This identifier SHOULD be globally unique as per the stipulations of [IEEE Standard 802.1AR](https://1.ieee802.org/security/802-1ar/). 
 
 *ECU Version Manifest:* Metadata which details the software version currently installed on the ECU.
 
@@ -25,7 +25,7 @@ In order to be considered Uptane-compliant, an implementation MUST follow all of
 
 *Image:* File containing software for an ECU to install. May contain a binary image to flash, installation instructions, and other necessary information for the ECU to properly apply the update. Each ECU typically holds only one image, although this may vary in some cases.
 
-*Metadata:* Information describing the characteristics of data. This could include structural metadata that describes data structures (e.g., data format, syntax, and semantics) and descriptive metadata that details data content (e.g., information security labels). As used in Uptane, metadata can be described as information associated with a role or an image that contains the characteristics or parameters thereof (e.g., cryptographic material parameters, filenames, and versions.)
+*Metadata:* Information describing the characteristics of data. This could include both structural metadata that describes data structures (e.g., data format, syntax, and semantics), and descriptive metadata that details data content (e.g., information security labels). As used in Uptane, metadata can be described as information associated with a role or an image that contains the characteristics or parameters thereof (e.g., cryptographic material parameters, filenames, and versions).
 
 *Primary/Secondary ECUs:* Terms used to describe the control units within a ground vehicle. A Primary ECU downloads and verifies update images and metadata for itself and for Secondary ECUs, and distributes images and metadata to Secondaries. Thus, it requires extra storage space and a means to download images and metadata. Secondary ECUs receive their update images and metadata from the Primary, and only need to verify and install their own metadata and images.
 
