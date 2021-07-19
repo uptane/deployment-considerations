@@ -32,7 +32,7 @@ The keys to all other roles (Root, Targets, and all delegations, which includes 
 
 #### Director repository
 
-Since a compromise of the Root role keys would have the greatest impact on the Director repository, it SHOULD use a sufficiently large threshold number of keys. This ensures that a single key compromise does not allow that corrupted key to sign the Root metadata file. Each key within the threshold MAY belong to a different repository administrator. For example, if there are 8 administrators, then at least 5 keys SHOULD be required to sign the Root metadata file, so that a quorum is required to trust the metadata.
+Since a compromise of the Root role keys would have the greatest impact on the Director repository, it SHOULD use a sufficiently large threshold number of keys. This ensures that a single key compromise does not allow that corrupted key to sign the Root metadata file on its own. Each key within the threshold MAY belong to a different repository administrator. For example, if there are 8 administrators, then at least 5 keys SHOULD be required to sign the Root metadata file, so that a quorum is required to trust the metadata.
 
 The Timestamp, Snapshot, and Targets roles MAY each use a single key, because for these roles using more keys does not provide any additional security. As long as these keys are online, attackers who compromise the repository can use them, regardless of how many are present.
 
