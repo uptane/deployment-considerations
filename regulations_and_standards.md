@@ -36,12 +36,11 @@ This document augments ISO 26262 (Functional Safety).
 This document augments the ISO Standard 26262 (Functional Safety) and ISO/SAE Standard 21434 (Cybersecurity). It standardizes detailed process requirements for wired and wireless software updates.
 
 [**ISO TC22/SC32/WG11 ISO 21434 Road Vehicles Cybersecurity Engineering**](https://upstream.auto/blog/setting-the-standard-for-automotive-cybersecurity/) 
-A joint effort between the International Standards Organization and the Society of Automotive Engineers that brings together “more than 100 experts from more than 82 companies based in over 16 countries.” The goal is a “deep and effective global standard for automotive cybersecurity.” The initiative is divided into four main working groups that focusin on risk management; product development; production, operation, maintenance, and decommissioning; and process overview.
+A joint effort between the International Standards Organization and the Society of Automotive Engineers that brings together “more than 100 experts from more than 82 companies based in over 16 countries.” The goal is a “deep and effective global standard for automotive cybersecurity.” The initiative is divided into four main working groups that focus in on risk management; product development; production, operation, maintenance, and decommissioning; and process overview.
 
 [**ISO/AWI PAS 5112 Road vehicles — Guidelines for auditing cybersecurity
 engineering (Work-in-Progress)**](https://www.iso.org/standard/80840.html?browse=tc)
 This document will provide auditing guidelines for ISO/SAE 21434.
-
 
 
 
