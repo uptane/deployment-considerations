@@ -3,7 +3,7 @@ layout: default
 css_id: ecus
 ---
 
-## Preparing an ECU for Uptane
+# Preparing an ECU for Uptane
 
 At the highest level, the basic requirement for an ECU to be capable of supporting Uptane is that it must be able to perform either full or partial verification, and access a secure source of time. (See the [Uptane Standard](https://uptane.github.io/uptane-standard/uptane-standard.html#build-time-prerequisite-requirements-for-ecus) for official requirements.)
 
