@@ -75,7 +75,9 @@ As partial verification Secondaries only check the Targets metadata from the Dir
 #### Time Server key compromise
 
 In the event of a Time Server key compromise, an attacker would be able to return a time attestation that contains an arbitrary time. The attacker could then either:
+
 * Make all metadata appear to be expired. If the Time Server returns a time far in the future, the vehicle would interpret all Uptane metadata as expired. The vehicle would be unable to verify the metadata, thus creating a denial of service.
+
 * Make expired metadata appear to be current. If the Time Server returns a time in the past, Uptane metadata that was valid at that point in the past will seem current to the vehicle, thus allowing for a freeze attack. This cannot be used for a rollback attack as the ECU will not accept a time earlier than the time of their previous update.
 
 All of these attacks can be mitigated by rotating the Time Server key in Root metadata, as described in [Managing signing keys and metadata expiration](https://uptane.github.io/deployment-considerations/key_management.html).
@@ -107,7 +109,14 @@ The OEM sets up and configures the Director and Image repositories. To host thes
 
 *Note that all information about setting up signing keys for this repository can be found on the [Managing signing keys and metadata expiration](https://uptane.github.io/deployment-considerations/key_management.html) section of this document.*
 
-In order to provide on-demand customization of vehicles, the OEM MUST also set up the Director repository following the guidance in the [Uptane Standard](https://uptane.github.io/papers/uptane-standard.1.1.0.html#director_repository). In addition, an OEM must keep in mind the following factors. Unlike the Image repository, the Director repository: (1) is managed by automated processes, (2) uses online keys to sign Targets metadata, (3) does not delegate images, (4) generally provides different metadata to different Primaries, (5) MAY encrypt images per ECU, and (6) produces new metadata on each request from a Primary.
+In order to provide on-demand customization of vehicles, the OEM MUST also set up the Director repository following the guidance in the [Uptane Standard](https://uptane.github.io/papers/uptane-standard.1.1.0.html#director_repository). In addition, an OEM must keep in mind the following factors. Unlike the Image repository, the Director repository:
+
+1. is managed by automated processes
+2. uses online keys to sign Targets metadata
+3. does not delegate images
+4. generally provides different metadata to different Primaries
+5. MAY encrypt images per ECU, and
+6. produces new metadata on each request from a Primary.
 
 **Steps to initialize the repository**
 
