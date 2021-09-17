@@ -52,10 +52,16 @@ Note, however, that these are only recommendations. Uptane does not prescribe a 
 
 ### Aftermarket ECUs
 
-A slightly more difficult use case to deal with are aftermarket ECUs -- for example, 3rd-party replacement parts, or add-on ECUs that add functionality for commercial fleet management. One approach is to work with the ECU manufacturer and treat them like any other tier-1 supplier. (The addition of the aftermarket ECU would be managed in one of the ways recommended in the previous subsection.) However, this may not be economically feasible in many cases. The easiest alternative is to simply exclude the aftermarket ECU from receiving OTA updates.
+A slightly more difficult use case to deal with are aftermarket ECUs -- for example, 3rd-party replacement parts, or add-on ECUs that add functionality for commercial fleet management. Though from a technical perspective adding an aftermarket ECU could be managed in one of the ways recommended in the previous subsection, there is no doubt that these components bring with them a set of unique logistical and security concerns. For starters, because aftermarket suppliers may not have access to the original design, these ECUs are often products of reverse engineering. As such suppliers may not be able to glean all relevant design information about the ECU, including the rationale behind certain choices. Furthermore, the use of these components raises a number of fundamental questions, such as:
+- How do we deal with aftermarket ECUs that do not have their own Primary? Can they leverage an OEMs Director repository?
+- If an aftermarket ECU does have its own Primary, is each capable of controlling a mutually exclusive set of Secondaries?
+- Could ownership of a Director repository be delegated to a third party or owner?
 
-Some aftermarket ECUs, such as those designed for fleet management or monitoring, may have their own independent internet connection, and thus do not need to be integrated into the OEM's update system at all.
+While at this point the easiest alternative might be to simply exclude aftermarket ECUs from receiving OTA updates, moving forward this might not be feasible. For starters, older vehicles depend heavily on aftermarket parts. Garages (including OEM dealers) regularly install aftermarket ECUs when an OEM stops producing them. And, the newly strengthened [Massachusetts Right-to-Repair law](https://en.wikipedia.org/wiki/2020_Massachusetts_Question_1) complicates both the distribution of ECU firmware updates and the attendant functional safety and cybersecurity issues. Among other provisions, the law mandates a platform to permit vehicle owners and independent mechanics to access telematics. Hence, OEMs may not have a say any more on whether or not these units receive OTA updates.
 
+Note that some aftermarket ECUs, such as those designed for fleet management or monitoring, may have their own independent internet connection, and thus do not need to be integrated into the OEM's update system at all. 
+
+While at this point Uptane is not ready to include any specific guidance on aftermarket material use in its Standard, it is an issue the community is closely monitoring, particularly in the context of pending international standards such as [ISO/SAE 21434](https://www.iso.org/standard/70918.html). 
 
 ## Adding or removing a supplier
 
