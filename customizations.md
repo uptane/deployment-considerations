@@ -84,7 +84,6 @@ It is highly RECOMMENDED that, in any given vehicle, there be a single, active P
 
 If multiple Primaries are active in the vehicle at the same time, then each Primary SHOULD control a mutually exclusive set of Secondaries, so that each Secondary is controlled only by one Primary.
 
-
 ## Atomic installation of a bundle of images
 
 An OEM may wish to require atomic installation of a bundle of images, which means that if one or more update in the bundle fails, none of them will be installed. Uptane does not provide a way to guarantee atomic installations because the problem of atomicity is out of its scope. It is challenging for ECUs to atomically install a bundle in the face of arbitrary failure. If just one ECU fails to install its update for any reason, such as a hardware failure, then the guarantee of atomicity is lost. Furthermore, different OEMs and suppliers already have established ways of solving this problem. Nevertheless, we discuss several different solutions for those who require guidance on this technique.
@@ -164,3 +163,13 @@ Certain types of updates, like maps, rules-of-the-road, or traffic notifications
 Such a system would require a way to reference location for all applicable targets in the custom section of the Targets metadata for the Image repository. The Director would then be responsible for identifying which device locations match those of targets on the Image repository. If a match is found, the Director SHOULD update its Targets metadata to instruct the relevant devices to install the location-based updates appropriate for their positions.
 
 It is possible that the vehicle's position may have changed by the time the vehicle receives a location-based update. The device MAY check that its current position matches that of the target before installation, and the implementer MAY decide to abort the update if the location no longer matches.
+
+### Government updates 
+
+In certain instances, government agencies and regulatory bodies, such as the U.S. Department of Transportation, the Department of Homeland Security, or the Federal Emergency Management Agency (or their state, local or international equivalents) may need to download location specific updates directly to vehicles. A scenario of this type might evolve if there are changes to the rules of the road across a state or country border, or if re-routing occurs due to an emergency condition, such as a flood. 
+
+Being able to grant this sort of access could require changes in some Uptane configurations, including perhaps adding Director or Image repositories, or facilitating different key management systems. Attempting to prioritize conflicting updates would bring with it a number of questions. For example, if a government agency is to have the ability to override functionality of a vehicle remotely, would each OEM  have its own copy of this Director? Or, would one government Director have to supervise multiple OEMs? Is this a case of fail-operational control where the vehicle's functionality can be adjusted (pull to the side of the road, reduce speed to below 25 MPH at a safe deceleration rate) or fail-safe control where the vehicle comes to a stop. 
+
+At this point, Uptane is not ready to propose an answer to any of these questions. Other standards teams are currently considering the issue of government updates. We will wait on those decisions and then ask the community's assistance in determining what needs to be amended  
+
+
