@@ -17,7 +17,7 @@ The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, REC
 
 *SHOULD NOT* This phrase or the phrase "NOT RECOMMENDED" mean that there may exist valid reasons in particular circumstances when the particular behavior is acceptable or even useful, but the full implications should be understood and the case carefully weighed before implementing any behavior described with this label.
 
-*MAY* This word or the adjective "OPTIONAL," mean that an item is truly optional and may or may not be implemented at the discretion of the adopter.
+*MAY* This word, or the adjective "OPTIONAL," mean that an item is truly optional and may or may not be implemented at the discretion of the adopter.
 
 In order to be considered Uptane-compliant, an implementation SHALL follow all of these rules as specified in the document.
 
