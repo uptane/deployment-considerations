@@ -10,10 +10,14 @@ css_id: glossary
 The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in {{RFC2119}}. Given the importance of interpreting these terms correctly, we present these definitions here. Note that when referring to actions in the Standard that mandate compliance, the word SHALL will be used, rather than the word MUST. Hence, MUST and MUST NOT are not included in these definitions.
 
 *SHALL* This word or the term "REQUIRED" mean that the definition is an absolute requirement of the specification.
+
 *SHALL NOT* This phrase means that the definition is an absolute prohibition of the specification.
+
 *SHOULD* This word or the adjective "RECOMMENDED" mean that, in particular circumstances, there may exist valid reasons to ignore a particular item, but the full implications must be understood and carefully weighed before choosing a different course.
+
 *SHOULD NOT* This phrase or the phrase "NOT RECOMMENDED" mean that there may exist valid reasons in particular circumstances when the particular behavior is acceptable or even useful, but the full implications should be understood and the case carefully weighed before implementing any behavior described with this label.
-*MAY* This word or the adjective "OPTIONAL," mean that an item is truly optional.  
+
+*MAY* This word, or the adjective "OPTIONAL," mean that an item is truly optional and may or may not be implemented at the discretion of the adopter.
 
 In order to be considered Uptane-compliant, an implementation SHALL follow all of these rules as specified in the document.
 
