@@ -63,18 +63,9 @@ However, in order for an implementation to be Uptane-compliant, no ECU can cause
 
 ## Using Uptane with transport security
 
-Uptane is designed to retain strong security guarantees even in the face of a network attacker.  This includes situations where there either is no transport security or where the transport security is compromised by an attacker.  Should this occur, Uptane may not be able to prevent an attacker from disrupting communication between the vehicle and the OEM (e.g., by jamming the signal or dropping packets).  However, it does prevent malicious packages from being installed or mix-and-match attacks from being launched, and a number of other threat scenarios from being realized.  This is similar to how a network attacker who has not compromised a key may be able to cause a TLS connection to fail to connect or disconnect (e.g., by dropping network packets), but cannot compromise the integrity or confidentiality of the connection.
+In general, Uptane's security is orthogonal to security systems at other network layers, such as transport security or data link security. If a security system at the transport layer is already deployed for other services, or is effectively free to deploy, there is little reason not to use it. For example, it may be beneficial to have a common system provide authentication for all services in a vehicle. For new implementations, there are several reasons to consider use of a security system at the transport layer in coordination with Uptane.
 
-Uptane's security is orthogonal to security systems at other network layers, such as transport security or data link security. However, there are several reasons why a party may wish to use a security system at the transport layer in coordination with Uptane:
-
-- If a security system at the transport layer is already deployed for other services or is effectively free to deploy, there is little reason not to use it.  For example, it may be beneficial to have a common system provide authentication for all services in a vehicle.
-
-- Regulations may require or recommend that security be provided at the transport layer. Hence, a secure transport system may be required for non-technical reasons.
-
-- Using Uptane over a transport layer security system does not weaken its own security properties. If the cost is low, then this may be viewed as adding defense-in-depth, especially if the security system can improve detection, mitigation, or reporting of network disruptions.
-
-- Security at the transport layer provides forensic proof of origin and destination when strong mutual authentication is used. This may be necessary for compliance with OTA update standards and various current draft regulations.
-
+The most important of these reasons is to insure, as should be true of all cybersecurity sensitive applications, that Uptane implementations use defense-in-depth strategies, as defined in [NIST DocumentIR.8183](https://nvlpubs.nist.gov/nistpubs/ir/2017/NIST.IR.8183.pdf) to ensure that all vulnerabilities and attack surfaces are protected by multiple and diverse detection and mitigation defenses. Thus, even though Uptane is designed to retain strong security guarantees in situations where there is either no transport security or where the transport security is compromised by an attacker, building on top of a such a system can augment the application layer image signature/package signature. There is little downside to such an arrangement as long as the cost is minimal. especially if the security system can improve detection, mitigation, or reporting of network disruptions. Another argument for using a transport security system is thatr emerging regulations may require or recommend that security be provided at the transport layer and OTA update standards. 
 
 ## Multiple Primaries
 
