@@ -29,6 +29,8 @@ Note that, following the recommendations of {{RFC2119}} imperatives of the type 
 
 *Bus:* An internal communications network that interconnects components within a vehicle. A vehicle can have a number of buses that will vary in terms of power, speed, and resources.
 
+*Defense-in-Depth:* As defined by [US NIST IR8183](https://nvlpubs.nist.gov/nistpubs/ir/2017/NIST.IR.8183.pdf) "The application of multiple countermeasures in a layered or stepwise manner to achieve security objectives. The methodology involves layering heterogeneous security technologies in the common attack vectors to ensure that attacks missed by one technology are caught by another." Defense-in-Depth is part of the rationale for using Uptane in conjunction with some form of transport security, as discussed in the [Customizing Uptane](https://uptane.github.io/deployment-considerations/customizations.html) section of Deployment Best Practices.
+
 *ECU Identifier:* An attribute used to identify a specific ECU (e.g., a unique serial number). This identifier SHOULD be globally unique as per the stipulations of [IEEE Standard 802.1AR](https://1.ieee802.org/security/802-1ar/). 
 
 *ECU Version Manifest:* Metadata which details the software version currently installed on the ECU.
