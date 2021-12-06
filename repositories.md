@@ -11,20 +11,41 @@ This section outlines recommended procedures for the one-time operations that an
 
 Without access to a secure source of time, ECUs may be prevented from receiving the most recent updates. If the ECU's time is set too far ahead, it will determine that the current valid metadata is expired and thus be unable to perform an update. If the ECU's time is set too far behind, an attacker can freeze or replay old metadata to the ECU. (ECUs in Uptane will not accept an earlier time than what has been seen before and signed with the same key.)
 
-If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. The following subsection describes how a Time Server can be used in an Uptane implementation.
+If a Primary ECU does not have a secure clock, then that Primary ECU SHALL use a Time Server or other secure external means to acquire accurate time. If a Secondary ECU does not have a secure clock, then the ECU SHALL use the time messages from its Primary ECU to acquire accurate time. The
+following subsection describes how Time Servers can be used in an Uptane implementation.
 
 ### Time server
 
-As the name suggests, a Time Server is a dedicated server that is responsible for providing a secure source of current time to ECUs that would not otherwise have access to this information. It informs ECUs in a cryptographically secure way through signed records and an exchange of tokens. The Time Server receives a list of tokens from vehicles, and returns back a list of signed records containing every token from the originally received list and at least one instance of the current time.
+The IETF Network Time Protocol v4 [NTPv4, RFC 5905]
+(https://datatracker.ietf.org/doc/rfc5905)  with IETF Network Time Security
+for the Network Time Protocol [NTS for NTP, RFC 8915]
+(https://datatracker.ietf.org/doc/html/rfc8915) SHOULD be used by an ECU to
+acquire accurate time. If IETF NTPv4 (or a higher version) is used, then that
+ECU SHALL conform to IETF Network Time Protocol Best Current Practices [BCP 223
+/ RFC 8633](https://datatracker.ietf.org/doc/rfc8633/). If IETF NTPv4 (or
+higher version) is used, then that ECU SHALL discard any received NTP mode
+6 and mode 7 packets to prevent a repeat of the famous 2013 DDOS attack caused by
+an old (1989) NTP implementation bug described in
+http://blog.cloudflare.com/the-ddos-that-knocked-spamhaus-offline-and-ho
+and https://us-cert.cisa.gov/ncas/alerts/TA14-013A.
 
-If the Time Server is used, it is CONDITIONALLY REQUIRED to conform to the following requirements:
+The work-in-progress [IETF Roughtime protocol](
+https://datatracker.ietf.org/doc/draft-ietf-ntp-roughtime/) and the [IETF
+Roughtime Ecosystem](
+https://datatracker.ietf.org/doc/draft-ietf-ntp-roughtime-ecosystem/) MAY
+be used by an ECU to acquire sufficiently accurate time to verify
+certificates (i.e., expiration) and signatures (i.e., freshness). Note that
+these are a revision and enhancement of the original [Google Roughtime]
+(https://roughtime.googlesource.com/roughtime). See also the Cloudflare
+implementation (https://github.com/cloudflare/roughtime).
 
-* When the Time Server receives a sequence of tokens from a vehicle, it will provide one or more signed responses, containing the time along with these tokens. It MAY produce either one signed time attestation containing the current time and all tokens, or multiple time attestations each containing the current time and one or more tokens. All tokens should be included in the response.
-
-* The Time Server will expose a public interface for communicating with Primaries. This communication MAY occur over FTP, FTPS, SFTP, HTTP, HTTPS, or any other transport control the implementer may choose.
-
-* The Time Server's key is rotated in the same manner as other roles' keys by listing the new key in the Director's Root metadata. It is also listed in the custom field of the Director repository's Targets metadata (for partial verification Secondaries).
-
+The US Global Positioning System (GPS), originally Navstar GPS, SHOULD NOT
+be used as a secure time source by any Uptane ECU, because spoofing attacks
+against the unsecured, civilian GPS signals are common, as described in
+https://www.euractiv.com/section/defence-and-security/news/russia-responsible-for-massive-satellite-system-spoofing-study-finds/
+and
+https://rin.org.uk/blogpost/1706945/332376/What-is-spoofing-and-how-to-ensure-GPS-security.
+.
 #### Changes to the Director repository
 
 If a Time Server is in use, a representation of its public key is CONDITIONALLY REQUIRED in Director repository Root metadata.
