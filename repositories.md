@@ -16,18 +16,7 @@ following subsection describes how Time Servers can be used in an Uptane impleme
 
 ### Time server
 
-The IETF Network Time Protocol v4 [NTPv4, RFC 5905]
-(https://datatracker.ietf.org/doc/rfc5905)  with IETF Network Time Security
-for the Network Time Protocol [NTS for NTP, RFC 8915]
-(https://datatracker.ietf.org/doc/html/rfc8915) SHOULD be used by an ECU to
-acquire accurate time. If IETF NTPv4 (or a higher version) is used, then that
-ECU SHALL conform to IETF Network Time Protocol Best Current Practices [BCP 223
-/ RFC 8633](https://datatracker.ietf.org/doc/rfc8633/). If IETF NTPv4 (or
-higher version) is used, then that ECU SHALL discard any received NTP mode
-6 and mode 7 packets to prevent a repeat of the famous 2013 DDOS attack caused by
-an old (1989) NTP implementation bug described in
-http://blog.cloudflare.com/the-ddos-that-knocked-spamhaus-offline-and-ho
-and https://us-cert.cisa.gov/ncas/alerts/TA14-013A.
+The IETF Network Time Protocol v4 [NTPv4, RFC 5905](https://datatracker.ietf.org/doc/rfc5905) with IETF Network Time Security for the Network Time Protocol [NTS for NTP, RFC 8915](https://datatracker.ietf.org/doc/html/rfc8915) SHOULD be used by an ECU to acquire accurate time. If IETF NTPv4 (or a higher version) is used, then that ECU SHALL conform to IETF Network Time Protocol Best Current Practices [BCP 223 / RFC 8633]https://datatracker.ietf.org/doc/rfc8633/). If IETF NTPv4 (or higher version) is used, then that ECU SHALL discard any received NTP mode 6 and mode 7 packets to prevent a DDOS attack caused by an old (1989) NTP implementation bug described in [http://blog.cloudflare.com/the-ddos-that-knocked-spamhaus-offline-and-ho]() and [https://us-cert.cisa.gov/ncas/alerts/TA14-013A]().
 
 The work-in-progress [IETF Roughtime protocol](
 https://datatracker.ietf.org/doc/draft-ietf-ntp-roughtime/) and the [IETF
