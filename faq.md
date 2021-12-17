@@ -18,6 +18,9 @@ No other automotive-grade update system has been designed to work in such rigoro
 
 Other mechanisms for performing updates, such as those offered by Red Bend, Movimento, and Tesla, are compatible with Uptane solely for handling data transport. Uptane can use any transport mechanism, and still provide strong security guarantees, even if the underlying network or transport mechanism is compromised. If a manufacturer wants to move to a secure update system, keeping their existing system as a transport mechanism for Uptane is an effective way to do so. See the [Recommendations for secure customized Uptane implementations](https://uptane.github.io/deployment-considerations/customizations.html) section of this document.
 
+### **What are the cost implications of integrating Uptane?**
+
+A number of factors can influence the costs involved with implementing Uptane. If a project is starting from scratch, the cost would be minimal and any money spent would be just one component of the initial design. For existing OTA systems, the choice will be to either buy an off-the-shelf solution and do an integration, or to build a custom solution, with some greater or smaller degree of reliance on available open-source client and server components. There are pros and cons to both options, but ultimately, the issue of cost cannot be determined without also considering the value received for the expense. Value in this case is enhanced security, so when discussing costs, the trade-off between taking shortcuts and sacrificing security, or doing it right and spending more time/money, must be considered. A more detailed discussion on this issue can be found in the [Setting up Uptane repositories](http:/uptane.github.io/deployment-considerations/repositories.html) section.
 
 ### **Must all signatures be valid for a threshold of signatures to be valid?**
 
