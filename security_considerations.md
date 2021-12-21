@@ -95,7 +95,7 @@ Many ECUs use EEPROM which, practically speaking, can be written to only a limit
 In order to analyze this problem, let us recap what new information should be downloaded in every software update cycle:
 
 1. The Primary writes and sends the latest vehicle version manifest to the Director repository.
-2. All ECUs download, verify, and write the latest downloaded time from the its source of current accurate time.
+2. All ECUs download, verify, and write the latest downloaded time from its source of current accurate time.
 3. All ECUs download, verify, and write metadata from the Director and/or Image repositories.
 4. At some point, ECUs download, verify, and write images.
 5. At some point, ECUs install new images. Then, they sign, and write the latest ECU version reports.
