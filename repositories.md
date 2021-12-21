@@ -14,7 +14,7 @@ Without access to a secure source of time, ECUs may be prevented from receiving 
 If a Primary ECU does not have a secure clock, then that Primary ECU SHALL use some other secure external means to acquire accurate time. If a Secondary ECU does not have a secure clock, then the ECU SHALL use the time messages from its Primary ECU to acquire accurate time. The
 following subsection describes how time servers can be used in an Uptane implementation.
 
-### External ources of time
+### External sources of time
 
 The IETF Network Time Protocol v4 [NTPv4, RFC 5905](https://datatracker.ietf.org/doc/rfc5905) with IETF Network Time Security for the Network Time Protocol [NTS for NTP, RFC 8915](https://datatracker.ietf.org/doc/html/rfc8915) SHOULD be used by an ECU to acquire accurate time. If IETF NTPv4 (or a higher version) is used, then that ECU SHALL conform to IETF Network Time Protocol Best Current Practices [BCP 223 / RFC 8633]https://datatracker.ietf.org/doc/rfc8633/). If IETF NTPv4 (or higher version) is used, then that ECU SHALL discard any received NTP mode 6 and mode 7 packets to prevent a DDOS attack caused by an old (1989) NTP implementation bug described in [http://blog.cloudflare.com/the-ddos-that-knocked-spamhaus-offline-and-ho]() and [https://us-cert.cisa.gov/ncas/alerts/TA14-013A]().
 
