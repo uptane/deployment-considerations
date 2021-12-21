@@ -47,7 +47,7 @@ The ECU version report from each Secondary will contain a token to be sent to th
 
 After the vehicle has been assembled, ECUs MAY receive an attestation of the current time as downloaded from the external time source.
 
-As the first step to verifying metadata, described in the Standard for both the [Primary](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) and [Secondaries](https://uptane.github.io/papers/uptane-standard.1.1.0.html#verify_time), the ECU SHOULD load and verify the most recent time from the external time source using the following procedure:
+As the first step to verifying metadata, described in the Standard for both the [Primary](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) and [Secondaries](https://uptane.github.io/papers/uptane-standard.1.1.0.html#verify_time), the ECU SHOULD load and verify the most recent time from the designated time source by following its designated procedure. This will likely include verifying that the signatures on the downloaded time are valid
 
 1. Verify that the signatures on the downloaded time are valid.
 2. Verify that the list of tokens in the downloaded time includes the token that the ECU sent in its version report.
