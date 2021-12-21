@@ -37,7 +37,6 @@ Listing the public key of the external time source in Director Targets metadata 
 If an external time source is implemented, the Primary SHOULD follow its stipulated  procedure for verifying the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the [Download and check current time](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) step of the Uptane Standard.
 
 1. Gather the tokens from each Secondary ECU's version report.
-2. Send the list of tokens to the external time source to fetch the current time. 
 3. If the response of the external time source meets the criteria below, update the Primary ECU's clock and retain the time source response for distribution to Secondary ECUs. If it fails to meet this criteria, discard the response and continue the procedure without an updated time.  
 
 #### ECU version report
