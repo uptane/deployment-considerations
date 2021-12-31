@@ -11,74 +11,67 @@ This section outlines recommended procedures for the one-time operations that an
 
 Without access to a secure source of time, ECUs may be prevented from receiving the most recent updates. If the ECU's time is set too far ahead, it will determine that the current valid metadata is expired and thus be unable to perform an update. If the ECU's time is set too far behind, an attacker can freeze or replay old metadata to the ECU. (ECUs in Uptane will not accept an earlier time than what has been seen before and signed with the same key.)
 
-If an ECU does not have a secure clock, we recommend the use of a Time Server for time attestations. The following subsection describes how a Time Server can be used in an Uptane implementation.
+If a Primary ECU does not have a secure clock, then that Primary ECU SHALL use some other secure external means to acquire accurate time. If a Secondary ECU does not have a secure clock, then the ECU SHALL use the time messages from its Primary ECU to acquire accurate time. The
+following subsection describes how time servers can be used in an Uptane implementation.
 
-### Time server
+### External sources of time
 
-As the name suggests, a Time Server is a dedicated server that is responsible for providing a secure source of current time to ECUs that would not otherwise have access to this information. It informs ECUs in a cryptographically secure way through signed records and an exchange of tokens. The Time Server receives a list of tokens from vehicles, and returns back a list of signed records containing every token from the originally received list and at least one instance of the current time.
+The IETF Network Time Protocol v4 [NTPv4, RFC 5905](https://datatracker.ietf.org/doc/rfc5905) with IETF Network Time Security for the Network Time Protocol [NTS for NTP, RFC 8915](https://datatracker.ietf.org/doc/html/rfc8915) SHOULD be used by an ECU to acquire accurate time. If IETF NTPv4 (or a higher version) is used, then that ECU SHALL conform to IETF Network Time Protocol Best Current Practices [BCP 223 / RFC 8633](https://datatracker.ietf.org/doc/rfc8633/). If IETF NTPv4 (or higher version) is used, then that ECU SHALL discard any received NTP mode 6 and mode 7 packets to prevent a DDOS attack caused by an old (1989) NTP implementation bug described [here](http://blog.cloudflare.com/the-ddos-that-knocked-spamhaus-offline-and-ho) and [here](https://us-cert.cisa.gov/ncas/alerts/TA14-013A).
 
-If the Time Server is used, it is CONDITIONALLY REQUIRED to conform to the following requirements:
+The work-in-progress [IETF Roughtime protocol](https://datatracker.ietf.org/doc/draft-ietf-ntp-roughtime/) and the [IETF Roughtime Ecosystem](https://datatracker.ietf.org/doc/draft-ietf-ntp-roughtime-ecosystem/) MAY be used by an ECU to acquire sufficiently accurate time to verify certificates (i.e., expiration) and signatures (i.e., freshness). Note that these are a revision and enhancement of the original [Google Roughtime](https://roughtime.googlesource.com/roughtime). See also the [Cloudflare implementation](https://github.com/cloudflare/roughtime).
 
-* When the Time Server receives a sequence of tokens from a vehicle, it will provide one or more signed responses, containing the time along with these tokens. It MAY produce either one signed time attestation containing the current time and all tokens, or multiple time attestations each containing the current time and one or more tokens. All tokens should be included in the response.
-
-* The Time Server will expose a public interface for communicating with Primaries. This communication MAY occur over FTP, FTPS, SFTP, HTTP, HTTPS, or any other transport control the implementer may choose.
-
-* The Time Server's key is rotated in the same manner as other roles' keys by listing the new key in the Director's Root metadata. It is also listed in the custom field of the Director repository's Targets metadata (for partial verification Secondaries).
-
+The US Global Positioning System (GPS), originally Navstar GPS, SHOULD NOT be used as a secure time source by any Uptane ECU, because spoofing attacks against the unsecured, civilian GPS signals are common, as described [here](https://www.euractiv.com/section/defence-and-security/news/russia-responsible-for-massive-satellite-system-spoofing-study-finds/) and [here](https://rin.org.uk/blogpost/1706945/332376/What-is-spoofing-and-how-to-ensure-GPS-security).
+.
 #### Changes to the Director repository
 
-If a Time Server is in use, a representation of its public key is CONDITIONALLY REQUIRED in Director repository Root metadata.
+If an external time source is in use, a representation of its public key is CONDITIONALLY REQUIRED in Director repository Root metadata.
 
-If a Time Server is implemented AND partial verification Secondaries are used, the following metadata is CONDITIONALLY REQUIRED in the Director repository's Targets metadata:
+If an external time source is implemented AND partial verification Secondaries are used, the following metadata is CONDITIONALLY REQUIRED in the Director repository's Targets metadata:
 
-* A representation of the public key(s) for the Time Server, similar to the representation of public keys in Root metadata.
+* A representation of the public key(s) for the external time source, similar to the representation of public keys in Root metadata.
 
-Listing the public key of the Time Server in Director Targets metadata is necessary to allow partial verification Secondaries to perform Time Server key rotation.
+Listing the public key of the external time source in Director Targets metadata is necessary to allow partial verification Secondaries to perform key rotation.
 
 #### Changes to a Primary
 
-If the Time Server is implemented, the Primary is CONDITIONALLY REQUIRED to use the following procedure to verify the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the [Download and check current time](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) step of the Uptane Standard.
+If an external time source is implemented, the Primary SHOULD follow its stipulated  procedure for verifying the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the [Download and check current time](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) step of the Uptane Standard.
 
 1. Gather the tokens from each Secondary ECU's version report.
-2. Send the list of tokens to the Time Server to fetch the current time. The Time Server responds, as described above in the [Time Server subsection](#time-server), by providing a cryptographic attestation of the last known time.
-3. If the Time Server's response meets the criteria below, update the Primary ECU's clock and retain the Time Server's response for distribution to Secondary ECUs. If it fails to meet this criteria, discard the response and continue the procedure without an updated time.  The criteria for checking the Time Server's response are:
-  - The signature over the Time Server's response is valid.
-  - All the tokens provided to the Time Server are included in the response.
-  - The time in the Time Server's response is later than the last time verified in this manner.
+If the response of the external time source meets verification criteria, update the Primary ECU's clock and retain the time source response for distribution to Secondary ECUs. If it fails to meet this criteria, discard the response and continue the procedure without an updated time.  
 
 #### ECU version report
 
-The ECU version report from each Secondary will contain a token to be sent to the Time Server in whatever manner the implementer chooses.  For example, the payload of the ECU version report sent from the Primary to the Director MAY contain the tokens sent to the Time Server. In this case, if any token is removed or changed, the signature will not match.  To detect a replay attack, each token SHOULD be unique per ECU. As we expect that these updates will be relatively infrequent (e.g., due to a limited number of write cycles), there will be a sufficient number of tokens to make this possible.
+The ECU version report from each Secondary will contain a token to be sent to the external time source in whatever manner the implementer chooses.  For example, the payload of the ECU version report sent from the Primary to the Director MAY contain the tokens sent to the Time Server. In this case, if any token is removed or changed, the signature will not match.  To detect a replay attack, each token SHOULD be unique per ECU. As we expect that these updates will be relatively infrequent (e.g., due to a limited number of write cycles), there will be a sufficient number of tokens to make this possible.
 
 #### Changes to all ECUs
 
-After the vehicle has been assembled, ECUs MAY receive an attestation of the current time as downloaded from the Time Server.
+After the vehicle has been assembled, ECUs MAY receive an attestation of the current time as downloaded from the external time source.
 
-As the first step to verifying metadata, described in the Standard for both the [Primary](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) and [Secondaries](https://uptane.github.io/papers/uptane-standard.1.1.0.html#verify_time), the ECU SHOULD load and verify the most recent time from the Time Server using the following procedure:
+As the first step to verifying metadata, described in the Standard for both the [Primary](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) and [Secondaries](https://uptane.github.io/papers/uptane-standard.1.1.0.html#verify_time), the ECU SHOULD load and verify the most recent time from the designated time source by following its designated procedure. This will likely include verifying that the signatures on the downloaded time are valid
 
 1. Verify that the signatures on the downloaded time are valid.
 2. Verify that the list of tokens in the downloaded time includes the token that the ECU sent in its version report.
 3. Verify that the time downloaded is greater than the previous time.
 
-If all three steps are completed without error, the ECU is CONDITIONALLY REQUIRED to overwrite its current attested time with the time it has just downloaded, and to generate a new token for the next request to the Time Server.
+If all three steps are completed without error, the ECU SHOULD overwrite its current attested time with the time it has just downloaded. 
 
-If any check fails, the ECU is CONDITIONALLY REQUIRED to NOT overwrite its current attested time, to jump to the last step ([Create and send version report](https://uptane.github.io/uptane-standard/uptane-standard.html#create_version_report)), and to report the error.
+If any check fails, the ECU SHOULD NOT overwrite its current attested time, but SHOULD jump to the last step ([Create and send version report](https://uptane.github.io/uptane-standard/uptane-standard.html#create_version_report))to report the error.
 
 #### Changes to check Root metadata
 
-In order to prevent a new Time Server from accidentally causing a rollback warning, the clock will be reset when switching to a new Time Server. To do this, check the Time Server key after updating to the most recent Root metadata file. If the Time Server key is listed in the Root metadata and has been rotated, reset the clock used to set the expiration of metadata to a minimal value (e.g., zero, or any time that is guaranteed to not be in the future based on other evidence).  It will be updated in the next cycle.
+In order to prevent a new time source from accidentally causing a rollback warning, the clock will be reset as folllows: check the time source key after updating to the most recent Root metadata file. If the key is listed in the Root metadata has been rotated, reset the clock used to set the expiration of metadata to a minimal value (e.g., zero, or any time that is guaranteed to not be in the future based on other evidence).  It will be updated in the next cycle.
 
 #### Changes to partial verification Secondaries
 
-As partial verification Secondaries only check the Targets metadata from the Director repository, the Time Server key on these ECUs will be checked when verifying the Targets metadata. To do this, check the Time Server key after verifying the most recent Targets metadata file. If the Time Server key is listed in the Targets metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value as described above.
+As partial verification Secondaries only check the Targets metadata from the Director repository, the time source keys on these ECUs will be checked when verifying the Targets metadata. To do this, check the key after verifying the most recent Targets metadata file. If the external time source key is listed in the Targets metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value as described above.
 
 #### Time Server key compromise
 
-In the event of a Time Server key compromise, an attacker would be able to return a time attestation that contains an arbitrary time. The attacker could then either:
+In the event of a key compromise for an external time source, an attacker would be able to return a time attestation that contains an arbitrary time. The attacker could then either:
 
-* Make all metadata appear to be expired. If the Time Server returns a time far in the future, the vehicle would interpret all Uptane metadata as expired. The vehicle would be unable to verify the metadata, thus creating a denial of service.
+* Make all metadata appear to be expired. If the returned time is far in the future, the vehicle would interpret all Uptane metadata as expired. The vehicle would be unable to verify the metadata, thus creating a denial of service.
 
-* Make expired metadata appear to be current. If the Time Server returns a time in the past, Uptane metadata that was valid at that point in the past will seem current to the vehicle, thus allowing for a freeze attack. This cannot be used for a rollback attack as the ECU will not accept a time earlier than the time of their previous update.
+* Make expired metadata appear to be current. If the returned time is in the past, Uptane metadata that was valid at that point in the past will seem current to the vehicle, thus allowing for a freeze attack. This cannot be used for a rollback attack as the ECU will not accept a time earlier than the time of their previous update.
 
 All of these attacks can be mitigated by rotating the Time Server key in Root metadata, as described in [Managing signing keys and metadata expiration](https://uptane.github.io/deployment-considerations/key_management.html).
 
