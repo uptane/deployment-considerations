@@ -5,7 +5,7 @@ css_id: repositories
 
 # Setting up Uptane repositories
 
-This section outlines recommended procedures for the one-time operations that an OEM and its suppliers SHOULD perform when they set up Uptane for the first time. In particular, they SHOULD correctly configure the Director and Image repositories, and, if used, the Time Server, so that the impact of a repository/server compromise is as limited as possible.
+This section outlines recommended procedures for the one-time operations that an OEM and its suppliers SHOULD perform when they set up Uptane for the first time. In particular, they SHOULD correctly configure the Director and Image repositories, and a secure source of time, so that the impact of a repository/server compromise is as limited as possible.
 
 ## Secure source of time
 
@@ -36,12 +36,11 @@ Listing the public key of the external time source in Director Targets metadata 
 
 If an external time source is implemented, the Primary SHOULD follow its stipulated  procedure for verifying the time. This procedure occurs after the vehicle version manifest is sent and will fulfill the [Download and check current time](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) step of the Uptane Standard.
 
-1. Gather the tokens from each Secondary ECU's version report.
 If the response of the external time source meets verification criteria, update the Primary ECU's clock and retain the time source response for distribution to Secondary ECUs. If it fails to meet this criteria, discard the response and continue the procedure without an updated time.  
 
 #### ECU version report
 
-The ECU version report from each Secondary will contain a token to be sent to the external time source in whatever manner the implementer chooses.  For example, the payload of the ECU version report sent from the Primary to the Director MAY contain the tokens sent to the Time Server. In this case, if any token is removed or changed, the signature will not match.  To detect a replay attack, each token SHOULD be unique per ECU. As we expect that these updates will be relatively infrequent (e.g., due to a limited number of write cycles), there will be a sufficient number of tokens to make this possible.
+The ECU version report from each Secondary may contain a token to be sent to the external time source in whatever manner the implementer chooses.  
 
 #### Changes to all ECUs
 
@@ -49,11 +48,7 @@ After the vehicle has been assembled, ECUs MAY receive an attestation of the cur
 
 As the first step to verifying metadata, described in the Standard for both the [Primary](https://uptane.github.io/papers/uptane-standard.1.1.0.html#check_time_primary) and [Secondaries](https://uptane.github.io/papers/uptane-standard.1.1.0.html#verify_time), the ECU SHOULD load and verify the most recent time from the designated time source by following its designated procedure. This will likely include verifying that the signatures on the downloaded time are valid
 
-1. Verify that the signatures on the downloaded time are valid.
-2. Verify that the list of tokens in the downloaded time includes the token that the ECU sent in its version report.
-3. Verify that the time downloaded is greater than the previous time.
-
-If all three steps are completed without error, the ECU SHOULD overwrite its current attested time with the time it has just downloaded. 
+If all steps are completed without error, the ECU SHOULD overwrite its current attested time with the time it has just downloaded. 
 
 If any check fails, the ECU SHOULD NOT overwrite its current attested time, but SHOULD jump to the last step ([Create and send version report](https://uptane.github.io/uptane-standard/uptane-standard.html#create_version_report))to report the error.
 
@@ -65,7 +60,7 @@ In order to prevent a new time source from accidentally causing a rollback warni
 
 As partial verification Secondaries only check the Targets metadata from the Director repository, the time source keys on these ECUs will be checked when verifying the Targets metadata. To do this, check the key after verifying the most recent Targets metadata file. If the external time source key is listed in the Targets metadata and has been rotated, reset the clock used to determine the expiration of metadata to a minimal value as described above.
 
-#### Time Server key compromise
+#### Time source key compromise
 
 In the event of a key compromise for an external time source, an attacker would be able to return a time attestation that contains an arbitrary time. The attacker could then either:
 
@@ -73,7 +68,7 @@ In the event of a key compromise for an external time source, an attacker would 
 
 * Make expired metadata appear to be current. If the returned time is in the past, Uptane metadata that was valid at that point in the past will seem current to the vehicle, thus allowing for a freeze attack. This cannot be used for a rollback attack as the ECU will not accept a time earlier than the time of their previous update.
 
-All of these attacks can be mitigated by rotating the Time Server key in Root metadata, as described in [Managing signing keys and metadata expiration](https://uptane.github.io/deployment-considerations/key_management.html).
+All of these attacks can be mitigated by rotating any key associated with an external time in Root metadata, as described in [Managing signing keys and metadata expiration](https://uptane.github.io/deployment-considerations/key_management.html).
 
 
 ## What suppliers should do
