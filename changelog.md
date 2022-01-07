@@ -43,7 +43,7 @@ As the first major release since 1.0.0 was issued on July 31, 2019, the new vers
 
 ### Removed
 
-- All references to the Uptane Time Server. While having a secure source of time is still mandated as a requirement for compliance, we are no longer recommending the Uptane Time Server as that source. Several other time source options are discussed in the “Setting up Uptane Repositories” section of Deployment Best Practices.
+- All references to the Uptane Time Server. While having a secure source of time is still mandated as a requirement for compliance, we are no longer recommending the Uptane Time Server as that source. Several other time source options are discussed in the [“Setting up Uptane Repositories” section of Deployment Best Practices](https://uptane.github.io/deployment-considerations/repositories.html).
 
 
 ## [1.2.0] - 2021-07-16
