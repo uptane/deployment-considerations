@@ -5,7 +5,7 @@ css_id: regulations_and_standards
 
 # Regulations and Standards Relevant to Uptane
 
-This page aims to provide the Uptane community with up-to-date information on the status of regulations and standards that may directly affect the evolution of the Uptane Standard. By keeping abreast of these changes, mandated by both government agencies and industry best practices, we can ensure that Uptane will help the automtive industry achieve compliance, and support continuing improvement of cybersecurity defenses.
+This page aims to provide the Uptane community with up-to-date information on the status of regulations and standards that may directly affect the evolution of the Uptane Standard. By keeping abreast of these changes, mandated by both government agencies and industry best practices, we can ensure that Uptane will help the automotive industry achieve compliance, and support continuing improvement of cybersecurity defenses.
 
 [**EVITA “E-safety Vehicle Intrusion Protected Applications, 2011**](https://argus-sec.com/e-safety-vehicle-intrusion-protected-applications-evita/)
 According to the source cited above, this standard can be described as “an automotive cybersecurity initiative co-funded by the European Union, intended to improve the resilience of the automotive on-board network to attacks from new V2X applications, as well as the physical attacks made possible by the physical access that attackers can have to vehicles in the public environment. Through a process of identifying E/E use cases, analyzing potential threats, and their associated risk, EVITA developed a series of security requirements for on-board networks. This was then distilled into a standard recommending hardware and software architectures to fulfill the defined security requirements.” 
@@ -19,7 +19,7 @@ Passed in 2020 by 75% of the voters in Massachusetts, this initiative expands an
 [**UNECE 29, 2020**](https://upstream.auto/blog/understanding-the-unece-wp-29-cybersecurity-regulation/) The United Nations Economic Commission for Europe (UNECE) World Forum for Harmonization of Vehicle Regulations on Cybersecurity and Cyber Security Management Systems adopted two regulations under this umbrella in June 2020. The regulations mandate: 
 * managing vehicle cyber risks
 * securing vehicles by design to mitigate risks along the value chain
-* detecting and responding to security incidents across vehicle fleet
+* detecting and responding to security incidents across vehicle fleets
 * providing safe and secure software updates and ensuring vehicle safety is not compromised
 * introducing a legal basis for so-called “Over-the-Air” (O.T.A.) updates to on-board vehicle software
 
@@ -32,11 +32,11 @@ TEE, HSM, etc.
 [**ISO/DIS 21448 Road vehicles — Safety of the intended functionality (SOTIF),January 2021**](https://www.iso.org/standard/77490.html?browse=tc)
 This document augments ISO 26262 (Functional Safety).
 
-[**ISO/CD 24089 Road vehicles-Software update engineering, February 2021**](https://www.iso.org/standard/77796.html?browse=tc)
+[**ISO/CD 24089 Road vehicles - Software update engineering, February 2021**](https://www.iso.org/standard/77796.html?browse=tc)
 This document augments the ISO Standard 26262 (Functional Safety) and ISO/SAE Standard 21434 (Cybersecurity). It standardizes detailed process requirements for wired and wireless software updates.
 
-[**ISO TC22/SC32/WG11 ISO 21434 Road Vehicles Cybersecurity Engineering**](https://upstream.auto/blog/setting-the-standard-for-automotive-cybersecurity/) 
-A joint effort between the International Standards Organization and the Society of Automotive Engineers that brings together “more than 100 experts from more than 82 companies based in over 16 countries.” The goal is a “deep and effective global standard for automotive cybersecurity.” The initiative is divided into four main working groups that focus in on risk management; product development; production, operation, maintenance, and decommissioning; and process overview.
+[**ISO TC22/SC32/WG11 ISO 21434 Road Vehicles - Cybersecurity Engineering**](https://upstream.auto/blog/setting-the-standard-for-automotive-cybersecurity/) 
+A joint effort between the International Standards Organization and the SAE International that brings together “more than 100 experts from more than 82 companies based in over 16 countries.” The goal is a “deep and effective global standard for automotive cybersecurity.” The initiative is divided into four main working groups that focus on risk management; product development; production, operation, maintenance, and decommissioning; and process overview.
 
 [**ISO/AWI PAS 5112 Road vehicles — Guidelines for auditing cybersecurity
 engineering (Work-in-Progress)**](https://www.iso.org/standard/80840.html?browse=tc)
