@@ -7,7 +7,7 @@ css_id: glossary
 
 ### Conformance terminology
 
-The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in {{RFC2119}}. Given the importance of interpreting these terms correctly, we present these definitions here. Note that when referring to actions in the Standard that mandate compliance, the word SHALL will be used, rather than the word MUST. Hence, MUST and MUST NOT are not included in these definitions.
+The keywords REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in {{RFC2119}}. Given the importance of interpreting these terms correctly, we present these definitions here. Note that when referring to actions in the Standard that mandate compliance, the word SHALL will be used, rather than the word MUST. 
 
 *SHALL* This word or the term "REQUIRED" mean that the definition is an absolute requirement of the specification.
 
@@ -21,7 +21,7 @@ The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, REC
 
 In order to be considered Uptane-compliant, an implementation SHALL follow all of these rules as specified in the document.
 
-Note that, following the recommendations of {{RFC2119}} imperatives of the type defined here "must be used with care and sparingly.  In particular, they MUST only be used where it is actually required for interoperation or to limit behavior which has potential for causing harm (e.g., limiting retransmisssions)  
+Note that, following the recommendations of {{RFC2119}}, imperatives of the type defined here will be used only when essential for security.
 
 ### Terminology
 
@@ -55,7 +55,7 @@ Note that, following the recommendations of {{RFC2119}} imperatives of the type 
 certain functions or services correctly, fairly and
 impartially, along with assurance that the entity and its identifier are
 genuine. (Source: https://csrc.nist.gov/glossary from US NIST SP800-152 Profile for U.S. Federal Cryptographic Key
-Management Systems )
+Management Systems)
 
 *Trustworthy:* Data or files stored electronically in an accurate, reliable and usable/readable manner,
 ensuring integrity over time (Source: https://csrc.nist.gov/glossary from ISO TR 15801:2009 Document management — Information stored
