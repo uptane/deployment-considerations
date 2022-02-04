@@ -21,7 +21,7 @@ The keywords REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, a
 
 In order to be considered Uptane-compliant, an implementation SHALL follow all of these rules as specified in the document.
 
-Note that, following the recommendations of {{RFC2119}}, imperatives of the type defined here "must be used with care and sparingly.  In particular, they SHALL only be used where it is actually required for interoperation or to limit behavior which has potential for causing harm (e.g., limiting retransmisssions)  
+Note that, following the recommendations of {{RFC2119}}, imperatives of the type defined here will be used only when essential for security.
 
 ### Terminology
 
