@@ -17,7 +17,7 @@ This builds the document from the file [uptane-deployment-considerations-release
 
 ### Setting the version number
 
-The title of the document will be **Uptane Deployment Considerations v.$(RELEASE_VERSION)**. If the `RELEASE_VERSION` variable is set in the shell, that value will be used. Otherwise, it will look for a git tag; if one is found, that will be used as the version. If there is no tag on the current commit and `RELEASE_VERSION` is not set in the environment, it will be set to **$(DATE)-DRAFT-$(COMMIT_ID)**, e.g. `2021-01-27-DRAFT-a3d478d`.
+The title of the document will be **Uptane Deployment Best Practices v.$(RELEASE_VERSION)**. If the `RELEASE_VERSION` variable is set in the shell, that value will be used. Otherwise, it will look for a git tag; if one is found, that will be used as the version. If there is no tag on the current commit and `RELEASE_VERSION` is not set in the environment, it will be set to **$(DATE)-DRAFT-$(COMMIT_ID)**, e.g. `2021-01-27-DRAFT-a3d478d`.
 
 ## Maintenance and re-use
 
