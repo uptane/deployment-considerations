@@ -63,6 +63,6 @@ First, filenames need not be strings. Even if there is no explicit notion of "fi
 Second, ECUs need not have a filesystem in order to use Uptane. It is only important that ECUs are able to recognize distinct metadata and images by using either strings or numbers as *file* names or numbers, and that they can allocate different parts of storage to different *files*.
 
 
-## ECUs without secondary storage
+## ECUs without sufficient storage
 
-As described in the [Standard](https://uptane.github.io/papers/uptane-standard.2.0.0.html#send_metadata_primary), all Secondaries MUST store some metadata objects. For partial verification Secondaries, this MAY include only the Targets metadata from the Director repository. If an ECU does not have any or enough secondary storage to store even just that one object, then it cannot be considered an Uptane Secondary. However, such a non-Uptane ECU can still be updated within an Uptane system, albeit with weaker guarantees than for fully-supported ECUs. In this case, the Director and Primary would treat a non-Uptane ECU like any other Secondary, but the ECU will not be able to perform any verification for itself. It must rely entirely on the Primary's verification of the metadata and images.
+As described in the [Standard](https://uptane.github.io/papers/uptane-standard.2.0.0.html#send_metadata_primary), all Secondaries MUST store some metadata objects. For partial verification Secondaries, this MAY include only the Targets metadata from the Director repository. If an ECU does not have any or enough secondary storage to store even just that one object, then it cannot be considered an Uptane Secondary. 
