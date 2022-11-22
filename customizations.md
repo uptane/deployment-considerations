@@ -162,3 +162,19 @@ In certain instances, government agencies and regulatory bodies, such as the U.S
 Being able to grant this sort of access would likely require changes in some Uptane configurations, such as adding Director or Image repositories, or supporting different key management systems. Prioritizing conflicting updates in such a system would bring with it a number of questions. For example, if a government agency has the ability to remotely override functionality of a vehicle, would these commands be issued by one central server, or would each OEM have to maintain two Director repositories—one for the company and one for the agency? If a government body can issue a command for an update, would a driver be able to pull to the side of the road, or reduce speed to below 25 MPH at a safe deceleration rate, or would the vehicle come to a stop wherever it might be?
 
 At this point, Uptane is not ready to propose an answer to any of these questions. As other standards teams (ISO 204 and IEEE 1609) are currently considering the issue of government updates, we prefer to wait on those decisions, and then work with automotive community to adapt the existing Standard to meet these design requirements. 
+
+<!---
+Copyright 2022 Joint Development Foundation Projects, LLC, Uptane Series
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->

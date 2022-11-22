@@ -12,3 +12,19 @@ In any serious Uptane installation, even if using an existing tool or service, a
 All of these guidelines should be viewed as complementary to the official Uptane Standard: they should be taken as advice, not gospel.
 
 In addition, these guidelines may be used in the creation of [POUFs](https://github.com/uptane/poufs). POUFs contain the Protocols, Operations, Usage, and Formats of an Uptane implementation. These details can be used to design interoperable Uptane implementations.
+
+<!---
+Copyright 2022 Joint Development Foundation Projects, LLC, Uptane Series
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
