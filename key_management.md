@@ -11,7 +11,6 @@ This section addresses both setup and maintenance issues for the signing keys us
 
 The secure management of cryptographic key material has been well-documented in previous studies. Implementers of Uptane SHOULD follow best practices outlined in [IETF RFC 4107](https://tools.ietf.org/html/rfc4107) / [BCP 107](https://tools.ietf.org/html/bcp107) - Guidelines for Cryptographic Key Management.
 
-
 ## Repository keys
 
 On both the Director and the Image repository, the OEM maintains the keys to the Root, Timestamp, Snapshot, and Targets roles. However, for any delegated Targets roles on the Image repository, the corresponding keys are expected to be maintained by the supplier to which the corresponding images have been delegated. For example, if a tier-1 supplier signs its own images, then the supplier would maintain its own (ideally offline) keys.
@@ -104,6 +103,10 @@ The OEM SHOULD then manually update only affected vehicles that run software mai
 The second case, where the OEM has had a key compromised, can be far more serious than the first case. An attacker in such a position may be able to execute attacks on all vehicles, depending on which keys have been compromised. If the keys are for the Timestamp and Snapshot roles, or the Targets or Root roles, then the OEM SHOULD use the following recovery procedure.
 
 First, the OEM SHOULD use the Root role to revoke and replace keys for all affected roles. Second, it SHOULD restore all metadata and images on the Image repository to a known good state using an offline backup. Third, the OEM SHOULD manually update all vehicles in order to replace metadata and images. A manual update SHOULD be done because, without trusted hardware (such as a TPM), it is difficult to ensure that compromised ECUs can be remotely and securely updated.
+
+#### Rotating an Image repository Root key
+
+A vehicle will only check for new Image repository root metadata if the Director targets metadata indicates that it has at least one updated image to install. However, there could be situations when it is necessary to perform a root key rotation even if there is no new image. One such scenario would be when there is evidence that one or more keys may have been compromised, making it crucial to get the updated root metadata to all ECUs as soon as possible. In this case, an update SHOULD be sent to at least one ECU, even if it is a "dummy" update that just bumps a version number. 
 
 ### ECU keys
 
