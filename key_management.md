@@ -106,7 +106,7 @@ First, the OEM SHOULD use the Root role to revoke and replace keys for all affec
 
 #### Rotating an Image repository Root key
 
-A vehicle will only check for new Image repository root metadata if the Director targets metadata indicates that it has at least one updated image to install. However, there could be situations when it is necessary to perform a root key rotation even if there is no new image. One such scenario would be when there is evidence that one or more keys may have been compromised, making it crucial to get the updated root metadata to all ECUs as soon as possible. In this case, an update SHOULD be sent to at least one ECU, even if it is a "dummy" update that just bumps a version number. 
+A vehicle will only check for new Image repository root metadata if the Director targets metadata indicates that it has at least one updated image to install. However, there could be situations when it is appropriate to perform a root key rotation even if there is no new image. One such scenario would be when there is evidence that one or more keys may have been compromised, making it crucial to get the updated root metadata to all ECUs as soon as possible. In this case, an update SHOULD be sent to at least one ECU, even if it is a "dummy" update that just bumps a version number. 
 
 ### ECU keys
 
