@@ -7,7 +7,7 @@ css_id: glossary
 
 ### Conformance terminology
 
-The keywords REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in {{RFC2119}}. Given the importance of interpreting these terms correctly, we present these definitions here. Note that when referring to actions in the Standard that mandate compliance, the word SHALL will be used, rather than the word MUST. 
+The keywords REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in [RFC2119](https://uptane.github.io/papers/uptane-standard.2.0.0.html#RFC2119). Given the importance of interpreting these terms correctly, we present these definitions here. Note that when referring to actions in the Standard that mandate compliance, the word SHALL will be used, rather than the word MUST. 
 
 *SHALL* This word or the term "REQUIRED" mean that the definition is an absolute requirement of the specification.
 
@@ -21,7 +21,7 @@ The keywords REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, a
 
 In order to be considered Uptane-compliant, an implementation SHALL follow all of these rules as specified in the document.
 
-Note that, following the recommendations of {{RFC2119}}, imperatives of the type defined here will be used only when essential for security.
+Note that, following the recommendations of [RFC2119](https://uptane.github.io/papers/uptane-standard.2.0.0.html#RFC2119), imperatives of the type defined here will be used only when essential for security.
 
 ### Terminology
 
