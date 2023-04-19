@@ -19,7 +19,7 @@ The keywords REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, a
 
 *MAY* This word, or the adjective "OPTIONAL," mean that an item is truly optional and may or may not be implemented at the discretion of the adopter.
 
-In order to be considered Uptane-compliant, an implementation SHALL follow all of these rules as specified in the document.
+In order to be considered Uptane-conformant, an implementation SHALL follow all of these rules as specified in the document.
 
 Note that, following the recommendations of [RFC2119](https://uptane.github.io/papers/uptane-standard.2.0.0.html#RFC2119), imperatives of the type defined here will be used only when essential for security.
 
