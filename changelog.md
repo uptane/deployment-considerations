@@ -11,6 +11,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2023-05-15 
+
+### Added
+- A clearer definition of the term “conformant” as it applies to Uptane
+- A security policy that outlines how errata can be reported and how reports will be addressed.
+- Acknowledgement that the Uptane Standard and Deployment Best Practices are licensed under Apache.
+- A mention of Scudo as an Uptane augmentation in the “Out of Scope” text in the Standard as a clarification of Uptane’s involvement in software supply chain security  
+
+### Changed
+- The term  “Uptane-compliant” to “Uptane-conformant” to clarify that the framework is a standard to follow rather than a regulation that must be adhered to. 
+- Metadata distribution requirements for secondaries to allow more flexibility when there are no new downloads for a given ECU. 
+- The requirement that verification of Targets metadata be considered complete if the Directory repository indicates that there are no new targets. 
+- The requirement that the Director repository check the time sent in the ECU report from a SHALL to a SHOULD
+
+### Removed
+- All mentions of the Reference Implementation, which has now been clearly marked as obsolete.
+- The term “private key” to reduce confusion about the role of these keys. 
+
+
 ## [2.0.0] - 2022-01-18
 As the first major release since 1.0.0 was issued on July 31, 2019, the new version contains several breaking changes that could affect backwards compatibility. However, several of these changes also provide greater flexibility for the implementer. Probably the most significant change was removing references to the Uptane Time Server, to clarify that users can make their own decisions about secure sources of time, as long as it is reliable. On the whole, V.2.0.0 should make implementation on legacy systems easier rather than more complex. 
 
