@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.1.0] - 2023-05-15
+## [2.1.0] - 2023-06-6
 V.2.1.0 is a minor release containing no breaking changes. The changes it includes, which are detailed below, are largely wording clarifications. The most significant addition is referencing the Scudo option as an augmentation for software supply chain security in automobiles. 
 
 ### Added
@@ -28,7 +28,8 @@ V.2.1.0 is a minor release containing no breaking changes. The changes it includ
 
 ### Removed
 - All mentions of the Reference Implementation, which has now been clearly marked as obsolete.
-- The term “private key” to reduce confusion about the role of these keys. 
+- The term “private key” to reduce confusion about the role of these keys.
+- Removed redundant and unclear wording from the description of the Root role in Section 5.1.1. 
 
 
 ## [2.0.0] - 2022-01-18
