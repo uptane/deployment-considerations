@@ -4,7 +4,7 @@ css_id: ecus
 ---
 # testing 
  
-testing workflow 
+testing
 
 # Preparing an ECU for Uptane
 
