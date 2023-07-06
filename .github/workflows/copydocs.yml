@@ -1,0 +1,25 @@
+---
+name: Copy Docs
+on:
+  push:
+    branches:
+      - master
+      
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copycat
+        uses: andstor/copycat-action@v3
+        with:
+          commit_message: Syncing from deployment considerations
+          clean: false
+          file_filter: "*.md"
+          exclude: /Readme.md
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          src_path: /.
+          dst_path: /docs/deployment
+          dst_owner: Abhijay007
+          dst_repo_name: uptane-demo
+          dst_branch: master
+          src_branch: master
