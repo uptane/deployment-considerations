@@ -108,11 +108,11 @@ First, the OEM SHOULD use the Root role to revoke and replace keys for all affec
 
 A vehicle will only check for new Image repository root metadata if the Director targets metadata indicates that it has at least one updated image to install. However, there could be situations when it is appropriate to perform a root key rotation even if there is no new image. One such scenario would be when there is evidence that one or more keys may have been compromised, making it crucial to get the updated root metadata to all ECUs as soon as possible. In this case, an update SHOULD be sent to at least one ECU, even if it is a "dummy" update that just bumps a version number. 
 
-### ECU keys
+### ECU Identity keys
 
-If ECU keys are compromised, then the OEM SHOULD manually update vehicles to replace these keys. This is the safest course of action because, after a key compromise, an OEM cannot be sure whether it is remotely replacing keys controlled by attackers or the intended ECUs.
+If the Identity keys for an ECU are compromised, then the OEM SHOULD manually update vehicles to replace these keys. This is the safest course of action because, after a key compromise, an OEM cannot be sure whether it is remotely replacing keys controlled by attackers or the intended ECUs.
 
-An OEM MAY use the Director repository and its inventory database to infer whether ECU keys have been compromised. This database is used to record vehicle version manifests that list what images an ECU has installed over time. Therefore, an OEM MAY check for any abnormal patterns of installation that could have been caused by an ECU key compromise. Note, however, that this method is not perfect, because if attackers control ECU keys, then they can also use these keys to send fraudulent ECU version reports.
+An OEM MAY use the Director repository and its inventory database to infer whether ECU Identity keys have been compromised. This database is used to record vehicle version manifests that list what images an ECU has installed over time. Therefore, an OEM MAY check for any abnormal patterns of installation that could have been caused by an Identity key compromise. Note, however, that this method is not perfect, because if attackers control the signing keys for ECU keys, then they can also use these keys to send fraudulent ECU version reports.
 
 <!---
 Copyright 2022 Joint Development Foundation Projects, LLC, Uptane Series
